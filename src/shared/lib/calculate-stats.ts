@@ -1,0 +1,116 @@
+import type { ExpenseRecord, IncomeRecord } from "../types";
+
+/**
+ * Calculate financial statistics from expense and income data
+ * Pure utility functions with no side effects
+ */
+
+export interface FinancialStats {
+  totalIncome: number;
+  totalExpense: number;
+  netBalance: number;
+  savingsRate: number;
+  incomeCount: number;
+  expenseCount: number;
+}
+
+export function calculateFinancialStats(
+  expenses: ExpenseRecord[],
+  incomes: IncomeRecord[]
+): FinancialStats {
+  const totalExpense = expenses.reduce((sum, e) => sum + e.amount, 0);
+  const totalIncome = incomes.reduce((sum, i) => sum + i.amount, 0);
+  const netBalance = totalIncome - totalExpense;
+  const savingsRate = totalIncome > 0 ? (netBalance / totalIncome) * 100 : 0;
+
+  return {
+    totalIncome,
+    totalExpense,
+    netBalance,
+    savingsRate,
+    incomeCount: incomes.length,
+    expenseCount: expenses.length,
+  };
+}
+
+export interface CategoryStats {
+  category: string;
+  amount: number;
+  count: number;
+  percentage: number;
+}
+
+export function calculateCategoryStats(records: (ExpenseRecord | IncomeRecord)[]): CategoryStats[] {
+  const categoryMap = new Map<string, { amount: number; count: number }>();
+  let total = 0;
+
+  // Group by category
+  for (const record of records) {
+    const existing = categoryMap.get(record.category) || { amount: 0, count: 0 };
+    categoryMap.set(record.category, {
+      amount: existing.amount + record.amount,
+      count: existing.count + 1,
+    });
+    total += record.amount;
+  }
+
+  // Convert to array with percentages
+  return Array.from(categoryMap.entries())
+    .map(([category, { amount, count }]) => ({
+      category,
+      amount,
+      count,
+      percentage: total > 0 ? (amount / total) * 100 : 0,
+    }))
+    .sort((a, b) => b.amount - a.amount);
+}
+
+export interface MonthlyStats {
+  month: string;
+  income: number;
+  expense: number;
+  net: number;
+}
+
+export function calculateMonthlyTrends(
+  expenses: ExpenseRecord[],
+  incomes: IncomeRecord[],
+  months = 6
+): MonthlyStats[] {
+  const now = new Date();
+  const stats: MonthlyStats[] = [];
+
+  for (let i = months - 1; i >= 0; i--) {
+    const targetDate = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    const targetYear = targetDate.getFullYear();
+    const targetMonth = targetDate.getMonth();
+    const monthName = targetDate
+      .toLocaleDateString("vi-VN", {
+        month: "short",
+        year: "numeric",
+      })
+      .replace(/^./, (c) => c.toUpperCase());
+
+    const monthExpenses = expenses.filter((e) => {
+      const expenseDate = new Date(e.date);
+      return expenseDate.getFullYear() === targetYear && expenseDate.getMonth() === targetMonth;
+    });
+
+    const monthIncomes = incomes.filter((i) => {
+      const incomeDate = new Date(i.date);
+      return incomeDate.getFullYear() === targetYear && incomeDate.getMonth() === targetMonth;
+    });
+
+    const expenseTotal = monthExpenses.reduce((sum, e) => sum + e.amount, 0);
+    const incomeTotal = monthIncomes.reduce((sum, i) => sum + i.amount, 0);
+
+    stats.push({
+      month: monthName,
+      income: incomeTotal,
+      expense: expenseTotal,
+      net: incomeTotal - expenseTotal,
+    });
+  }
+
+  return stats;
+}

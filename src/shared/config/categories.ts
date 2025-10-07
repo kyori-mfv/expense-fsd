@@ -14,6 +14,11 @@ export const EXPENSE_CATEGORIES = [
   { id: "khac", name: "Khác", icon: "MoreHorizontal", color: "#6b7280" },
 ] as const;
 
+// Category lookup map for O(1) access
+export const EXPENSE_CATEGORY_MAP = new Map(
+  EXPENSE_CATEGORIES.map((cat) => [cat.name, cat] as const)
+) as Map<string, (typeof EXPENSE_CATEGORIES)[number]>;
+
 // Category keywords for AI parsing
 export const EXPENSE_CATEGORY_KEYWORDS: Record<string, string[]> = {
   "Ăn uống": [
@@ -408,6 +413,11 @@ export const INCOME_CATEGORIES = [
   { id: "lai-suat", name: "Lãi suất", icon: "PiggyBank", color: "#2563eb" },
   { id: "khac", name: "Khác", icon: "MoreHorizontal", color: "#6b7280" },
 ] as const;
+
+// Category lookup map for O(1) access
+export const INCOME_CATEGORY_MAP = new Map(
+  INCOME_CATEGORIES.map((cat) => [cat.name, cat] as const)
+) as Map<string, (typeof INCOME_CATEGORIES)[number]>;
 
 export const INCOME_CATEGORY_KEYWORDS: Record<string, string[]> = {
   Lương: [

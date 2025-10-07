@@ -55,6 +55,16 @@ body {
   --income-light: hsl(142 76% 96%);
   --income-foreground: hsl(142 76% 36%);
 
+  --dashboard: hsl(217 91% 60%);
+  --dashboard-light: hsl(217 91% 96%);
+  --dashboard-foreground: hsl(217 91% 60%);
+
+  --net-balance-positive: hsl(217 91% 60%);
+  --net-balance-negative: hsl(342 75% 50%);
+
+  --savings: hsl(271 81% 56%);
+  --savings-foreground: hsl(271 81% 56%);
+
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
@@ -92,6 +102,16 @@ body {
   --income: hsl(142 76% 46%);
   --income-light: hsl(142 76% 20%);
   --income-foreground: hsl(142 76% 56%);
+
+  --dashboard: hsl(217 91% 70%);
+  --dashboard-light: hsl(217 91% 20%);
+  --dashboard-foreground: hsl(217 91% 70%);
+
+  --net-balance-positive: hsl(217 91% 70%);
+  --net-balance-negative: hsl(342 75% 60%);
+
+  --savings: hsl(271 81% 66%);
+  --savings-foreground: hsl(271 81% 66%);
 
   --chart-1: hsl(300 30% 50%);
   --chart-2: hsl(194 86% 58%);
@@ -157,6 +177,16 @@ body {
   --color-income: var(--income);
   --color-income-light: var(--income-light);
   --color-income-foreground: var(--income-foreground);
+
+  --color-dashboard: var(--dashboard);
+  --color-dashboard-light: var(--dashboard-light);
+  --color-dashboard-foreground: var(--dashboard-foreground);
+
+  --color-net-balance-positive: var(--net-balance-positive);
+  --color-net-balance-negative: var(--net-balance-negative);
+
+  --color-savings: var(--savings);
+  --color-savings-foreground: var(--savings-foreground);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);

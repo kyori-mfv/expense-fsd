@@ -15,11 +15,16 @@ export function IncomeList() {
   // Feature: Filter
   const { form, filters, debouncedSearch, handleReset } = useIncomeFilter();
 
+  // Default date range (current month if not set)
+  const dateFrom =
+    filters.dateRange?.from || new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+  const dateTo = filters.dateRange?.to || new Date();
+
   // Widget: Data fetching with filters and pagination
   const { items: paginatedIncomes, total: totalCount } = useIncomeListData({
     category: filters.category,
-    dateFrom: filters.dateRange?.from,
-    dateTo: filters.dateRange?.to,
+    dateFrom,
+    dateTo,
     searchText: debouncedSearch,
     page: currentPage,
     limit: PAGINATION.INCOME_LIST_PAGE_SIZE,

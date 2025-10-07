@@ -49,21 +49,14 @@ export const incomeService = {
     await db.incomes.where("id").equals(id).delete();
   },
 
-  // Query incomes with filters and pagination
-  async queryIncomes(params: {
+  // Query incomes with filters (no pagination - returns all matching records)
+  async queryIncomesAll(params: {
     category?: string;
-    dateFrom?: Date;
-    dateTo?: Date;
+    dateFrom: Date;
+    dateTo: Date;
     searchText?: string;
-    page?: number;
-    limit?: number;
-  }): Promise<{ items: IncomeRecord[]; total: number }> {
-    const { category, dateFrom, dateTo, searchText, page, limit } = params;
-
-    // If no date range, return empty
-    if (!dateFrom || !dateTo) {
-      return { items: [], total: 0 };
-    }
+  }): Promise<IncomeRecord[]> {
+    const { category, dateFrom, dateTo, searchText } = params;
 
     const hasCategory = category && category !== "all";
 
@@ -93,16 +86,36 @@ export const incomeService = {
       results = results.filter((i) => i.description.toLowerCase().includes(searchLower));
     }
 
-    // Get total before pagination
-    const total = results.length;
+    return results;
+  },
 
-    // Step 3: Paginate if requested
-    if (page !== undefined && limit !== undefined) {
-      const offset = (page - 1) * limit;
-      results = results.slice(offset, offset + limit);
-    }
+  // Query incomes with filters and pagination
+  async queryIncomesPaginated(params: {
+    category?: string;
+    dateFrom: Date;
+    dateTo: Date;
+    searchText?: string;
+    page: number;
+    limit: number;
+  }): Promise<{ items: IncomeRecord[]; total: number }> {
+    const { category, dateFrom, dateTo, searchText, page, limit } = params;
 
-    return { items: results, total };
+    // Get all matching records first
+    const allResults = await incomeService.queryIncomesAll({
+      category,
+      dateFrom,
+      dateTo,
+      searchText,
+    });
+
+    // Get total
+    const total = allResults.length;
+
+    // Paginate
+    const offset = (page - 1) * limit;
+    const items = allResults.slice(offset, offset + limit);
+
+    return { items, total };
   },
 
   // Count total incomes

@@ -51,21 +51,14 @@ export const expenseService = {
     await db.expenses.where("id").equals(id).delete();
   },
 
-  // Query expenses with filters and pagination
-  async queryExpenses(params: {
+  // Query expenses with filters (no pagination - returns all matching records)
+  async queryExpensesAll(params: {
     category?: string;
-    dateFrom?: Date;
-    dateTo?: Date;
+    dateFrom: Date;
+    dateTo: Date;
     searchText?: string;
-    page?: number;
-    limit?: number;
-  }): Promise<{ items: ExpenseRecord[]; total: number }> {
-    const { category, dateFrom, dateTo, searchText, page, limit } = params;
-
-    // If no date range, return empty
-    if (!dateFrom || !dateTo) {
-      return { items: [], total: 0 };
-    }
+  }): Promise<ExpenseRecord[]> {
+    const { category, dateFrom, dateTo, searchText } = params;
 
     const hasCategory = category && category !== "all";
 
@@ -95,16 +88,36 @@ export const expenseService = {
       results = results.filter((e) => e.description.toLowerCase().includes(searchLower));
     }
 
-    // Get total before pagination
-    const total = results.length;
+    return results;
+  },
 
-    // Step 3: Paginate if requested
-    if (page !== undefined && limit !== undefined) {
-      const offset = (page - 1) * limit;
-      results = results.slice(offset, offset + limit);
-    }
+  // Query expenses with filters and pagination
+  async queryExpensesPaginated(params: {
+    category?: string;
+    dateFrom: Date;
+    dateTo: Date;
+    searchText?: string;
+    page: number;
+    limit: number;
+  }): Promise<{ items: ExpenseRecord[]; total: number }> {
+    const { category, dateFrom, dateTo, searchText, page, limit } = params;
 
-    return { items: results, total };
+    // Get all matching records first
+    const allResults = await expenseService.queryExpensesAll({
+      category,
+      dateFrom,
+      dateTo,
+      searchText,
+    });
+
+    // Get total
+    const total = allResults.length;
+
+    // Paginate
+    const offset = (page - 1) * limit;
+    const items = allResults.slice(offset, offset + limit);
+
+    return { items, total };
   },
 
   // Count total expenses

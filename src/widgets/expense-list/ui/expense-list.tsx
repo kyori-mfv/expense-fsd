@@ -15,11 +15,16 @@ export function ExpenseList() {
   // Feature: Filter
   const { form, filters, debouncedSearch, handleReset } = useExpenseFilter();
 
+  // Default date range (current month if not set)
+  const dateFrom =
+    filters.dateRange?.from || new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+  const dateTo = filters.dateRange?.to || new Date();
+
   // Widget: Data fetching with filters and pagination
   const { items: paginatedExpenses, total: totalCount } = useExpenseListData({
     category: filters.category,
-    dateFrom: filters.dateRange?.from,
-    dateTo: filters.dateRange?.to,
+    dateFrom,
+    dateTo,
     searchText: debouncedSearch,
     page: currentPage,
     limit: PAGINATION.EXPENSE_LIST_PAGE_SIZE,
