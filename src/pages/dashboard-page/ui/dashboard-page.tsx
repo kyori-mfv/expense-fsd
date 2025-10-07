@@ -1,7 +1,8 @@
-import { useExpensesAll } from "@/entities/expense/model/use-expense-query";
-import { useIncomesAll } from "@/entities/income/model/use-income-query";
+import { useExpensesAll } from "@/entities/expense";
+import { useIncomesAll } from "@/entities/income";
 import {
-  calculateCategoryStats,
+  calculateExpenseCategoryStats,
+  calculateIncomeCategoryStats,
   calculateFinancialStats,
   calculateMonthlyTrends,
 } from "@/shared/lib/calculate-stats";
@@ -58,9 +59,9 @@ export function DashboardPage() {
     [expenses, incomes]
   );
 
-  const expenseCategoryStats = useMemo(() => calculateCategoryStats(expenses), [expenses]);
+  const expenseCategoryStats = useMemo(() => calculateExpenseCategoryStats(expenses), [expenses]);
 
-  const incomeCategoryStats = useMemo(() => calculateCategoryStats(incomes), [incomes]);
+  const incomeCategoryStats = useMemo(() => calculateIncomeCategoryStats(incomes), [incomes]);
 
   // Calculate monthly trends for 6 months (independent of filter)
   const monthlyStats = useMemo(

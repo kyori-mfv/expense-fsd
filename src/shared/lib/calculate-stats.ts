@@ -40,18 +40,51 @@ export interface CategoryStats {
   percentage: number;
 }
 
-export function calculateCategoryStats(records: (ExpenseRecord | IncomeRecord)[]): CategoryStats[] {
+/**
+ * Calculate category statistics for expenses
+ * Separate from income to maintain FSD separation principle
+ */
+export function calculateExpenseCategoryStats(expenses: ExpenseRecord[]): CategoryStats[] {
   const categoryMap = new Map<string, { amount: number; count: number }>();
   let total = 0;
 
   // Group by category
-  for (const record of records) {
-    const existing = categoryMap.get(record.category) || { amount: 0, count: 0 };
-    categoryMap.set(record.category, {
-      amount: existing.amount + record.amount,
+  for (const expense of expenses) {
+    const existing = categoryMap.get(expense.category) || { amount: 0, count: 0 };
+    categoryMap.set(expense.category, {
+      amount: existing.amount + expense.amount,
       count: existing.count + 1,
     });
-    total += record.amount;
+    total += expense.amount;
+  }
+
+  // Convert to array with percentages
+  return Array.from(categoryMap.entries())
+    .map(([category, { amount, count }]) => ({
+      category,
+      amount,
+      count,
+      percentage: total > 0 ? (amount / total) * 100 : 0,
+    }))
+    .sort((a, b) => b.amount - a.amount);
+}
+
+/**
+ * Calculate category statistics for incomes
+ * Separate from expense to maintain FSD separation principle
+ */
+export function calculateIncomeCategoryStats(incomes: IncomeRecord[]): CategoryStats[] {
+  const categoryMap = new Map<string, { amount: number; count: number }>();
+  let total = 0;
+
+  // Group by category
+  for (const income of incomes) {
+    const existing = categoryMap.get(income.category) || { amount: 0, count: 0 };
+    categoryMap.set(income.category, {
+      amount: existing.amount + income.amount,
+      count: existing.count + 1,
+    });
+    total += income.amount;
   }
 
   // Convert to array with percentages

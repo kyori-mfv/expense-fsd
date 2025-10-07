@@ -12,6 +12,7 @@ dist
 dist-ssr
 *.local
 
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -31,6 +32,3 @@ dev-dist
 .env.local
 .env.production
 .env.development
-
-# Claude
-.claude
