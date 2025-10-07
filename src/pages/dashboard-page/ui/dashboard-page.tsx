@@ -85,7 +85,7 @@ export function DashboardPage() {
       {/* Page Header */}
       <PageHeader
         icon={LayoutDashboardIcon}
-        title="Dashboard Tổng quan"
+        title="Tổng quan"
         description="Tổng quan tài chính cá nhân"
         titleColor="text-dashboard-foreground"
         iconColor="text-dashboard-foreground"

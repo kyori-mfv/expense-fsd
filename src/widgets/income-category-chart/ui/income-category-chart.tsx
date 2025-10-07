@@ -29,7 +29,7 @@ export function IncomeCategoryChart({ categoryStats }: IncomeCategoryChartProps)
       title="Thu nhập theo danh mục"
       subtitle="Phân bổ thu nhập"
       data={chartData}
-      valueColor="text-green-600"
+      valueColor="text-income-foreground"
       valuePrefix="+"
       emptyMessage="Chưa có dữ liệu thu nhập"
       tooltipLabel="tổng thu nhập"

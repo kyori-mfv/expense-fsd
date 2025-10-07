@@ -64,7 +64,7 @@ export function AIIncomeInput({ apiKey, onError }: AIIncomeInputProps) {
         <div>
           <label
             htmlFor="ai-input"
-            className="text-sm font-medium mb-2 block flex items-center gap-2"
+            className="text-sm font-medium mb-2 flex items-center gap-2"
           >
             <Sparkles size={16} className="text-primary" />
             Nhập thu nhập bằng AI

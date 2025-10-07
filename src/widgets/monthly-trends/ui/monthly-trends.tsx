@@ -68,22 +68,22 @@ export function MonthlyTrends({ monthlyStats, showNetLine = true }: MonthlyTrend
                         <p className="font-semibold mb-2">{label}</p>
                         <div className="space-y-1">
                           <div className="flex items-center justify-between gap-4">
-                            <span className="text-sm text-green-600">Thu nhập:</span>
-                            <span className="font-semibold text-green-600">
+                            <span className="text-sm text-income-foreground">Thu nhập:</span>
+                            <span className="font-semibold text-income-foreground">
                               +{formatAmount(payload[0].value as number)}
                             </span>
                           </div>
                           <div className="flex items-center justify-between gap-4">
-                            <span className="text-sm text-red-600">Chi tiêu:</span>
-                            <span className="font-semibold text-red-600">
+                            <span className="text-sm text-expense-foreground">Chi tiêu:</span>
+                            <span className="font-semibold text-expense-foreground">
                               -{formatAmount(payload[1].value as number)}
                             </span>
                           </div>
                           {payload[2] && (
                             <div className="flex items-center justify-between gap-4 pt-1 border-t">
-                              <span className="text-sm text-blue-600">Số dư:</span>
-                              <span className="font-semibold text-blue-600">
-                                {(payload[2].value as number) >= 0 ? "+" : ""}
+                              <span className="text-sm text-net-balance-positive">Số dư:</span>
+                              <span className="font-semibold text-net-balance-positive">
+                                {(payload[2].value as number) >= 0 ? "+" : "-"}
                                 {formatAmount(payload[2].value as number)}
                               </span>
                             </div>
@@ -96,14 +96,24 @@ export function MonthlyTrends({ monthlyStats, showNetLine = true }: MonthlyTrend
                 }}
               />
               <Legend />
-              <Bar dataKey="income" name="Thu nhập" fill="#22c55e" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="expense" name="Chi tiêu" fill="#ef4444" radius={[4, 4, 0, 0]} />
+              <Bar
+                dataKey="income"
+                name="Thu nhập"
+                fill="var(--income-foreground)"
+                radius={[4, 4, 0, 0]}
+              />
+              <Bar
+                dataKey="expense"
+                name="Chi tiêu"
+                fill="var(--expense-foreground)"
+                radius={[4, 4, 0, 0]}
+              />
               {showNetLine && (
                 <Line
                   type="monotone"
                   dataKey="net"
                   name="Số dư ròng"
-                  stroke="#3b82f6"
+                  stroke="var(--net-balance-positive)"
                   strokeWidth={2}
                 />
               )}

@@ -9,7 +9,7 @@ export function App() {
   const [activeTab, setActiveTab] = useState<"dashboard" | "expenses" | "income">("dashboard");
 
   return (
-    <ThemeProvider defaultTheme="light">
+    <ThemeProvider>
       <div className="min-h-screen bg-background pb-16">
         {/* Main Content */}
         <div className="min-h-screen">

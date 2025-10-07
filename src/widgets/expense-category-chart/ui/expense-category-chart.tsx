@@ -29,7 +29,7 @@ export function ExpenseCategoryChart({ categoryStats }: ExpenseCategoryChartProp
       title="Chi tiêu theo danh mục"
       subtitle="Phân bổ chi tiêu"
       data={chartData}
-      valueColor="text-red-600"
+      valueColor="text-expense-foreground"
       valuePrefix="-"
       emptyMessage="Chưa có dữ liệu chi tiêu"
       tooltipLabel="tổng chi tiêu"

@@ -1,3 +1,4 @@
+import { ThemeToggle } from "@/shared/components/theme-toggle";
 import type { LucideIcon } from "lucide-react";
 
 interface PageHeaderProps {
@@ -17,11 +18,16 @@ export function PageHeader({
 }: PageHeaderProps) {
   return (
     <div className="mb-4">
-      <h1 className={`text-2xl font-bold flex items-center gap-2 ${titleColor || ""}`}>
-        <Icon size={28} strokeWidth={2.5} className={iconColor || ""} />
-        {title}
-      </h1>
-      <p className="text-sm text-muted-foreground mt-1">{description}</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className={`text-2xl font-bold flex items-center gap-2 ${titleColor || ""}`}>
+            <Icon size={28} strokeWidth={2.5} className={iconColor || ""} />
+            {title}
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">{description}</p>
+        </div>
+        <ThemeToggle />
+      </div>
     </div>
   );
 }
