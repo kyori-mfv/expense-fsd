@@ -6,6 +6,7 @@ import { EmptyState } from "@/shared/components/empty-state";
 import { PaginationControls } from "@/shared/components/pagination-controls";
 import { PAGINATION } from "@/shared/config/constants";
 import { usePagination } from "@/shared/hooks";
+import { Separator } from "@/shared/ui/separator";
 import { SearchX } from "lucide-react";
 
 export function IncomeList() {

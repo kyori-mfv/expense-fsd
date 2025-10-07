@@ -112,7 +112,7 @@ export function PieChartCard({
         </div>
 
         {/* Category breakdown */}
-        <div className="mt-4 space-y-2 max-h-60 overflow-y-auto">
+        <div className="mt-4 space-y-2">
           {data.map((category) => (
             <div
               key={category.name}

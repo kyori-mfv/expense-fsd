@@ -4,6 +4,7 @@ import { Separator } from "@/shared/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { ExpenseList } from "@/widgets/expense-list";
 import { ManageExpenseData } from "@/widgets/manage-expense-data";
+import { PageHeader } from "@/widgets/page-header";
 import { RecentExpenses } from "@/widgets/recent-expenses";
 import { TrendingDown } from "lucide-react";
 import { toast } from "sonner";
@@ -13,10 +14,12 @@ export function ExpensePage() {
 
   return (
     <div className="container mx-auto p-4 max-w-4xl pb-6">
-      <h1 className="text-2xl font-bold mb-4 flex items-center gap-2 text-expense-foreground">
-        <TrendingDown size={28} strokeWidth={2.5} />
-        Chi tiêu
-      </h1>
+      <PageHeader
+        icon={TrendingDown}
+        title="Chi tiêu"
+        description="Quản lý và theo dõi các khoản chi tiêu"
+        titleColor="text-expense-foreground"
+      />
 
       <div className="space-y-6">
         {/* API Key Input - only show if not set */}
@@ -53,7 +56,12 @@ export function ExpensePage() {
 
         {/* All Expenses with Search/Filter */}
         <div>
-          <h2 className="text-xl font-semibold mb-4">Tất cả Chi tiêu</h2>
+          <div className="mb-4">
+            <h2 className="text-xl font-semibold">Tất cả chi tiêu</h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Danh sách đầy đủ các khoản chi tiêu với lọc và tìm kiếm
+            </p>
+          </div>
           <ExpenseList />
         </div>
 

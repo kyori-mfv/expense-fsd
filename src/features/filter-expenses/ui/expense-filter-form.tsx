@@ -84,7 +84,7 @@ export function ExpenseFilterForm({ form, onReset, onFilterChange }: ExpenseFilt
           )}
         />
 
-        <Button type="button" variant="outline" onClick={onReset} className="w-full">
+        <Button type="button" variant="link" onClick={onReset} className="w-full">
           <X className="h-4 w-4 mr-2" />
           Xóa bộ lọc
         </Button>

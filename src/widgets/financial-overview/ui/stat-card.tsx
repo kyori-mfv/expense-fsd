@@ -31,7 +31,7 @@ export function StatCard({
 
   return (
     <Card className={`border-l-4 p-0 ${borderColor}`}>
-      <CardContent className="p-6">
+      <CardContent className="p-4">
         <div className="flex items-start justify-between">
           <div className="space-y-2">
             <p className="text-sm font-medium text-muted-foreground">{title}</p>

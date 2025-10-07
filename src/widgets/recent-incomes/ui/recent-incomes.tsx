@@ -8,7 +8,10 @@ export function RecentIncomes() {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold">Thu nhập gần đây</h3>
+      <div>
+        <h3 className="text-lg font-semibold">Thu nhập gần đây</h3>
+        <p className="text-sm text-muted-foreground mt-1">5 thu nhập được thêm gần nhất</p>
+      </div>
       {recentIncomes.length === 0 ? (
         <EmptyState icon={ReceiptText} description="Chưa có thu nhập nào" />
       ) : (

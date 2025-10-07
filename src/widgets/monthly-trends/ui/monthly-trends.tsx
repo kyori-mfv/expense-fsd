@@ -38,6 +38,7 @@ export function MonthlyTrends({ monthlyStats, showNetLine = true }: MonthlyTrend
     <Card>
       <CardHeader>
         <CardTitle>Xu hướng 6 tháng gần nhất</CardTitle>
+        <p className="text-sm text-muted-foreground">Biểu đồ thu chi và số dư ròng theo tháng</p>
       </CardHeader>
       <CardContent>
         <div role="img" aria-label="Biểu đồ xu hướng thu chi 6 tháng gần nhất">

@@ -4,6 +4,7 @@ import { Separator } from "@/shared/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { IncomeList } from "@/widgets/income-list";
 import { ManageIncomeData } from "@/widgets/manage-income-data";
+import { PageHeader } from "@/widgets/page-header";
 import { RecentIncomes } from "@/widgets/recent-incomes";
 import { TrendingUp } from "lucide-react";
 import { toast } from "sonner";
@@ -13,10 +14,12 @@ export function IncomePage() {
 
   return (
     <div className="container mx-auto p-4 max-w-4xl pb-6">
-      <h1 className="text-2xl font-bold mb-4 flex items-center gap-2 text-income-foreground">
-        <TrendingUp size={28} strokeWidth={2.5} />
-        Thu nhập
-      </h1>
+      <PageHeader
+        icon={TrendingUp}
+        title="Thu nhập"
+        description="Quản lý và theo dõi các khoản thu nhập"
+        titleColor="text-income-foreground"
+      />
 
       <div className="space-y-6">
         {/* API Key Input - only show if not set */}
@@ -53,7 +56,12 @@ export function IncomePage() {
 
         {/* All Incomes with Search/Filter */}
         <div>
-          <h2 className="text-xl font-semibold mb-4">Tất cả Thu nhập</h2>
+          <div className="mb-4">
+            <h2 className="text-xl font-semibold">Tất cả thu nhập</h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Danh sách đầy đủ các khoản thu nhập với lọc và tìm kiếm
+            </p>
+          </div>
           <IncomeList />
         </div>
 

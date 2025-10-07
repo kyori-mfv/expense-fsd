@@ -18,7 +18,8 @@ import { ExpenseCategoryChart } from "@/widgets/expense-category-chart";
 import { FinancialOverview } from "@/widgets/financial-overview";
 import { IncomeCategoryChart } from "@/widgets/income-category-chart";
 import { MonthlyTrends } from "@/widgets/monthly-trends";
-import { ArrowUpDownIcon } from "lucide-react";
+import { PageHeader } from "@/widgets/page-header";
+import { LayoutDashboardIcon } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import type { DateRange } from "react-day-picker";
 
@@ -82,15 +83,13 @@ export function DashboardPage() {
   return (
     <div className="container mx-auto p-4 space-y-6 max-w-7xl">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <ArrowUpDownIcon className="h-6 w-6 text-blue-600" />
-          <div>
-            <h1 className="text-2xl font-bold">Dashboard Tổng quan</h1>
-            <p className="text-sm text-muted-foreground">Tổng quan tài chính cá nhân</p>
-          </div>
-        </div>
-      </div>
+      <PageHeader
+        icon={LayoutDashboardIcon}
+        title="Dashboard Tổng quan"
+        description="Tổng quan tài chính cá nhân"
+        titleColor="text-dashboard-foreground"
+        iconColor="text-dashboard-foreground"
+      />
 
       {/* Monthly Trends Chart (6 months fixed) */}
       <MonthlyTrends monthlyStats={monthlyStats} showNetLine />
