@@ -1,5 +1,6 @@
 import { CategoryIcon } from "@/shared/components/category-icon";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select";
+import { Grid3x3 } from "lucide-react";
 
 interface CategoryItem {
   id: string;
@@ -37,7 +38,18 @@ export function CategorySelect({
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>
-        {includeAllOption && <SelectItem value="all">Tất cả danh mục</SelectItem>}
+        {includeAllOption && (
+          <SelectItem value="all">
+            {showIcons ? (
+              <div className="flex items-center gap-2">
+                <Grid3x3 size={16} className="text-muted-foreground" />
+                <span>Tất cả danh mục</span>
+              </div>
+            ) : (
+              "Tất cả danh mục"
+            )}
+          </SelectItem>
+        )}
         {categories.map((cat) => (
           <SelectItem key={cat.id} value={cat.name}>
             {showIcons ? (

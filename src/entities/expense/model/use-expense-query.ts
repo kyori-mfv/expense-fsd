@@ -2,23 +2,48 @@ import type { ExpenseRecord } from "@/shared/types";
 import { useLiveQuery } from "dexie-react-hooks";
 import { expenseService } from "../api/expense.service";
 
+interface ExpenseListParams {
+  category?: string;
+  dateFrom?: Date;
+  dateTo?: Date;
+  searchText?: string;
+  page: number;
+  limit: number;
+}
+
+interface ExpenseListResult {
+  items: ExpenseRecord[];
+  total: number;
+}
+
 /**
- * Generic expense query hooks at entity level
- * Use these for simple, reusable data fetching
+ * Expense query hooks at entity level
  */
 
 export function useRecentExpenses(limit = 5): ExpenseRecord[] {
   return useLiveQuery(() => expenseService.getRecent(limit), [limit]) ?? [];
 }
 
-export function useAllExpenses(): ExpenseRecord[] {
-  return useLiveQuery(() => expenseService.getAll(), []) ?? [];
-}
-
-export function useExpenseById(id: string): ExpenseRecord | undefined {
-  return useLiveQuery(() => expenseService.getById(id), [id]);
-}
-
-export function useExpenseCount(): number {
-  return useLiveQuery(() => expenseService.count(), []) ?? 0;
+export function useExpenseListData({
+  category,
+  dateFrom,
+  dateTo,
+  searchText,
+  page,
+  limit,
+}: ExpenseListParams): ExpenseListResult {
+  return (
+    useLiveQuery(
+      () =>
+        expenseService.queryExpenses({
+          category,
+          dateFrom,
+          dateTo,
+          searchText,
+          page,
+          limit,
+        }),
+      [category, dateFrom, dateTo, searchText, page, limit]
+    ) ?? { items: [], total: 0 }
+  );
 }

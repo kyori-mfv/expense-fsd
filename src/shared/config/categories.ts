@@ -406,7 +406,6 @@ export const INCOME_CATEGORIES = [
   { id: "ban-hang", name: "Bán hàng", icon: "ShoppingCart", color: "#0891b2" },
   { id: "cho-thue", name: "Cho thuê", icon: "Home", color: "#0284c7" },
   { id: "lai-suat", name: "Lãi suất", icon: "PiggyBank", color: "#2563eb" },
-  { id: "thu-nhap-khac", name: "Thu nhập khác", icon: "Plus", color: "#4338ca" },
   { id: "khac", name: "Khác", icon: "MoreHorizontal", color: "#6b7280" },
 ] as const;
 
@@ -506,7 +505,13 @@ export const INCOME_CATEGORY_KEYWORDS: Record<string, string[]> = {
     "gửi tiết kiệm",
     "term deposit",
   ],
-  "Thu nhập khác": [
+  Khác: [
+    "khác",
+    "other",
+    "misc",
+    "linh tinh",
+    "tạp",
+    "thu nhập",
     "thu nhập khác",
     "other income",
     "miscellaneous income",
@@ -514,8 +519,6 @@ export const INCOME_CATEGORY_KEYWORDS: Record<string, string[]> = {
     "hoàn tiền",
     "cashback",
     "reward",
-    "thưởng",
     "prize",
   ],
-  Khác: ["khác", "other", "misc", "linh tinh", "tạp", "thu nhập"],
 };

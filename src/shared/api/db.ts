@@ -1,9 +1,10 @@
-import type { ExpenseRecord } from "@/shared/types";
+import type { ExpenseRecord, IncomeRecord } from "@/shared/types";
 import Dexie, { type EntityTable } from "dexie";
 
 // Database class
 class ExpenseDatabase extends Dexie {
   expenses!: EntityTable<ExpenseRecord, "id">;
+  incomes!: EntityTable<IncomeRecord, "id">;
 
   constructor() {
     super("ExpenseManagerDB");
@@ -11,6 +12,8 @@ class ExpenseDatabase extends Dexie {
     // Single version with optimized compound indexes
     this.version(1).stores({
       expenses:
+        "id, createdAt, date, category, [category+date+createdAt], [date+createdAt], *description",
+      incomes:
         "id, createdAt, date, category, [category+date+createdAt], [date+createdAt], *description",
     });
   }

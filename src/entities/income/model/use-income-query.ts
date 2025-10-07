@@ -1,13 +1,8 @@
-import { expenseService } from "@/entities/expense";
-import type { ExpenseRecord } from "@/shared/types";
+import type { IncomeRecord } from "@/shared/types";
 import { useLiveQuery } from "dexie-react-hooks";
+import { incomeService } from "../api/income.service";
 
-/**
- * Widget-specific data fetching hook
- * Combines filtering, pagination, and search for expense list
- */
-
-interface ExpenseListParams {
+interface IncomeListParams {
   category?: string;
   dateFrom?: Date;
   dateTo?: Date;
@@ -16,23 +11,31 @@ interface ExpenseListParams {
   limit: number;
 }
 
-interface ExpenseListResult {
-  items: ExpenseRecord[];
+interface IncomeListResult {
+  items: IncomeRecord[];
   total: number;
 }
 
-export function useExpenseListData({
+/**
+ * Income query hooks at entity level
+ */
+
+export function useRecentIncomes(limit = 5): IncomeRecord[] {
+  return useLiveQuery(() => incomeService.getRecent(limit), [limit]) ?? [];
+}
+
+export function useIncomeListData({
   category,
   dateFrom,
   dateTo,
   searchText,
   page,
   limit,
-}: ExpenseListParams): ExpenseListResult {
+}: IncomeListParams): IncomeListResult {
   return (
     useLiveQuery(
       () =>
-        expenseService.queryExpenses({
+        incomeService.queryIncomes({
           category,
           dateFrom,
           dateTo,

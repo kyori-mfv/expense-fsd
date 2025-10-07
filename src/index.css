@@ -51,6 +51,10 @@ body {
   --expense-light: hsl(342 75% 96%);
   --expense-foreground: hsl(342 90% 40%);
 
+  --income: hsl(142 76% 36%);
+  --income-light: hsl(142 76% 96%);
+  --income-foreground: hsl(142 76% 36%);
+
   --shadow-2xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-sm: 0 1px 3px 0px hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
@@ -84,6 +88,11 @@ body {
   --expense: hsl(342 75% 60%);
   --expense-light: hsl(342 75% 20%);
   --expense-foreground: hsl(342 90% 70%);
+
+  --income: hsl(142 76% 46%);
+  --income-light: hsl(142 76% 20%);
+  --income-foreground: hsl(142 76% 56%);
+
   --chart-1: hsl(300 30% 50%);
   --chart-2: hsl(194 86% 58%);
   --chart-3: hsl(155 57% 45%);
@@ -144,6 +153,10 @@ body {
   --color-expense: var(--expense);
   --color-expense-light: var(--expense-light);
   --color-expense-foreground: var(--expense-foreground);
+
+  --color-income: var(--income);
+  --color-income-light: var(--income-light);
+  --color-income-foreground: var(--income-foreground);
 
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);

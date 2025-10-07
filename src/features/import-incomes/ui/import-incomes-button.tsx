@@ -1,0 +1,52 @@
+import { Button } from "@/shared/ui/button";
+import { Upload } from "lucide-react";
+import { useRef } from "react";
+import { toast } from "sonner";
+import { useImportIncomes } from "../model/use-import-incomes";
+
+export function ImportIncomesButton() {
+  const { importFromJSON, isImporting } = useImportIncomes();
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleClick = () => {
+    fileInputRef.current?.click();
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const result = await importFromJSON(file);
+
+      if (result.failed > 0) {
+        toast.warning(`Đã nhập ${result.success}/${result.total} thu nhập. ${result.failed} lỗi.`);
+      } else {
+        toast.success(`Đã nhập ${result.success} thu nhập thành công`);
+      }
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Nhập dữ liệu thất bại");
+    }
+
+    // Reset input
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  return (
+    <>
+      <input
+        ref={fileInputRef}
+        type="file"
+        accept=".json"
+        onChange={handleFileChange}
+        className="hidden"
+      />
+      <Button onClick={handleClick} disabled={isImporting} variant="outline">
+        <Upload className="h-4 w-4 mr-2" />
+        {isImporting ? "Đang nhập..." : "Nhập dữ liệu"}
+      </Button>
+    </>
+  );
+}
