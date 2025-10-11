@@ -7,6 +7,7 @@ A modern, offline-first Progressive Web Application (PWA) for personal expense a
 [![Vite](https://img.shields.io/badge/Vite-6-646cff.svg)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-38bdf8.svg)](https://tailwindcss.com/)
 [![FSD](https://img.shields.io/badge/Architecture-FSD-orange.svg)](https://feature-sliced.design/)
+[![AI Agents](https://img.shields.io/badge/AI-Multi--Agent%20System-purple.svg)](.claude/agents/README.md)
 
 ---
 
@@ -46,6 +47,13 @@ A modern, offline-first Progressive Web Application (PWA) for personal expense a
 - **Offline-First**: Full functionality without internet (IndexedDB)
 - **Bottom Navigation**: Mobile-optimized navigation bar
 - **Toast Notifications**: User-friendly feedback for actions
+
+### 🤖 AI Development Tools
+- **Multi-Agent System**: Autonomous AI team for feature development
+- **FSD Architecture Compliance**: Automatic architecture validation
+- **Iterative Quality Assurance**: Multiple review cycles before delivery
+- **Natural Language Requests**: Describe what you want, agents build it
+- **See [AI Development Agents](#-ai-development-agents) for details**
 
 ---
 
@@ -433,9 +441,97 @@ The app requires a Gemini API key for AI features.
 
 ---
 
+## 🤖 AI Development Agents
+
+### Overview
+
+This project includes an **autonomous multi-agent AI system** - a team of 7 specialized AI agents that work together to build features with high quality and FSD architecture compliance.
+
+### How to Use
+
+**Simply describe what you want in plain language** when talking to Claude Code (in your chat or conversation). The AI agents will automatically activate and collaborate to build the feature.
+
+#### Example Session:
+
+```
+You (in Claude Code chat):
+"I want to add tags to expenses so I can organize them better"
+
+[AI agents activate automatically]
+
+Manager Agent:
+  → Analyzes your request
+  → Assigns tasks to specialist agents
+  → Coordinates the workflow
+
+Business Expert (AI) → Analyzes requirements
+Data Expert (AI) → Designs data model
+UX Designer (AI) → Designs interface
+Software Architect (AI) → Plans FSD structure
+Senior Engineer (AI) → Writes code
+Architect (AI) → Reviews implementation
+QA Engineer (AI) → Tests everything
+All Experts → Final validation
+
+Manager Agent (reports back):
+"✅ Expense Tags Feature Complete!
+ - 3 files created, 5 modified
+ - All experts approved
+ - 25/25 tests passed
+ Ready for your approval!"
+
+You:
+"Looks great! Ship it!"
+```
+
+### Key Points
+
+- **No special commands needed** - just describe what you want in your normal conversation
+- **No technical details required** - describe the problem, not the solution
+- **Automatic collaboration** - agents work together autonomously
+- **Iterative quality** - multiple review cycles ensure high quality
+- **You approve the final result** - maintain full control
+
+### What You Can Request
+
+```
+✅ "I want to add tags to expenses"
+✅ "I need budget tracking with monthly limits"
+✅ "I want to see which expenses are tax deductible"
+✅ "The date picker doesn't work on Safari - please fix it"
+✅ "Check if the code follows FSD architecture properly"
+
+❌ Don't say: "Add tags: string[] to ExpenseRecord interface"
+❌ Don't say: "Update database schema to v3"
+❌ Don't say: "Create a TagInput component"
+```
+
+### Benefits
+
+- ✅ **Faster development** with AI collaboration
+- ✅ **FSD architecture compliance** guaranteed
+- ✅ **Multiple expert reviews** before delivery
+- ✅ **Comprehensive testing** with feedback loops
+- ✅ **You focus on "what"**, agents handle "how"
+
+### Documentation
+
+- **📖 Full Guide**: [.claude/agents/README.md](.claude/agents/README.md)
+- **🚀 Quick Reference**: [.claude/QUICK-START.md](.claude/QUICK-START.md)
+- **📋 Detailed Workflows**: [.claude/agents/WORKFLOW-GUIDE.md](.claude/agents/WORKFLOW-GUIDE.md)
+
+---
+
 ## 🧪 Development Guide
 
 ### Adding a New Feature
+
+**Option 1: Use AI Agents (Recommended)**
+- Just describe what you want in simple terms
+- AI team handles everything (design, code, testing)
+- See [AI Development Agents](#-ai-development-agents) above
+
+**Option 2: Manual Development**
 
 Follow FSD principles:
 
