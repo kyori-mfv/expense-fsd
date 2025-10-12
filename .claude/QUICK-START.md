@@ -2,7 +2,7 @@
 
 ## Your AI Development Team
 
-You now have **7 autonomous AI agents** working together to build features:
+You now have **8 autonomous AI agents** working together to build features:
 
 | Agent | Role | Expertise |
 |-------|------|-----------|
@@ -13,6 +13,7 @@ You now have **7 autonomous AI agents** working together to build features:
 | 🏗️ **Software Architect** | Principal Engineer | Ensures FSD compliance |
 | 👨‍💻 **Senior Engineer** | Developer | Writes production code |
 | 🧪 **QA Engineer** | Tester | Tests everything, finds bugs |
+| 📝 **Documentation Agent** | Technical Writer | Updates all documentation |
 
 ---
 
@@ -70,7 +71,12 @@ Phase 6: Expert Review (Business, Data, UX)
     ↓ ← Feedback loop: Engineer fixes → Architect reviews → QA tests → Experts re-review
     ✅ All experts approve
     ↓
-Phase 7: Your Approval ✅
+Phase 7: Your Approval ✅ "Ship it!"
+    ↓
+Phase 8: Documentation Update
+    📝 Documentation Agent → Updates all docs automatically
+    ↓
+Manager: "✅ Deployed & Documented!"
 ```
 
 ---

@@ -19,10 +19,13 @@ This system simulates a **real software development team** where specialized exp
 - **Reports to**: You
 
 ### 🤖 AI Agent Team
-1. 🎨 **UX Designer** - Designs interfaces and user flows
-2. 🏗️ **Software Architect** - Plans FSD structure
-3. 👨‍💻 **Senior Engineer** - Implements features
-4. 🧪 **QA Engineer** - Tests and finds bugs
+1. 💼 **Business Expert** - Analyzes requirements
+2. 📊 **Data Expert** - Designs data models
+3. 🎨 **UX Designer** - Designs interfaces and user flows
+4. 🏗️ **Software Architect** - Plans FSD structure
+5. 👨‍💻 **Senior Engineer** - Implements features
+6. 🧪 **QA Engineer** - Tests and finds bugs
+7. 📝 **Documentation Agent** - Updates all documentation
 
 ---
 
@@ -120,7 +123,22 @@ This system simulates a **real software development team** where specialized exp
                              ↓
 ┌──────────────────────────────────────────────────────────────────┐
 │                         YOU (User)                               │
-│              ✅ Final Approval & Deployment                      │
+│              ✅ Final Approval: "Ship it!"                       │
+└────────────────────────────┬─────────────────────────────────────┘
+                             ↓
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ PHASE 7: DOCUMENTATION UPDATE                                   ┃
+┃   📝 Documentation Agent → Updates all docs                     ┃
+┃        ↓                                                         ┃
+┃   - README.md (features, schema)                                ┃
+┃   - ARCHITECTURE.md (FSD structure)                             ┃
+┃   - API docs (hooks, components)                                ┃
+┃   - Code docs (JSDoc comments)                                  ┃
+┗━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛
+                          ↓
+┌──────────────────────────────────────────────────────────────────┐
+│                    🎯 MANAGER AGENT                              │
+│              "✅ Feature deployed & documented!"                 │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
@@ -584,6 +602,66 @@ You: "Great! Ship it!"
 
 ---
 
+### Phase 10: Documentation Update
+
+```
+┌─────────────────────────────────────────────┐
+│ 11. Manager → Documentation Agent          │
+└─────────────────────────────────────────────┘
+
+Manager → Documentation Agent:
+"User approved expense tags feature. Update all documentation."
+
+Documentation Agent (AI works autonomously):
+✓ Analyzes feature changes:
+  - Database schema updated (v2 → v3)
+  - New slice: features/manage-tags/
+  - New hook: useExpenseTags
+  - New component: TagInput
+  - Modified: expense-list, filter-expenses
+
+✓ Updates README.md:
+  - Added "Tags" to Expense Management features
+  - Updated database schema section to v3
+
+✓ Updates ARCHITECTURE.md:
+  - Added features/manage-tags/ to FSD structure
+  - Documented slice organization
+
+✓ Updates API Documentation:
+  - Documented useExpenseTags hook with examples
+  - Documented TagInput component props
+
+✓ Adds Code Documentation:
+  - JSDoc comments for all new functions
+  - TypeScript interface documentation
+
+✓ Verifies:
+  - All code examples compile ✅
+  - All links work ✅
+  - Consistent formatting ✅
+
+Documentation Agent → Manager:
+"📝 Documentation Update Complete
+ - README.md: Updated features + schema
+ - ARCHITECTURE.md: Added new slice structure
+ - API docs: Documented useExpenseTags hook
+ - Component docs: Documented TagInput
+ - Code docs: Added JSDoc comments
+
+ All documentation verified and production-ready!"
+
+Manager → You:
+"✅ Feature Deployed & Documented!
+ - Code deployed ✅
+ - Documentation updated ✅
+ - All changes tracked ✅
+
+ Expense tags feature is live!"
+```
+
+---
+
 ## Workflow Patterns
 
 ### Pattern 1: Small Bug Fix
@@ -783,8 +861,18 @@ Phase 6: EXPERT REVIEW (Feedback Loop)
     ↓ (all approved)
 Manager → Compiles all reviews
     ↓
-Phase 7: FINAL APPROVAL
-You → Review & Approve
+Phase 7: USER APPROVAL
+You → Review & Approve: "Ship it!"
+    ↓
+Phase 8: DOCUMENTATION UPDATE
+Documentation Agent (AI) → Updates all docs
+    ↓
+    - README.md (features, schema)
+    - ARCHITECTURE.md (FSD structure)
+    - API docs (hooks, components)
+    - Code docs (JSDoc comments)
+    ↓
+Manager → "✅ Feature deployed & documented!"
 ```
 
 Use when: Full feature development (most common)

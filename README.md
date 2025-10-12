@@ -482,6 +482,20 @@ Manager Agent (reports back):
 
 You:
 "Looks great! Ship it!"
+
+[Documentation Agent activates]
+
+Documentation Agent (AI) → Updates docs automatically
+  - README.md (features, schema)
+  - ARCHITECTURE.md (FSD structure)
+  - API docs (hooks, components)
+  - Code docs (JSDoc comments)
+
+Manager Agent (confirms):
+"✅ Feature Deployed & Documented!
+ - Code deployed ✅
+ - Documentation updated ✅
+ Expense tags feature is live!"
 ```
 
 ### Key Points

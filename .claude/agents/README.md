@@ -45,6 +45,11 @@ This is a **fully autonomous AI development team** that builds features for your
 - **File**: `06-qa-agent.md`
 - **Autonomous**: Yes - runs tests, documents bugs, validates fixes
 
+### 📝 Documentation Agent (AI)
+- **Role**: Updates all project documentation after feature approval
+- **File**: `07-documentation-agent.md`
+- **Autonomous**: Yes - updates README, architecture docs, API docs, code comments
+
 ---
 
 ## How It Works
@@ -58,7 +63,9 @@ This is a **fully autonomous AI development team** that builds features for your
    - Architect reviews → Engineer fixes → Architect approves
    - QA tests → Engineer fixes bugs → Architect reviews → QA retests
    - Experts review → Engineer addresses feedback → Experts re-review
-5. **Manager delivers complete feature** with all approvals
+5. **You approve the final result** ("Ship it!")
+6. **Documentation Agent updates all docs** (automatically)
+7. **Manager confirms deployment** with all documentation updated
 
 ---
 
