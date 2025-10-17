@@ -54,6 +54,7 @@ export function IncomeForm({ onError }: IncomeFormProps) {
           <Input
             id="amount"
             type="number"
+            inputMode="numeric"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="100000"
