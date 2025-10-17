@@ -5,8 +5,7 @@ import { PageTransition } from "@/shared/components";
 import { BottomNav } from "@/widgets/bottom-nav";
 import { AnimatePresence } from "framer-motion";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { RouterProvider } from "./providers/router-provider";
-import { ThemeProvider } from "./providers/theme-provider";
+import { Providers } from "./providers/providers";
 
 /**
  * AppRoutes component - Contains routing logic with animations
@@ -58,10 +57,8 @@ function AppRoutes() {
 
 export function App() {
   return (
-    <ThemeProvider>
-      <RouterProvider>
-        <AppRoutes />
-      </RouterProvider>
-    </ThemeProvider>
+    <Providers>
+      <AppRoutes />
+    </Providers>
   );
 }
