@@ -2,8 +2,8 @@ import { useExpensesAll } from "@/entities/expense";
 import { useIncomesAll } from "@/entities/income";
 import {
   calculateExpenseCategoryStats,
-  calculateIncomeCategoryStats,
   calculateFinancialStats,
+  calculateIncomeCategoryStats,
   calculateMonthlyTrends,
 } from "@/shared/lib/calculate-stats";
 import {

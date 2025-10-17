@@ -306,6 +306,179 @@ const message = 'Total: ' + formatAmount(total) + ' VND';
 
 ---
 
+### Navigation Conventions
+
+#### 1. Routing
+
+```typescript
+// ✅ Define routes in app/app.tsx only
+function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/page" element={<PageTransition><Page /></PageTransition>} />
+    </Routes>
+  );
+}
+
+// ❌ Never define routes in page components
+export function MyPage() {
+  return <Routes>...</Routes>; // NO!
+}
+```
+
+#### 2. Navigation Links
+
+```typescript
+// ✅ Use NavLink for navigation
+import { NavLink } from 'react-router-dom';
+
+<NavLink to="/expenses">
+  Expenses
+</NavLink>
+
+// ❌ Don't use Button with onClick for navigation
+<Button onClick={() => setPage("expenses")}>  // NO!
+  Expenses
+</Button>
+
+// ❌ Don't use plain Link (use NavLink for active state)
+<Link to="/expenses">Expenses</Link>  // Use NavLink instead
+```
+
+#### 3. Active State
+
+```typescript
+// ✅ Use NavLink's isActive prop
+<NavLink
+  to="/expenses"
+  className={({ isActive }) => cn(
+    "base-styles",
+    isActive && "active-styles"
+  )}
+>
+  {({ isActive }) => (
+    <span className={isActive ? "font-bold" : ""}>
+      Expenses
+    </span>
+  )}
+</NavLink>
+
+// ❌ Don't manage active state manually
+const [active, setActive] = useState("expenses"); // NO!
+```
+
+#### 4. Route Transitions
+
+```typescript
+// ✅ Always wrap page routes with PageTransition
+<Route
+  path="/expenses"
+  element={
+    <PageTransition>
+      <ExpensePage />
+    </PageTransition>
+  }
+/>
+
+// ❌ Don't render pages directly
+<Route path="/expenses" element={<ExpensePage />} /> // Missing transition
+```
+
+---
+
+### Animation Conventions
+
+#### 1. When to Animate
+
+```typescript
+// ✅ Appropriate use cases
+- Page transitions (use PageTransition)
+- Modal/dialog entry and exit
+- List item additions/removals
+- Notification toasts
+- Accordion expand/collapse
+
+// ❌ Avoid animating
+- Every state change (too distracting)
+- Form input values (accessibility issue)
+- Hover states (CSS transitions sufficient)
+- Loading spinners (use CSS animations)
+```
+
+#### 2. Animation Performance
+
+```typescript
+// ✅ Use GPU-accelerated properties
+const animation = {
+  transform: "translateY(10px)",  // GPU-accelerated
+  opacity: 0,                      // GPU-accelerated
+};
+
+// ✅ Add willChange hint for complex animations
+<motion.div style={{ willChange: "transform, opacity" }}>
+
+// ❌ Avoid animating expensive properties
+const badAnimation = {
+  width: "100%",    // Causes layout reflow
+  height: "500px",  // Causes layout reflow
+  margin: "20px",   // Causes layout reflow
+  left: "100px",    // Not GPU-accelerated
+};
+```
+
+#### 3. Animation Duration
+
+```typescript
+// ✅ Keep animations fast and responsive
+const transition = { duration: 0.2 };     // Good: 200ms
+const transition = { duration: 0.3 };     // OK: 300ms
+
+// ❌ Avoid slow animations
+const transition = { duration: 1.0 };     // Too slow
+const transition = { duration: 0.05 };    // Too fast to perceive
+```
+
+#### 4. Accessibility
+
+```typescript
+// ✅ Always respect user preferences
+const shouldReduceMotion =
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const transition = shouldReduceMotion
+  ? { duration: 0 }           // Instant for accessibility
+  : { duration: 0.2 };        // Smooth animation
+
+// ❌ Never force animations
+const transition = { duration: 0.3 };  // Ignores user preference
+```
+
+#### 5. Framer Motion Best Practices
+
+```typescript
+// ✅ Use variants for reusable animation states
+const variants: Variants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+<motion.div variants={variants} />
+
+// ✅ Use AnimatePresence for exit animations
+<AnimatePresence mode="wait">
+  <Routes>...</Routes>
+</AnimatePresence>
+
+// ✅ Use motion.div, not div with motion props
+<motion.div animate={{ x: 100 }} />  // Correct
+
+// ❌ Don't use motion props on regular elements
+<div animate={{ x: 100 }} />  // Won't work
+```
+
+---
+
 ### React Conventions
 
 #### 1. Component Structure

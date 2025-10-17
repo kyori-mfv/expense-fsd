@@ -47,6 +47,8 @@ A modern, offline-first Progressive Web Application (PWA) for personal expense a
 - **Offline-First**: Full functionality without internet (IndexedDB)
 - **Bottom Navigation**: Mobile-optimized navigation bar
 - **Toast Notifications**: User-friendly feedback for actions
+- **URL-Based Navigation**: Bookmarkable pages with browser history support
+- **Smooth Page Transitions**: Professional fade animations (200ms) with accessibility support
 
 ### 🤖 AI Development Tools
 - **Multi-Agent System**: Autonomous AI team for feature development
@@ -79,7 +81,9 @@ app → pages → widgets → features → entities → shared
 src/
 ├── app/                      # Application layer
 │   ├── providers/           # Theme, routing providers
-│   ├── app.tsx              # Root component
+│   │   ├── router-provider.tsx  # React Router setup
+│   │   └── theme-provider.tsx   # Theme management
+│   ├── app.tsx              # Root component with AppRoutes
 │   └── index.css            # Global styles
 │
 ├── pages/                   # Page components (routes)
@@ -130,6 +134,7 @@ src/
 └── shared/                  # Reusable infrastructure
     ├── ui/                 # shadcn/ui components (Button, Card, etc.)
     ├── components/         # Custom shared components
+    │   └── page-transition.tsx  # Route transition animations
     ├── lib/                # Utilities (format, calculations, date)
     ├── api/                # Database setup (Dexie)
     ├── config/             # Categories, constants
@@ -198,7 +203,7 @@ pnpm verify        # Run lint + type-check + build
 - **[React 19](https://reactjs.org/)**: Latest React with modern features
 - **[TypeScript 5.6](https://www.typescriptlang.org/)**: Type-safe development
 - **[Vite 6](https://vitejs.dev/)**: Lightning-fast build tool
-- **[React Router 6](https://reactrouter.com/)**: Client-side routing
+- **[React Router 6](https://reactrouter.com/)**: URL-based routing with browser history
 
 ### Styling
 - **[Tailwind CSS 4](https://tailwindcss.com/)**: Utility-first CSS framework
@@ -218,6 +223,9 @@ pnpm verify        # Run lint + type-check + build
 
 ### Charts & Visualization
 - **[Recharts](https://recharts.org/)**: Composable charting library
+
+### Animation
+- **[Framer Motion](https://www.framer.com/motion/)**: Production-grade animation library for smooth page transitions
 
 ### AI Integration
 - **[Gemini AI](https://ai.google.dev/)**: Google's AI for natural language parsing

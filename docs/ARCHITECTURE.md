@@ -56,14 +56,16 @@ This application is built using **Feature-Sliced Design (FSD)**, a modern archit
 ```
 app/
 ├── providers/
-│   ├── providers.tsx       # Root provider composition
-│   └── theme-provider.tsx  # Theme context
-├── app.tsx                 # Main app component
-└── index.css               # Global styles
+│   ├── providers.tsx           # Root provider composition
+│   ├── theme-provider.tsx      # Theme context
+│   └── router-provider.tsx     # React Router setup (BrowserRouter)
+├── app.tsx                     # Main app component with AppRoutes
+└── index.css                   # Global styles
 ```
 
 **Rules**:
 - ✅ Can import from any layer below
+- ✅ AppRoutes component contains routing logic (must be inside RouterProvider)
 - ❌ No business logic
 - ❌ No feature-specific code
 
@@ -273,6 +275,166 @@ shared/
 - ❌ No business logic
 - ❌ No knowledge of features or entities
 - ❌ Pure infrastructure code only
+
+---
+
+## Routing Architecture
+
+### React Router Integration
+
+The application uses **React Router v6** for URL-based navigation, providing browser history support, bookmarkable pages, and direct URL access.
+
+#### Structure
+
+**RouterProvider** (`src/app/providers/router-provider.tsx`)
+- Wraps the application with `BrowserRouter`
+- Provides routing context to the entire app
+- Placed in app/providers following FSD conventions
+
+**AppRoutes Component** (`src/app/app.tsx`)
+- Contains all routing logic and route definitions
+- Must be inside `RouterProvider` to use `useLocation()` hook
+- Wraps routes with `AnimatePresence` for page transitions
+
+**Route Configuration**:
+```typescript
+// src/app/app.tsx
+function AppRoutes() {
+  const location = useLocation(); // Hook requires Router context
+
+  return (
+    <AnimatePresence mode="wait" initial={false}>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PageTransition>
+              <DashboardPage />
+            </PageTransition>
+          }
+        />
+        {/* More routes... */}
+      </Routes>
+    </AnimatePresence>
+  );
+}
+```
+
+#### Why AppRoutes Component?
+
+The `AppRoutes` component exists to solve a React Router context requirement:
+
+- `useLocation()` hook **must** be called inside `BrowserRouter` context
+- `AnimatePresence` requires the current `location` for animation keys
+- **Solution**: Create `AppRoutes` component that's rendered inside `RouterProvider`
+
+**Component Hierarchy**:
+```
+App
+└── ThemeProvider
+    └── RouterProvider (BrowserRouter context starts here)
+        └── AppRoutes (useLocation() works here ✓)
+            ├── AnimatePresence
+            │   └── Routes
+            │       └── Route components with PageTransition
+            └── BottomNav
+```
+
+#### Navigation Components
+
+**Bottom Navigation** (`src/widgets/bottom-nav/ui/bottom-nav.tsx`)
+- Uses `NavLink` from react-router-dom
+- Automatic active state detection via `isActive` prop
+- Dynamic styling based on current route
+
+**Example**:
+```typescript
+<NavLink
+  to="/dashboard"
+  className={({ isActive }) => cn(
+    "flex flex-col items-center",
+    isActive
+      ? "text-dashboard-foreground bg-dashboard-foreground/10"
+      : "text-muted-foreground"
+  )}
+>
+  {({ isActive }) => (
+    <>
+      <LayoutDashboardIcon strokeWidth={isActive ? 2.5 : 2} />
+      <span className={cn("text-xs", isActive && "font-semibold")}>
+        Tổng quan
+      </span>
+    </>
+  )}
+</NavLink>
+```
+
+---
+
+## Animation System
+
+### Page Transitions
+
+**Component**: `PageTransition` (`src/shared/components/page-transition.tsx`)
+
+Provides smooth, accessible animations between route changes.
+
+#### Features
+
+- **200ms fade animation** with subtle 10px slide
+- **GPU-accelerated** transforms (`willChange` hint)
+- **Accessibility support**: Respects `prefers-reduced-motion` user preference
+- **Reusable**: Can wrap any page content
+- **Performance optimized**: 60fps smooth transitions
+
+#### Usage
+
+```typescript
+<Route
+  path="/expenses"
+  element={
+    <PageTransition>
+      <ExpensePage />
+    </PageTransition>
+  }
+/>
+```
+
+#### Animation Configuration
+
+```typescript
+const pageVariants: Variants = {
+  initial: { opacity: 0, y: 10 },    // Start invisible, slightly below
+  animate: { opacity: 1, y: 0 },     // Fade in, slide to position
+  exit: { opacity: 0, y: -10 },      // Fade out, slide up
+};
+
+const pageTransition: Transition = shouldReduceMotion
+  ? { duration: 0 }                   // Instant for accessibility
+  : { duration: 0.2, ease: [0.4, 0.0, 0.2, 1] }; // Smooth Material easing
+```
+
+#### Accessibility
+
+Automatically detects user motion preferences:
+
+```typescript
+const shouldReduceMotion =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+```
+
+- **Motion enabled**: 200ms smooth fade + slide animation
+- **Motion disabled**: Instant transitions (duration: 0)
+- **WCAG 2.1 compliant**: Respects user accessibility settings
+
+#### Performance
+
+- Uses `transform` and `opacity` (GPU-accelerated properties)
+- `willChange: "transform, opacity"` hint for browser optimization
+- `mode="wait"` in AnimatePresence prevents overlapping renders
+- `initial={false}` skips animation on first mount (faster initial load)
 
 ---
 
@@ -543,6 +705,25 @@ export function useRecentExpenses(limit = 5): ExpenseRecord[] {
 4. **Server State** (`Dexie + useLiveQuery`)
    - Use for: Persistent data (expenses, incomes)
    - Scope: Database-backed state
+
+### Routing State
+
+**Managed by React Router** (`react-router-dom`)
+- URL state (current route)
+- Browser history (back/forward stack)
+- Location state (passed between routes)
+
+**Benefits**:
+- Automatic persistence (URL is the source of truth)
+- Shareable state (copy URL to share page)
+- Browser integration (back/forward buttons work)
+
+**Access Pattern**:
+```typescript
+// Must be inside RouterProvider context
+const location = useLocation();
+const navigate = useNavigate();
+```
 
 ### When to Use What
 

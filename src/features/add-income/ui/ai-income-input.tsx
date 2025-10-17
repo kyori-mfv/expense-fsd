@@ -62,10 +62,7 @@ export function AIIncomeInput({ apiKey, onError }: AIIncomeInputProps) {
     <Card className="p-4">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label
-            htmlFor="ai-input"
-            className="text-sm font-medium mb-2 flex items-center gap-2"
-          >
+          <label htmlFor="ai-input" className="text-sm font-medium mb-2 flex items-center gap-2">
             <Sparkles size={16} className="text-primary" />
             Nhập thu nhập bằng AI
           </label>

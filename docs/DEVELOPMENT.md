@@ -58,6 +58,120 @@ git push origin feature/your-feature-name
 
 ---
 
+### Adding a New Route
+
+Follow these steps to add a new page to the application:
+
+#### 1. Create Page Component
+
+```bash
+mkdir -p src/pages/my-new-page/ui
+touch src/pages/my-new-page/ui/my-new-page.tsx
+touch src/pages/my-new-page/index.ts
+```
+
+**File**: `src/pages/my-new-page/ui/my-new-page.tsx`
+```typescript
+import { PageHeader } from "@/widgets/page-header";
+import { MyIcon } from "lucide-react";
+
+export function MyNewPage() {
+  return (
+    <div className="container mx-auto p-4 max-w-4xl">
+      <PageHeader
+        icon={MyIcon}
+        title="My New Page"
+        description="Description of the page"
+      />
+
+      {/* Page content */}
+    </div>
+  );
+}
+```
+
+**File**: `src/pages/my-new-page/index.ts`
+```typescript
+export { MyNewPage } from './ui/my-new-page';
+```
+
+#### 2. Add Route in App
+
+**File**: `src/app/app.tsx`
+
+Import the page:
+```typescript
+import { MyNewPage } from "@/pages/my-new-page";
+```
+
+Add route to AppRoutes:
+```typescript
+function AppRoutes() {
+  const location = useLocation();
+
+  return (
+    <Routes location={location} key={location.pathname}>
+      {/* Existing routes */}
+
+      <Route
+        path="/my-new-page"
+        element={
+          <PageTransition>
+            <MyNewPage />
+          </PageTransition>
+        }
+      />
+    </Routes>
+  );
+}
+```
+
+#### 3. Add Navigation Link (Optional)
+
+If you want to add the page to bottom navigation:
+
+**File**: `src/widgets/bottom-nav/ui/bottom-nav.tsx`
+
+```typescript
+<NavLink
+  to="/my-new-page"
+  className={({ isActive }) => cn(
+    "flex flex-col items-center justify-center gap-1 h-full",
+    isActive
+      ? "text-primary bg-primary/10"
+      : "text-muted-foreground"
+  )}
+>
+  {({ isActive }) => (
+    <>
+      <MyIcon size={24} strokeWidth={isActive ? 2.5 : 2} />
+      <span className={cn("text-xs", isActive && "font-semibold")}>
+        My Page
+      </span>
+    </>
+  )}
+</NavLink>
+```
+
+#### 4. Test the Route
+
+```bash
+# Start dev server
+pnpm dev
+
+# Navigate to http://localhost:5173/my-new-page
+# Test smooth page transition
+# Test browser back/forward buttons
+```
+
+#### 5. Verify
+
+```bash
+pnpm verify
+```
+
+---
+
 ## Available Scripts
 
 ### Development
@@ -559,6 +673,71 @@ const filtered = all.filter(e => e.category === category);
 ---
 
 ## Common Issues & Solutions
+
+### Issue: useLocation() Hook Error
+
+**Error Message**: "useLocation() may be used only in the context of a <Router> component"
+
+**Cause**: Attempting to use React Router hooks outside of `BrowserRouter` context.
+
+**Solution**: Ensure the hook is called inside a component that's rendered within `RouterProvider`:
+
+```typescript
+// ❌ Wrong: Outside RouterProvider
+export function App() {
+  const location = useLocation(); // ERROR!
+
+  return (
+    <RouterProvider>
+      {/* ... */}
+    </RouterProvider>
+  );
+}
+
+// ✅ Correct: Inside RouterProvider
+function AppRoutes() {
+  const location = useLocation(); // Works!
+  return <Routes>...</Routes>;
+}
+
+export function App() {
+  return (
+    <RouterProvider>
+      <AppRoutes />
+    </RouterProvider>
+  );
+}
+```
+
+---
+
+### Issue: Page Transitions Not Working
+
+**Symptoms**: Pages switch instantly without animation
+
+**Possible Causes**:
+1. Missing `PageTransition` wrapper on route
+2. `AnimatePresence` not wrapping `Routes`
+3. Missing `key` prop on Routes
+
+**Solution**: Check the route configuration in `src/app/app.tsx`:
+
+```typescript
+<AnimatePresence mode="wait" initial={false}>
+  <Routes location={location} key={location.pathname}> {/* key is essential */}
+    <Route
+      path="/page"
+      element={
+        <PageTransition> {/* Must wrap page */}
+          <MyPage />
+        </PageTransition>
+      }
+    />
+  </Routes>
+</AnimatePresence>
+```
+
+---
 
 ### Issue: Database Not Updating
 
