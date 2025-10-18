@@ -32,3 +32,7 @@ dev-dist
 .env.local
 .env.production
 .env.development
+
+# Capacitor
+ios/
+android/

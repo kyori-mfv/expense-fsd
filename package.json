@@ -13,10 +13,21 @@
     "lint:fix": "biome check . --apply",
     "format": "biome format . --write",
     "type-check": "tsc --noEmit",
-    "verify": "pnpm lint && pnpm type-check && pnpm build",
-    "prepare": "husky"
+    "verify": "pnpm format && pnpm lint && pnpm type-check && pnpm build && pnpm cap:sync",
+    "prepare": "husky",
+    "cap:sync": "pnpm build && npx cap sync",
+    "cap:sync:ios": "pnpm build && npx cap sync ios",
+    "cap:sync:android": "pnpm build && npx cap sync android",
+    "cap:open:ios": "npx cap open ios",
+    "cap:open:android": "npx cap open android",
+    "ios": "pnpm cap:sync:ios && pnpm cap:open:ios",
+    "android": "pnpm cap:sync:android && pnpm cap:open:android"
   },
   "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/cli": "^7.4.3",
+    "@capacitor/core": "^7.4.3",
+    "@capacitor/ios": "^7.4.3",
     "@hookform/resolvers": "^5.2.1",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",

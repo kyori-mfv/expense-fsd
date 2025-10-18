@@ -30,6 +30,16 @@
     }
   },
   "files": {
-    "ignore": ["node_modules", "dist", "build", ".next", "coverage", ".claude", "dev-dist/**"]
+    "ignore": [
+      "node_modules",
+      "dist",
+      "build",
+      ".next",
+      "coverage",
+      ".claude",
+      "dev-dist/**",
+      "ios/**",
+      "android/**"
+    ]
   }
 }

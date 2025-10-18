@@ -1,6 +1,6 @@
 # 💰 Expense Manager FSD
 
-A modern, offline-first Progressive Web Application (PWA) for personal expense and income tracking, built with Feature-Sliced Design architecture and powered by AI for intelligent transaction parsing.
+A modern, offline-first Progressive Web Application (PWA) and hybrid mobile app for personal expense and income tracking, built with Feature-Sliced Design architecture and powered by AI for intelligent transaction parsing.
 
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue.svg)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-19-61dafb.svg)](https://reactjs.org/)
@@ -45,6 +45,7 @@ A modern, offline-first Progressive Web Application (PWA) for personal expense a
 - **Dark/Light Theme**: System-aware theme with manual toggle
 - **Responsive Design**: Mobile-first, works on all screen sizes
 - **Progressive Web App**: Installable on any device
+- **Hybrid Mobile App**: Native iOS and Android apps (via Capacitor)
 - **Offline-First**: Full functionality without internet (IndexedDB)
 - **Bottom Navigation**: Mobile-optimized navigation bar
 - **Toast Notifications**: User-friendly feedback for actions
@@ -153,8 +154,14 @@ src/
 ## 🚀 Getting Started
 
 ### Prerequisites
+
+**Required for Web/PWA Development:**
 - **Node.js**: >= 20.0.0
 - **pnpm**: >= 10.0.0
+
+**Additional for Mobile Development:**
+- **iOS**: macOS with Xcode and CocoaPods
+- **Android**: Android Studio and Java/Kotlin SDK
 
 ### Installation
 
@@ -188,8 +195,24 @@ pnpm dev           # Start dev server with hot reload
 
 ### Build
 ```bash
-pnpm build         # Build for production
+pnpm build         # Build for production (web)
 pnpm preview       # Preview production build locally
+```
+
+### Mobile Development
+```bash
+# iOS
+pnpm ios           # Build + sync + open in Xcode
+pnpm cap:sync:ios  # Build web + sync iOS platform
+pnpm cap:open:ios  # Open iOS project in Xcode
+
+# Android
+pnpm android       # Build + sync + open in Android Studio
+pnpm cap:sync:android  # Build web + sync Android platform
+pnpm cap:open:android  # Open Android project in Android Studio
+
+# Both platforms
+pnpm cap:sync      # Build web + sync iOS and Android
 ```
 
 ### Code Quality
@@ -198,7 +221,7 @@ pnpm lint          # Run Biome linter
 pnpm lint:fix      # Auto-fix linting issues
 pnpm format        # Format code with Biome
 pnpm type-check    # TypeScript type checking
-pnpm verify        # Run lint + type-check + build
+pnpm verify        # Format + lint + type-check + build + cap:sync
 ```
 
 ---
@@ -237,9 +260,10 @@ pnpm verify        # Run lint + type-check + build
 ### AI Integration
 - **[Gemini AI](https://ai.google.dev/)**: Google's AI for natural language parsing
 
-### PWA
+### PWA & Mobile
 - **[Vite PWA Plugin](https://vite-pwa-org.netlify.app/)**: Zero-config PWA
 - **[Workbox](https://developers.google.com/web/tools/workbox)**: Service worker strategies
+- **[Capacitor](https://capacitorjs.com/)**: Hybrid mobile app framework (minimal setup)
 
 ### Code Quality
 - **[Biome](https://biomejs.dev/)**: Fast linter and formatter (Prettier + ESLint alternative)
@@ -358,22 +382,116 @@ const expenses = useLiveQuery(() =>
 
 ---
 
-## 📱 Progressive Web App (PWA)
+## 📱 Progressive Web App (PWA) & Mobile Apps
 
-### Features
+### Deployment Options
+
+This application can be deployed in three ways:
+
+1. **Web App (PWA)** - Browser-based, installable on any device
+2. **iOS Native App** - Distributed via Apple App Store
+3. **Android Native App** - Distributed via Google Play Store
+
+### PWA Features
 - ✅ Installable on mobile and desktop
 - ✅ Works offline
 - ✅ Fast loading with service worker caching
 - ✅ App-like experience (no browser chrome)
 
-### Installation
+### PWA Installation
 1. Open the app in Chrome/Edge/Safari
 2. Look for "Install App" prompt or menu option
 3. Click "Install"
 4. App opens in standalone window
 
-### Manifest
-See [`public/manifest.webmanifest`](public/manifest.webmanifest) for PWA configuration.
+### Hybrid Mobile Apps (Capacitor)
+
+**Philosophy**: Minimal Capacitor setup - Pure PWA in a native container
+
+**What Capacitor Provides**:
+- Native iOS and Android platform configurations
+- App store deployment capability
+- Native app packaging
+
+**What Capacitor Does NOT Include**:
+- ❌ No native feature wrappers (haptics, status bar, etc.)
+- ❌ No platform-specific code
+- ❌ No native plugins beyond core Capacitor
+
+**Why This Approach?**
+- Simplicity: Zero native feature code to maintain
+- PWA-first: All features work identically across web and native
+- Pure web stack: Standard web APIs only
+- Easy maintenance: No platform-specific bugs
+
+### Building for iOS
+
+**Prerequisites**:
+- macOS with Xcode installed
+- CocoaPods (`sudo gem install cocoapods`)
+- Apple Developer Account (for distribution)
+
+**Steps**:
+```bash
+# 1. Build and sync
+pnpm ios
+
+# 2. In Xcode:
+#    - Set your Team in Signing & Capabilities
+#    - Configure Bundle Identifier
+#    - Archive and upload to App Store Connect
+```
+
+### Building for Android
+
+**Prerequisites**:
+- Android Studio installed
+- Java/Kotlin SDK
+- Google Play Developer Account (for distribution)
+
+**Steps**:
+```bash
+# 1. Build and sync
+pnpm android
+
+# 2. In Android Studio:
+#    - Build → Generate Signed Bundle / APK
+#    - Upload to Google Play Console
+```
+
+### Configuration
+
+**Capacitor Config** (`capacitor.config.ts`):
+```typescript
+{
+  appId: "com.expensemanager.fsd",
+  appName: "Expense Manager",
+  webDir: "dist",
+  server: {
+    androidScheme: "https",
+    iosScheme: "https",
+  }
+}
+```
+
+**Platforms**:
+- `ios/` - iOS platform files (managed by Capacitor)
+- `android/` - Android platform files (managed by Capacitor)
+
+### Testing Mobile Apps
+
+```bash
+# Test on iOS Simulator
+pnpm ios
+
+# Test on Android Emulator
+pnpm android
+
+# Test on physical device:
+# 1. Connect device via USB
+# 2. Open Xcode/Android Studio
+# 3. Select device and run
+```
 
 ---
 

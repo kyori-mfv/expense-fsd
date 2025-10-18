@@ -8,6 +8,19 @@ This application is built using **Feature-Sliced Design (FSD)**, a modern archit
 - ✅ Predictable structure
 - ✅ Prevention of spaghetti code
 
+### Deployment Architecture
+
+The application supports multiple deployment targets:
+- **Web/PWA**: Browser-based application with offline support
+- **iOS Native**: Hybrid app via Capacitor (pure PWA in native shell)
+- **Android Native**: Hybrid app via Capacitor (pure PWA in native shell)
+
+**Capacitor Integration Philosophy**:
+- Minimal setup (packaging only, no native features)
+- Zero native wrapper code
+- Pure web standards (no platform-specific APIs)
+- Identical behavior across all platforms
+
 ---
 
 ## Feature-Sliced Design (FSD)
@@ -268,6 +281,16 @@ shared/
 └── types/                 # Type definitions
     └── index.ts
 ```
+
+**Mobile Platforms**:
+```
+# Capacitor (Native App Packaging)
+ios/                       # iOS platform (managed by Capacitor)
+android/                   # Android platform (managed by Capacitor)
+capacitor.config.ts        # Capacitor configuration
+```
+
+**Note**: Capacitor is used ONLY for native app packaging. No native feature wrappers or platform-specific code exists in `src/`. The app runs as a pure PWA inside the native container.
 
 **Rules**:
 - ✅ No imports from any other layer (except external packages)

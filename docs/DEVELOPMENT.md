@@ -4,9 +4,21 @@
 
 ### Prerequisites
 
+**Required for Web/PWA Development:**
 - **Node.js**: >= 20.0.0
 - **pnpm**: >= 10.0.0
 - **Gemini API Key**: For AI features (get from [Google AI Studio](https://makersuite.google.com/app/apikey))
+
+**Additional for Mobile Development:**
+- **iOS Development**:
+  - macOS with Xcode installed (latest version recommended)
+  - CocoaPods: `sudo gem install cocoapods`
+  - Apple Developer Account (for App Store distribution)
+
+- **Android Development**:
+  - Android Studio (latest version)
+  - Java Development Kit (JDK 17 or higher)
+  - Google Play Developer Account (for Play Store distribution)
 
 ### Initial Setup
 
@@ -39,9 +51,11 @@ Follow the [Project Rules](RULES.md) and [Architecture Guidelines](ARCHITECTURE.
 ### 3. Verify Changes
 
 ```bash
-# Run verification (lint + type-check + build)
+# Run verification (format + lint + type-check + build + cap:sync)
 pnpm verify
 ```
+
+**Note**: The `verify` script now includes Capacitor sync (`cap:sync`), which builds the web app and syncs both iOS and Android platforms. This ensures mobile platforms are always up-to-date.
 
 ### 4. Commit Changes
 
@@ -181,8 +195,24 @@ pnpm dev          # Start dev server (port 5173)
 
 ### Building
 ```bash
-pnpm build        # Production build
+pnpm build        # Production build (web)
 pnpm preview      # Preview production build
+```
+
+### Mobile Development
+```bash
+# iOS
+pnpm ios                # Build web + sync + open Xcode
+pnpm cap:sync:ios       # Build web + sync iOS platform
+pnpm cap:open:ios       # Open iOS project in Xcode
+
+# Android
+pnpm android            # Build web + sync + open Android Studio
+pnpm cap:sync:android   # Build web + sync Android platform
+pnpm cap:open:android   # Open Android project in Android Studio
+
+# Both Platforms
+pnpm cap:sync           # Build web + sync iOS and Android
 ```
 
 ### Code Quality
@@ -191,7 +221,7 @@ pnpm lint         # Run Biome linter
 pnpm lint:fix     # Auto-fix linting issues
 pnpm format       # Format code with Biome
 pnpm type-check   # TypeScript type checking
-pnpm verify       # Lint + type-check + build
+pnpm verify       # Format + lint + type-check + build + cap:sync
 ```
 
 ---
@@ -853,19 +883,21 @@ refactor/extract-common-hooks
 
 ## Deployment
 
-### Build for Production
+### Web/PWA Deployment
+
+#### Build for Production
 
 ```bash
 pnpm build
 ```
 
-### Preview Production Build
+#### Preview Production Build
 
 ```bash
 pnpm preview
 ```
 
-### Deploy to Vercel
+#### Deploy to Vercel
 
 ```bash
 # Install Vercel CLI
@@ -875,7 +907,7 @@ pnpm add -g vercel
 vercel
 ```
 
-### Deploy to Netlify
+#### Deploy to Netlify
 
 ```bash
 # Install Netlify CLI
@@ -884,6 +916,186 @@ pnpm add -g netlify-cli
 # Build and deploy
 pnpm build
 netlify deploy --prod --dir=dist
+```
+
+---
+
+### Mobile App Deployment
+
+#### iOS App Store Deployment
+
+**Prerequisites**:
+- macOS with Xcode
+- Apple Developer Account ($99/year)
+- CocoaPods installed
+
+**Steps**:
+
+1. **Build and sync iOS platform**:
+```bash
+pnpm ios
+```
+
+2. **Configure in Xcode**:
+   - Open the project (should open automatically)
+   - Select the project in Navigator
+   - Go to "Signing & Capabilities"
+   - Select your Team
+   - Set Bundle Identifier (e.g., `com.yourcompany.expensemanager`)
+
+3. **Update app metadata**:
+   - Edit `ios/App/App/Info.plist` if needed
+   - Update app icons in `ios/App/App/Assets.xcassets/AppIcon.appiconset/`
+   - Update splash screen if needed
+
+4. **Build and archive**:
+   - In Xcode: Product → Archive
+   - Wait for archive to complete
+   - Click "Distribute App"
+   - Choose "App Store Connect"
+   - Follow upload wizard
+
+5. **Submit for review**:
+   - Go to [App Store Connect](https://appstoreconnect.apple.com/)
+   - Complete app metadata (screenshots, description, etc.)
+   - Submit for review
+
+**Testing**:
+```bash
+# Test on simulator
+pnpm ios
+
+# Test on physical device:
+# 1. Connect iPhone via USB
+# 2. Select device in Xcode
+# 3. Click Run (⌘R)
+```
+
+---
+
+#### Android Play Store Deployment
+
+**Prerequisites**:
+- Android Studio
+- Google Play Developer Account ($25 one-time)
+- Java/Kotlin SDK
+
+**Steps**:
+
+1. **Build and sync Android platform**:
+```bash
+pnpm android
+```
+
+2. **Configure signing**:
+   - Create a keystore file:
+   ```bash
+   keytool -genkey -v -keystore my-release-key.keystore \
+     -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
+   ```
+   - Update `android/app/build.gradle` with signing config
+
+3. **Update app metadata**:
+   - Edit `android/app/src/main/AndroidManifest.xml` if needed
+   - Update app icons in `android/app/src/main/res/` directories
+   - Update `android/app/build.gradle` version codes
+
+4. **Build release AAB/APK**:
+   - In Android Studio: Build → Generate Signed Bundle / APK
+   - Choose "Android App Bundle" (AAB)
+   - Select your keystore
+   - Build release
+
+5. **Upload to Play Console**:
+   - Go to [Google Play Console](https://play.google.com/console)
+   - Create app listing
+   - Upload AAB file
+   - Complete store listing (screenshots, description, etc.)
+   - Submit for review
+
+**Testing**:
+```bash
+# Test on emulator
+pnpm android
+
+# Test on physical device:
+# 1. Enable Developer Options on Android device
+# 2. Enable USB debugging
+# 3. Connect via USB
+# 4. Select device in Android Studio
+# 5. Click Run
+```
+
+---
+
+### Capacitor Notes
+
+**What Capacitor Does**:
+- Packages your web app (PWA) into native iOS/Android apps
+- Provides native app containers for app store distribution
+- NO native feature wrappers or platform-specific code
+
+**What Capacitor Does NOT Do**:
+- ❌ No native plugins (haptics, status bar, etc.)
+- ❌ No platform-specific features
+- ❌ No native code to maintain
+
+**Philosophy**: This project uses Capacitor in its most minimal form - purely for packaging the PWA into native apps for store distribution. The app runs identically on web, iOS, and Android using only standard web APIs.
+
+**Why This Approach?**
+- Simplicity: One codebase, no platform-specific bugs
+- Maintainability: No native code to maintain
+- Pure PWA: All features work via web standards
+- Easy updates: Push web updates without app store approval (where allowed)
+
+---
+
+### Mobile Development Workflow
+
+#### Making Changes
+
+1. **Develop in browser** (fastest iteration):
+```bash
+pnpm dev
+# Test at http://localhost:5173
+```
+
+2. **Test on mobile when needed**:
+```bash
+# iOS
+pnpm cap:sync:ios
+# Then test in Xcode simulator
+
+# Android
+pnpm cap:sync:android
+# Then test in Android Studio emulator
+```
+
+3. **Verify everything works**:
+```bash
+pnpm verify
+# This also syncs mobile platforms
+```
+
+#### Common Tasks
+
+**Update Capacitor config**:
+- Edit `capacitor.config.ts`
+- Run `pnpm cap:sync` to apply changes
+
+**Update app icons/splash screens**:
+- Place assets in `public/` folder
+- Use [Capacitor Assets](https://capacitorjs.com/docs/guides/splash-screens-and-icons) or manual placement
+
+**Clear mobile platform cache**:
+```bash
+# iOS
+rm -rf ios/App/App/public
+pnpm cap:sync:ios
+
+# Android
+rm -rf android/app/src/main/assets/public
+pnpm cap:sync:android
 ```
 
 ---
