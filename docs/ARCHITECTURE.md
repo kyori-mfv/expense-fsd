@@ -56,9 +56,8 @@ This application is built using **Feature-Sliced Design (FSD)**, a modern archit
 ```
 app/
 ├── providers/
-│   ├── providers.tsx           # Root provider composition
-│   ├── theme-provider.tsx      # Theme context
-│   └── router-provider.tsx     # React Router setup (BrowserRouter)
+│   ├── providers.tsx           # Root provider composition (includes BrowserRouter + ThemeProvider)
+│   └── theme-provider.tsx      # Theme context
 ├── app.tsx                     # Main app component with AppRoutes
 └── index.css                   # Global styles
 ```
@@ -286,8 +285,8 @@ The application uses **React Router v6** for URL-based navigation, providing bro
 
 #### Structure
 
-**RouterProvider** (`src/app/providers/router-provider.tsx`)
-- Wraps the application with `BrowserRouter`
+**RouterProvider** (`src/app/providers/providers.tsx`)
+- Wraps the application with `BrowserRouter` (integrated in main Providers component)
 - Provides routing context to the entire app
 - Placed in app/providers following FSD conventions
 

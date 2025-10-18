@@ -17,6 +17,7 @@ A modern, offline-first Progressive Web Application (PWA) for personal expense a
 - **AI-Powered Input**: Use Gemini AI to parse natural language Vietnamese input
   - Example: "ăn sáng 50k" → automatically parsed as Food, 50,000 VND
 - **Manual Entry**: Traditional form-based expense entry
+- **Numeric Keyboard**: Mobile-optimized `inputMode="numeric"` for amount fields
 - **Edit & Delete**: Modify or remove expense records
 - **Search & Filter**: Advanced filtering by category, date range, and text search
 - **Pagination**: Efficient browsing of large expense lists
@@ -99,7 +100,12 @@ src/
 │   ├── expense-category-chart/  # Expense pie chart
 │   ├── income-category-chart/   # Income pie chart
 │   ├── monthly-trends/      # Trend line chart
-│   └── date-range-filter/   # Date picker widget
+│   ├── date-range-filter/   # Date picker widget
+│   ├── recent-expenses/     # Recent expenses widget
+│   ├── recent-incomes/      # Recent incomes widget
+│   ├── manage-expense-data/ # Expense data management (export/import/delete)
+│   ├── manage-income-data/  # Income data management (export/import/delete)
+│   └── page-header/         # Reusable page header component
 │
 ├── features/                # User interactions
 │   ├── add-expense/         # AI + manual expense input
@@ -215,7 +221,8 @@ pnpm verify        # Run lint + type-check + build
 ### Data & State
 - **[Dexie.js](https://dexie.org/)**: IndexedDB wrapper for offline storage
 - **[dexie-react-hooks](https://dexie.org/docs/dexie-react-hooks/useLiveQuery())**: Live queries with React
-- **[Zustand](https://zustand-demo.pmnd.rs/)**: Lightweight state management
+
+> State management is handled by React Context API and Dexie live queries (no global state library needed)
 
 ### Forms & Validation
 - **[React Hook Form](https://react-hook-form.com/)**: Performant form library

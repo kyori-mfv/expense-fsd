@@ -540,6 +540,29 @@ Mobile-first approach:
 </div>
 ```
 
+### Mobile UX Best Practices
+
+#### Numeric Input for Currency Fields
+
+All amount input fields should use `inputMode="numeric"` to trigger the numeric keyboard on mobile devices:
+
+```tsx
+<Input
+  type="number"
+  inputMode="numeric"  // Triggers 0-9 keyboard on mobile
+  placeholder="100000"
+/>
+```
+
+This provides better mobile UX for Vietnamese currency (VND) input by showing an integer-only keyboard.
+
+**Implementation**: Added in commit 25c24d0 (Oct 17, 2025)
+**Affected Components**:
+- AddExpenseForm
+- EditExpenseForm
+- AddIncomeForm
+- EditIncomeForm
+
 ---
 
 ## Debugging
