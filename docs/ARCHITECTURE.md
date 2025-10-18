@@ -32,6 +32,43 @@ The application supports multiple deployment targets:
 3. **Public API**: Each slice exposes only what's necessary via `index.ts`
 4. **Business Logic Separation**: Shared layer contains no domain logic
 
+### FSD Architecture Enforcement
+
+This project uses **Steiger** with the official FSD plugin to automatically enforce architecture rules.
+
+#### What Steiger Checks
+
+Steiger validates the following FSD principles:
+
+1. **Layer Boundaries**: Prevents upward imports (e.g., shared → entities, features → pages)
+2. **Cross-Slice Isolation**: Detects when features import other features
+3. **Public API Usage**: Ensures imports use `index.ts` exports, not direct file paths
+4. **Naming Conventions**: Validates FSD naming standards for slices and segments
+5. **Over-Abstraction**: Warns about single-use slices that could be merged
+
+#### Running the FSD Linter
+
+```bash
+# Check for FSD violations
+pnpm lint:fsd
+
+# Auto-fix issues (limited support)
+pnpm lint:fsd --fix
+
+# Full verification (includes FSD linting)
+pnpm verify
+```
+
+#### Configuration
+
+FSD linting is configured in `.steiger.json`:
+```json
+{
+  "plugins": ["@feature-sliced/steiger-plugin"],
+  "root": "src"
+}
+```
+
 ### Layer Structure
 
 ```
@@ -864,6 +901,7 @@ Before committing code, verify:
 - [ ] No expense/income mixing (separate types, components, services)
 - [ ] Used `@/` import alias (not relative paths)
 - [ ] TypeScript compiles (`pnpm type-check`)
+- [ ] FSD architecture validated (`pnpm lint:fsd`)
 - [ ] Follows FSD principles
 
 ---

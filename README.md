@@ -72,11 +72,12 @@ This project follows [Feature-Sliced Design](https://feature-sliced.design/), a 
 app → pages → widgets → features → entities → shared
 ```
 
-**Rules**:
+**Rules** (enforced by Steiger FSD linter):
 1. ✅ Layers can only import from layers below them
 2. ✅ Slices within a layer cannot import from each other
 3. ✅ Shared layer has no business logic
 4. ✅ Complete separation of expense and income domains
+5. ✅ All imports must use public API (index.ts) exports
 
 #### Project Structure
 ```
@@ -219,9 +220,10 @@ pnpm cap:sync      # Build web + sync iOS and Android
 ```bash
 pnpm lint          # Run Biome linter
 pnpm lint:fix      # Auto-fix linting issues
+pnpm lint:fsd      # Run Steiger FSD architecture linter
 pnpm format        # Format code with Biome
 pnpm type-check    # TypeScript type checking
-pnpm verify        # Format + lint + type-check + build + cap:sync
+pnpm verify        # Format + lint + lint:fsd + type-check + build + cap:sync
 ```
 
 ---
@@ -267,6 +269,7 @@ pnpm verify        # Format + lint + type-check + build + cap:sync
 
 ### Code Quality
 - **[Biome](https://biomejs.dev/)**: Fast linter and formatter (Prettier + ESLint alternative)
+- **[Steiger](https://github.com/feature-sliced/steiger)**: FSD architecture linter for enforcing layer boundaries
 - **[Husky](https://typicode.github.io/husky/)**: Git hooks
 
 ---

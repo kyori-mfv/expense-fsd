@@ -51,11 +51,13 @@ Follow the [Project Rules](RULES.md) and [Architecture Guidelines](ARCHITECTURE.
 ### 3. Verify Changes
 
 ```bash
-# Run verification (format + lint + type-check + build + cap:sync)
+# Run verification (format + lint + lint:fsd + type-check + build + cap:sync)
 pnpm verify
 ```
 
-**Note**: The `verify` script now includes Capacitor sync (`cap:sync`), which builds the web app and syncs both iOS and Android platforms. This ensures mobile platforms are always up-to-date.
+**Note**: The `verify` script now includes:
+- FSD architecture linting (`lint:fsd`) - ensures code follows Feature-Sliced Design principles
+- Capacitor sync (`cap:sync`) - builds the web app and syncs both iOS and Android platforms
 
 ### 4. Commit Changes
 
@@ -219,10 +221,102 @@ pnpm cap:sync           # Build web + sync iOS and Android
 ```bash
 pnpm lint         # Run Biome linter
 pnpm lint:fix     # Auto-fix linting issues
+pnpm lint:fsd     # Run Steiger FSD architecture linter
 pnpm format       # Format code with Biome
 pnpm type-check   # TypeScript type checking
-pnpm verify       # Format + lint + type-check + build + cap:sync
+pnpm verify       # Format + lint + lint:fsd + type-check + build + cap:sync
 ```
+
+---
+
+## Development Tools
+
+### FSD Architecture Linter (Steiger)
+
+This project uses **Steiger** to automatically enforce Feature-Sliced Design architecture rules.
+
+#### What Steiger Does
+
+Steiger validates your codebase against FSD principles:
+
+1. **Layer Boundaries** - Prevents upward imports (e.g., entities → features, shared → entities)
+2. **Cross-Slice Imports** - Detects when slices in the same layer import each other
+3. **Public API Sidesteps** - Ensures imports use `index.ts` exports, not direct file paths
+4. **Naming Conventions** - Validates FSD naming standards
+5. **Over-Abstraction** - Warns about single-use slices
+
+#### Commands
+
+```bash
+# Run FSD linter
+pnpm lint:fsd
+
+# Auto-fix issues (limited support for some violations)
+pnpm lint:fsd --fix
+
+# Full verification (includes FSD linting)
+pnpm verify
+```
+
+#### Common FSD Violations and Fixes
+
+**1. Public API Sidestep**
+
+❌ **Violation**:
+```typescript
+// Importing directly from internal file
+import { ExpenseItem } from '@/entities/expense/ui/expense-item';
+```
+
+✅ **Fix**:
+```typescript
+// Import from public API (index.ts)
+import { ExpenseItem } from '@/entities/expense';
+```
+
+**2. Missing Public API**
+
+❌ **Violation**: A slice folder without `index.ts` file
+
+✅ **Fix**: Create `index.ts` in the slice root:
+```typescript
+// features/add-expense/index.ts
+export { AddExpenseForm } from './ui/add-expense-form';
+export { useAddExpense } from './model/use-add-expense';
+```
+
+**3. Upward Import (Layer Boundary Violation)**
+
+❌ **Violation**:
+```typescript
+// shared/lib/expense-utils.ts
+import { expenseService } from '@/entities/expense'; // NO! shared → entities
+```
+
+✅ **Fix**: Move the code to the correct layer (entities or higher)
+
+**4. Cross-Slice Import**
+
+❌ **Violation**:
+```typescript
+// features/add-expense/model/use-add-expense.ts
+import { useEditExpense } from '@/features/edit-expense'; // NO! feature → feature
+```
+
+✅ **Fix**: Extract common logic to entities layer or use composition in widgets/pages
+
+**5. Naming Convention Violation**
+
+❌ **Violation**: File or folder not in kebab-case (e.g., `AddExpense.tsx`)
+
+✅ **Fix**: Rename to kebab-case (e.g., `add-expense.tsx`)
+
+#### FSD Linting in CI/CD
+
+The `verify` script includes FSD linting, so it runs automatically during:
+- Pre-commit hooks (via Husky)
+- CI/CD pipelines
+- Manual verification before committing
 
 ---
 
@@ -836,8 +930,61 @@ pnpm dev
 ```bash
 pnpm type-check  # Check types
 pnpm lint        # Check linting
+pnpm lint:fsd    # Check FSD architecture
 pnpm build       # Build
 ```
+
+### Issue: FSD Linter Errors
+
+**Error**: "Public API sidestep detected"
+
+**Cause**: Importing directly from internal file instead of using public API (index.ts)
+
+**Solution**:
+```typescript
+// Before (wrong)
+import { ExpenseForm } from '@/features/add-expense/ui/expense-form';
+
+// After (correct)
+import { ExpenseForm } from '@/features/add-expense';
+```
+
+Then ensure `index.ts` exports the component:
+```typescript
+// features/add-expense/index.ts
+export { ExpenseForm } from './ui/expense-form';
+```
+
+**Error**: "Forbidden import from higher layer"
+
+**Cause**: Upward import violating layer hierarchy (e.g., shared → entities)
+
+**Solution**: Move the code to the correct layer or refactor to avoid the dependency
+
+**Error**: "Cross-slice import detected"
+
+**Cause**: Importing from another slice in the same layer (e.g., feature → feature)
+
+**Solution**: Extract common logic to entities layer or compose features in widgets/pages
+
+**Error**: "Naming convention violation"
+
+**Cause**: File or folder not in kebab-case
+
+**Solution**: Rename to kebab-case:
+```bash
+# Wrong: AddExpense.tsx
+# Correct: add-expense.tsx
+
+mv src/features/AddExpense src/features/add-expense
+```
+
+**Auto-fix some violations**:
+```bash
+pnpm lint:fsd --fix
+```
+
+Note: Some violations like missing index.ts files can be auto-fixed. Others like architectural violations require manual refactoring.
 
 ---
 
