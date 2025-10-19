@@ -1,5 +1,5 @@
+import type { ExpenseRecord } from "@/shared/contract";
 import { formatAmount, formatDate } from "@/shared/lib/format";
-import type { ExpenseRecord } from "@/shared/types";
 import { Card } from "@/shared/ui/card";
 import { Calendar } from "lucide-react";
 import { ExpenseCategoryBadge } from "./expense-category-badge";

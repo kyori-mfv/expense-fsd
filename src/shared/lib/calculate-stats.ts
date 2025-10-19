@@ -1,4 +1,4 @@
-import type { ExpenseRecord, IncomeRecord } from "../types";
+import type { ExpenseRecord, IncomeRecord } from "../contract";
 
 /**
  * Calculate financial statistics from expense and income data

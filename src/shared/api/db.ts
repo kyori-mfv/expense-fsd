@@ -1,4 +1,4 @@
-import type { ExpenseRecord, IncomeRecord } from "@/shared/types";
+import type { ExpenseRecord, IncomeRecord } from "@/shared/contract";
 import Dexie, { type EntityTable } from "dexie";
 
 // Database class

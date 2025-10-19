@@ -1,4 +1,4 @@
-import { API_ENDPOINTS } from "@/shared/config/constants";
+import { API_ENDPOINTS } from "@/shared/config";
 import type { AIProvider, AIProviderConfig, ParsedTransaction } from "../model/ai-provider.types";
 
 export class GeminiProvider implements AIProvider {

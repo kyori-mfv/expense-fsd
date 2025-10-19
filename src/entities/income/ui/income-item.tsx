@@ -1,5 +1,5 @@
+import type { IncomeRecord } from "@/shared/contract";
 import { formatAmount, formatDate } from "@/shared/lib/format";
-import type { IncomeRecord } from "@/shared/types";
 import { Card } from "@/shared/ui/card";
 import { Calendar } from "lucide-react";
 import { IncomeCategoryBadge } from "./income-category-badge";

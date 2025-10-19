@@ -1,4 +1,4 @@
-import { EXPENSE_CATEGORY_MAP } from "@/shared/config/categories";
+import { EXPENSE_CATEGORY_MAP } from "@/shared/config";
 import type { CategoryStats } from "@/shared/lib/calculate-stats";
 import { PieChartCard, type PieChartData } from "@/shared/ui/pie-chart-card";
 import { useMemo } from "react";

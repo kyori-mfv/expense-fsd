@@ -1,4 +1,4 @@
-import { CategoryIcon } from "@/shared/components/category-icon";
+import { CategoryIcon } from "@/shared/composite/category-icon";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/shared/ui/select";
 import { Grid3x3 } from "lucide-react";
 

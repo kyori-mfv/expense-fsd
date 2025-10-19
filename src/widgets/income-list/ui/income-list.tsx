@@ -2,10 +2,10 @@ import { IncomeItem, useIncomeListData } from "@/entities/income";
 import { DeleteIncomeButton } from "@/features/delete-income";
 import { EditIncomeButton } from "@/features/edit-income";
 import { IncomeFilterForm, useIncomeFilter } from "@/features/filter-incomes";
-import { EmptyState } from "@/shared/components/empty-state";
-import { PaginationControls } from "@/shared/components/pagination-controls";
-import { PAGINATION } from "@/shared/config/constants";
-import { usePagination } from "@/shared/hooks";
+import { EmptyState } from "@/shared/composite";
+import { PaginationControls } from "@/shared/composite";
+import { PAGINATION } from "@/shared/config";
+import { usePagination } from "@/shared/react";
 import { Separator } from "@/shared/ui/separator";
 import { SearchX } from "lucide-react";
 

@@ -1,4 +1,4 @@
-import type { IncomeRecord } from "@/shared/types";
+import type { IncomeRecord } from "@/shared/contract";
 import { useLiveQuery } from "dexie-react-hooks";
 import { incomeService } from "../api/income.service";
 

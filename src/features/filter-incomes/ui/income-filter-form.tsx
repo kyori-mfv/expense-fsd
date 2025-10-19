@@ -1,5 +1,5 @@
 import { IncomeCategorySelect } from "@/entities/income";
-import { DateRangePicker } from "@/shared/components/date-range-picker";
+import { DateRangePicker } from "@/shared/composite";
 import { Button } from "@/shared/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/shared/ui/form";
 import { Input } from "@/shared/ui/input";

@@ -1,5 +1,5 @@
 import { incomeService } from "@/entities/income";
-import type { IncomeRecord } from "@/shared/types";
+import type { IncomeRecord } from "@/shared/contract";
 import { useState } from "react";
 
 interface ImportResult {

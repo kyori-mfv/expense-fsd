@@ -1,7 +1,7 @@
-import { DashboardPage } from "@/pages/dashboard-page";
-import { ExpensePage } from "@/pages/expense-page";
-import { IncomePage } from "@/pages/income-page";
-import { PageTransition } from "@/shared/components";
+import { DashboardPage } from "@/pages/dashboard";
+import { ExpensePage } from "@/pages/expenses";
+import { IncomePage } from "@/pages/incomes";
+import { PageTransition } from "@/shared/composite";
 import { BottomNav } from "@/widgets/bottom-nav";
 import { AnimatePresence } from "framer-motion";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";

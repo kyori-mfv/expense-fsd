@@ -1,6 +1,6 @@
 import { IncomeItem, useRecentIncomes } from "@/entities/income";
-import { EmptyState } from "@/shared/components/empty-state";
-import { DISPLAY_LIMITS } from "@/shared/config/constants";
+import { EmptyState } from "@/shared/composite";
+import { DISPLAY_LIMITS } from "@/shared/config";
 import { ReceiptText } from "lucide-react";
 
 export function RecentIncomes() {

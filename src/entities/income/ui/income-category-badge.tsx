@@ -1,5 +1,5 @@
-import { CategoryBadge } from "@/shared/components/category-badge";
-import { INCOME_CATEGORIES } from "@/shared/config/categories";
+import { CategoryBadge } from "@/shared/composite";
+import { INCOME_CATEGORIES } from "@/shared/config";
 import type { badgeVariants } from "@/shared/ui/badge";
 import type { VariantProps } from "class-variance-authority";
 

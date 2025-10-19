@@ -1,5 +1,5 @@
 import { ExpenseCategorySelect } from "@/entities/expense";
-import { DatePicker } from "@/shared/components/date-picker";
+import { DatePicker } from "@/shared/composite";
 import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
 import { Input } from "@/shared/ui/input";

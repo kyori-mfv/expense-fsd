@@ -1,4 +1,4 @@
-import type { IncomeRecord } from "@/shared/types";
+import type { IncomeRecord } from "@/shared/contract";
 import { Button } from "@/shared/ui/button";
 import { Pencil } from "lucide-react";
 import { useState } from "react";

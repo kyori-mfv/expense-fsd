@@ -1,6 +1,6 @@
 import { IncomeCategorySelect } from "@/entities/income";
-import { DatePicker } from "@/shared/components/date-picker";
-import type { IncomeRecord } from "@/shared/types";
+import { DatePicker } from "@/shared/composite";
+import type { IncomeRecord } from "@/shared/contract";
 import { Button } from "@/shared/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/shared/ui/dialog";
 import { Input } from "@/shared/ui/input";

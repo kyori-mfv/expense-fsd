@@ -2,10 +2,10 @@ import { ExpenseItem, useExpenseListData } from "@/entities/expense";
 import { DeleteExpenseButton } from "@/features/delete-expense";
 import { EditExpenseButton } from "@/features/edit-expense";
 import { ExpenseFilterForm, useExpenseFilter } from "@/features/filter-expenses";
-import { EmptyState } from "@/shared/components/empty-state";
-import { PaginationControls } from "@/shared/components/pagination-controls";
-import { PAGINATION } from "@/shared/config/constants";
-import { usePagination } from "@/shared/hooks";
+import { EmptyState } from "@/shared/composite";
+import { PaginationControls } from "@/shared/composite";
+import { PAGINATION } from "@/shared/config";
+import { usePagination } from "@/shared/react";
 import { Separator } from "@/shared/ui/separator";
 import { SearchX } from "lucide-react";
 

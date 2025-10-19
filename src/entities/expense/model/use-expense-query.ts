@@ -1,4 +1,4 @@
-import type { ExpenseRecord } from "@/shared/types";
+import type { ExpenseRecord } from "@/shared/contract";
 import { useLiveQuery } from "dexie-react-hooks";
 import { expenseService } from "../api/expense.service";
 

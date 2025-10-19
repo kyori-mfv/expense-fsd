@@ -1,5 +1,5 @@
 import { expenseService } from "@/entities/expense";
-import type { ExpenseRecord } from "@/shared/types";
+import type { ExpenseRecord } from "@/shared/contract";
 import { useState } from "react";
 
 export function useAddExpense() {

@@ -1,5 +1,5 @@
-import { CategorySelect } from "@/shared/components/category-select";
-import { EXPENSE_CATEGORIES } from "@/shared/config/categories";
+import { CategorySelect } from "@/shared/composite";
+import { EXPENSE_CATEGORIES } from "@/shared/config";
 
 interface ExpenseCategorySelectProps {
   value: string;

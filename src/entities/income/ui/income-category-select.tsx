@@ -1,5 +1,5 @@
-import { CategorySelect } from "@/shared/components/category-select";
-import { INCOME_CATEGORIES } from "@/shared/config/categories";
+import { CategorySelect } from "@/shared/composite";
+import { INCOME_CATEGORIES } from "@/shared/config";
 
 interface IncomeCategorySelectProps {
   value: string;

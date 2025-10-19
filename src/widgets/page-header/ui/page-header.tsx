@@ -1,4 +1,4 @@
-import { ThemeToggle } from "@/shared/components/theme-toggle";
+import { ThemeToggle } from "@/shared/composite";
 import type { LucideIcon } from "lucide-react";
 
 interface PageHeaderProps {

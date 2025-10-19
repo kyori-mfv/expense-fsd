@@ -1,4 +1,4 @@
-import { DateRangePicker } from "@/shared/components/date-range-picker";
+import { DateRangePicker } from "@/shared/composite";
 import type { DatePreset } from "@/shared/lib/date-presets";
 import { Button } from "@/shared/ui/button";
 import type { DateRange } from "react-day-picker";

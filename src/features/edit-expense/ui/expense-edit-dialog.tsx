@@ -1,6 +1,6 @@
 import { ExpenseCategorySelect } from "@/entities/expense";
-import { DatePicker } from "@/shared/components/date-picker";
-import type { ExpenseRecord } from "@/shared/types";
+import { DatePicker } from "@/shared/composite";
+import type { ExpenseRecord } from "@/shared/contract";
 import { Button } from "@/shared/ui/button";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/shared/ui/dialog";
 import { Input } from "@/shared/ui/input";

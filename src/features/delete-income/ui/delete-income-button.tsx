@@ -1,4 +1,4 @@
-import { ConfirmationDialog } from "@/shared/components/confirmation-dialog";
+import { ConfirmationDialog } from "@/shared/composite";
 import { Button } from "@/shared/ui/button";
 import { Trash2 } from "lucide-react";
 import { useState } from "react";

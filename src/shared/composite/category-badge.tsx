@@ -1,4 +1,4 @@
-import { CategoryIcon } from "@/shared/components/category-icon";
+import { CategoryIcon } from "@/shared/composite/category-icon";
 import { Badge, type badgeVariants } from "@/shared/ui/badge";
 import type { VariantProps } from "class-variance-authority";
 

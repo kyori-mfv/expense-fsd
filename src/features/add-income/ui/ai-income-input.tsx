@@ -1,5 +1,5 @@
 import { useAIProvider } from "@/entities/ai-provider";
-import { INCOME_CATEGORIES, INCOME_CATEGORY_KEYWORDS } from "@/shared/config/categories";
+import { INCOME_CATEGORIES, INCOME_CATEGORY_KEYWORDS } from "@/shared/config";
 import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
 import { Input } from "@/shared/ui/input";
