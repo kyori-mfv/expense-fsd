@@ -1,4 +1,0 @@
-{
-  "plugins": ["@feature-sliced/steiger-plugin"],
-  "root": "src"
-}
