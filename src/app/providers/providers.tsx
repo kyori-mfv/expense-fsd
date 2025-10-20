@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "./theme-provider";
 
 interface ProvidersProps {
@@ -14,12 +13,9 @@ interface ProvidersProps {
  *
  * Current providers:
  * - ThemeProvider: Dark/light theme management
- * - BrowserRouter: React Router for URL-based navigation
+ *
+ * Note: Routing is handled by IonReactRouter in app.tsx
  */
 export function Providers({ children }: ProvidersProps) {
-  return (
-    <ThemeProvider>
-      <BrowserRouter>{children}</BrowserRouter>
-    </ThemeProvider>
-  );
+  return <ThemeProvider>{children}</ThemeProvider>;
 }

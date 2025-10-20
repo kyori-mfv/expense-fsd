@@ -19,6 +19,7 @@ export default defineConfig({
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg}"],
         cleanupOutdatedCaches: true,
+        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3 MB (increased for Ionic)
       },
       includeAssets: ["favicon.ico", "apple-touch-icon.png"],
       manifest: {

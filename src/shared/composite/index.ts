@@ -6,6 +6,5 @@ export { ConfirmationDialog } from "./confirmation-dialog";
 export { DatePicker } from "./date-picker";
 export { DateRangePicker } from "./date-range-picker";
 export { EmptyState } from "./empty-state";
-export { PageTransition } from "./page-transition";
 export { PaginationControls } from "./pagination-controls";
 export { ThemeToggle } from "./theme-toggle";

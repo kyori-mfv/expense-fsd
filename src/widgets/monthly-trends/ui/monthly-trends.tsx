@@ -81,8 +81,8 @@ export function MonthlyTrends({ monthlyStats, showNetLine = true }: MonthlyTrend
                           </div>
                           {payload[2] && (
                             <div className="flex items-center justify-between gap-4 pt-1 border-t">
-                              <span className="text-sm text-net-balance-positive">Số dư:</span>
-                              <span className="font-semibold text-net-balance-positive">
+                              <span className="text-sm text-dashboard-foreground">Số dư:</span>
+                              <span className="font-semibold text-dashboard-foreground">
                                 {(payload[2].value as number) >= 0 ? "+" : "-"}
                                 {formatAmount(payload[2].value as number)}
                               </span>
@@ -99,13 +99,13 @@ export function MonthlyTrends({ monthlyStats, showNetLine = true }: MonthlyTrend
               <Bar
                 dataKey="income"
                 name="Thu nhập"
-                fill="var(--income-foreground)"
+                fill="var(--ion-color-income-foreground)"
                 radius={[4, 4, 0, 0]}
               />
               <Bar
                 dataKey="expense"
                 name="Chi tiêu"
-                fill="var(--expense-foreground)"
+                fill="var(--ion-color-expense-foreground)"
                 radius={[4, 4, 0, 0]}
               />
               {showNetLine && (
@@ -113,7 +113,7 @@ export function MonthlyTrends({ monthlyStats, showNetLine = true }: MonthlyTrend
                   type="monotone"
                   dataKey="net"
                   name="Số dư ròng"
-                  stroke="var(--net-balance-positive)"
+                  stroke="var(--ion-color-dashboard-foreground)"
                   strokeWidth={2}
                 />
               )}

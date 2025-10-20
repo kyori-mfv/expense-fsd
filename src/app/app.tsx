@@ -1,64 +1,39 @@
-import { DashboardPage } from "@/pages/dashboard";
-import { ExpensePage } from "@/pages/expenses";
-import { IncomePage } from "@/pages/incomes";
-import { PageTransition } from "@/shared/composite";
-import { BottomNav } from "@/widgets/bottom-nav";
-import { AnimatePresence } from "framer-motion";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { IonApp, setupIonicReact } from "@ionic/react";
+import { IonReactRouter } from "@ionic/react-router";
+
+import { AppRoutes } from "./app-routes";
 import { Providers } from "./providers/providers";
 
 /**
- * AppRoutes component - Contains routing logic with animations
- * Must be inside RouterProvider to use useLocation hook
+ * Initialize Ionic React
+ * Must be called before rendering IonApp components
  */
-function AppRoutes() {
-  const location = useLocation();
+setupIonicReact({
+  mode: "ios", // Use iOS style for native Apple look and feel
+});
 
-  return (
-    <div className="min-h-screen bg-background pb-16">
-      {/* Main Content */}
-      <div className="min-h-screen">
-        <AnimatePresence mode="wait" initial={false}>
-          <Routes location={location} key={location.pathname}>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route
-              path="/dashboard"
-              element={
-                <PageTransition>
-                  <DashboardPage />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/expenses"
-              element={
-                <PageTransition>
-                  <ExpensePage />
-                </PageTransition>
-              }
-            />
-            <Route
-              path="/income"
-              element={
-                <PageTransition>
-                  <IncomePage />
-                </PageTransition>
-              }
-            />
-          </Routes>
-        </AnimatePresence>
-      </div>
-
-      {/* Bottom Navigation */}
-      <BottomNav />
-    </div>
-  );
-}
-
+/**
+ * App component - Application root
+ *
+ * Responsibilities:
+ * - Compose application layers (Providers, Router, Routes)
+ * - Initialize Ionic App wrapper
+ * - Setup routing context
+ *
+ * Architecture:
+ * - Providers: Theme, state management, global context
+ * - IonApp: Ionic framework initialization
+ * - IonReactRouter: Routing system (React Router v5)
+ * - AppRoutes: Route definitions and navigation structure
+ */
 export function App() {
   return (
     <Providers>
-      <AppRoutes />
+      <IonApp>
+        <IonReactRouter>
+          <AppRoutes />
+        </IonReactRouter>
+      </IonApp>
     </Providers>
   );
 }

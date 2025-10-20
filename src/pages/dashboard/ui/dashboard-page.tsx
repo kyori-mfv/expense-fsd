@@ -20,6 +20,7 @@ import { FinancialOverview } from "@/widgets/financial-overview";
 import { IncomeCategoryChart } from "@/widgets/income-category-chart";
 import { MonthlyTrends } from "@/widgets/monthly-trends";
 import { PageHeader } from "@/widgets/page-header";
+import { IonContent, IonPage } from "@ionic/react";
 import { LayoutDashboardIcon } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 import type { DateRange } from "react-day-picker";
@@ -82,42 +83,46 @@ export function DashboardPage() {
   }, []);
 
   return (
-    <div className="container mx-auto p-4 space-y-6 max-w-7xl">
-      {/* Page Header */}
-      <PageHeader
-        icon={LayoutDashboardIcon}
-        title="Tổng quan"
-        description="Tổng quan tài chính cá nhân"
-        titleColor="text-dashboard-foreground"
-        iconColor="text-dashboard-foreground"
-      />
+    <IonPage>
+      <IonContent>
+        <div className="container mx-auto p-4 space-y-6 max-w-7xl">
+          {/* Page Header */}
+          <PageHeader
+            icon={LayoutDashboardIcon}
+            title="Tổng quan"
+            description="Tổng quan tài chính cá nhân"
+            titleColor="text-dashboard-foreground"
+            iconColor="text-dashboard-foreground"
+          />
 
-      {/* Monthly Trends Chart (6 months fixed) */}
-      <MonthlyTrends monthlyStats={monthlyStats} showNetLine />
+          {/* Monthly Trends Chart (6 months fixed) */}
+          <MonthlyTrends monthlyStats={monthlyStats} showNetLine />
 
-      {/* Date Range Filter */}
-      <DateRangeFilter
-        dateRange={{ from: dateRangeState.from, to: dateRangeState.to }}
-        preset={dateRangeState.preset}
-        onPresetChange={handlePresetChange}
-        onCustomRangeChange={handleCustomRangeChange}
-      />
+          {/* Date Range Filter */}
+          <DateRangeFilter
+            dateRange={{ from: dateRangeState.from, to: dateRangeState.to }}
+            preset={dateRangeState.preset}
+            onPresetChange={handlePresetChange}
+            onCustomRangeChange={handleCustomRangeChange}
+          />
 
-      {/* Financial Overview Cards */}
-      <FinancialOverview
-        totalIncome={financialStats.totalIncome}
-        totalExpense={financialStats.totalExpense}
-        netBalance={financialStats.netBalance}
-        savingsRate={financialStats.savingsRate}
-        incomeCount={financialStats.incomeCount}
-        expenseCount={financialStats.expenseCount}
-      />
+          {/* Financial Overview Cards */}
+          <FinancialOverview
+            totalIncome={financialStats.totalIncome}
+            totalExpense={financialStats.totalExpense}
+            netBalance={financialStats.netBalance}
+            savingsRate={financialStats.savingsRate}
+            incomeCount={financialStats.incomeCount}
+            expenseCount={financialStats.expenseCount}
+          />
 
-      {/* Category Charts */}
-      <div className="grid gap-6 md:grid-cols-2">
-        <ExpenseCategoryChart categoryStats={expenseCategoryStats} />
-        <IncomeCategoryChart categoryStats={incomeCategoryStats} />
-      </div>
-    </div>
+          {/* Category Charts */}
+          <div className="grid gap-6 md:grid-cols-2">
+            <ExpenseCategoryChart categoryStats={expenseCategoryStats} />
+            <IncomeCategoryChart categoryStats={incomeCategoryStats} />
+          </div>
+        </div>
+      </IonContent>
+    </IonPage>
   );
 }
