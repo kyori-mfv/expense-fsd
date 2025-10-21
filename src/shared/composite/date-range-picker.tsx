@@ -1,13 +1,9 @@
+import { IonButton, IonButtons, IonContent, IonDatetime, IonHeader, IonIcon, IonModal, IonText, IonTitle, IonToolbar } from "@ionic/react";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
-import { Calendar as CalendarIcon } from "lucide-react";
+import { calendarOutline } from "ionicons/icons";
 import * as React from "react";
 import type { DateRange } from "react-day-picker";
-
-import { cn } from "@/shared/lib/utils";
-import { Button } from "@/shared/ui/button";
-import { Calendar } from "@/shared/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 
 interface DateRangePickerProps {
   dateRange?: DateRange;
@@ -16,68 +12,180 @@ interface DateRangePickerProps {
   placeholder?: string;
 }
 
+/**
+ * DateRangePicker - Two-step Ionic date picker
+ *
+ * A composite component that uses IonDatetime in a two-step process:
+ * 1. Select start date
+ * 2. Select end date
+ */
 export function DateRangePicker({
   dateRange,
   onDateRangeChange,
   disabled,
   placeholder = "Chọn khoảng ngày",
 }: DateRangePickerProps) {
-  const [open, setOpen] = React.useState(false);
-  const [tempDateRange, setTempDateRange] = React.useState<DateRange | undefined>(dateRange);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const [step, setStep] = React.useState<'start' | 'end'>('start');
+  const [startDate, setStartDate] = React.useState<string | undefined>(
+    dateRange?.from?.toISOString()
+  );
+  const [endDate, setEndDate] = React.useState<string | undefined>(
+    dateRange?.to?.toISOString()
+  );
 
-  // Update temp range when external value changes
+  // Update dates when external value changes
   React.useEffect(() => {
-    if (!open) {
-      setTempDateRange(dateRange);
+    if (!isOpen) {
+      setStartDate(dateRange?.from?.toISOString());
+      setEndDate(dateRange?.to?.toISOString());
+      setStep('start');
     }
-  }, [dateRange, open]);
+  }, [dateRange, isOpen]);
 
-  // Handle popover close - commit the change
-  const handleOpenChange = (newOpen: boolean) => {
-    setOpen(newOpen);
+  const handleStartDateChange = (e: CustomEvent) => {
+    const value = e.detail.value as string;
+    setStartDate(value);
+    // Automatically move to step 2 after selecting start date
+    setTimeout(() => {
+      setStep('end');
+    }, 300);
+  };
 
-    // When closing, commit the temp selection
-    if (!newOpen && tempDateRange) {
-      onDateRangeChange(tempDateRange);
+  const handleEndDateChange = (e: CustomEvent) => {
+    const value = e.detail.value as string;
+    setEndDate(value);
+    // Automatically confirm after selecting end date
+    if (startDate) {
+      setTimeout(() => {
+        const from = new Date(startDate);
+        const to = new Date(value);
+        onDateRangeChange({ from, to });
+        setIsOpen(false);
+      }, 300);
     }
   };
 
+  const handleNext = () => {
+    if (step === 'start' && startDate) {
+      setStep('end');
+    }
+  };
+
+  const handleBack = () => {
+    setStep('start');
+  };
+
+  const handleConfirm = () => {
+    if (startDate && endDate) {
+      const from = new Date(startDate);
+      const to = new Date(endDate);
+      onDateRangeChange({ from, to });
+      setIsOpen(false);
+    }
+  };
+
+  const handleCancel = () => {
+    setStartDate(dateRange?.from?.toISOString());
+    setEndDate(dateRange?.to?.toISOString());
+    setStep('start');
+    setIsOpen(false);
+  };
+
+  const formatDateDisplay = () => {
+    if (dateRange?.from) {
+      if (dateRange.to && dateRange.to !== dateRange.from) {
+        return `${format(dateRange.from, "dd/MM/yyyy", { locale: vi })} - ${format(dateRange.to, "dd/MM/yyyy", { locale: vi })}`;
+      }
+      return format(dateRange.from, "dd/MM/yyyy", { locale: vi });
+    }
+    return placeholder;
+  };
+
   return (
-    <Popover open={open} onOpenChange={handleOpenChange}>
-      <PopoverTrigger asChild>
-        <Button
-          variant="outline"
-          className={cn(
-            "w-full justify-start text-left font-normal",
-            !dateRange?.from && "text-muted-foreground"
+    <>
+      <IonButton
+        expand="block"
+        fill="outline"
+        onClick={() => !disabled && setIsOpen(true)}
+        disabled={disabled}
+        className="space-x-3"
+      >
+        <IonIcon slot="start" icon={calendarOutline} className="text-xl" />
+        <span className={!dateRange?.from ? "text-[var(--ion-color-medium)]" : ""}>
+          {formatDateDisplay()}
+        </span>
+      </IonButton>
+
+      <IonModal
+        isOpen={isOpen}
+        onDidDismiss={handleCancel}
+        breakpoints={[0, 0.7, 1]}
+        initialBreakpoint={0.7}
+        className="date-picker-modal"
+      >
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              {step === 'end' ? (
+                <IonButton onClick={handleBack}>Quay lại</IonButton>
+              ) : (
+                <IonButton onClick={handleCancel}>Hủy</IonButton>
+              )}
+            </IonButtons>
+            <IonTitle>
+              {step === 'start' ? 'Chọn ngày bắt đầu' : 'Chọn ngày kết thúc'}
+            </IonTitle>
+            <IonButtons slot="end">
+              {step === 'start' ? (
+                <IonButton strong onClick={handleNext} disabled={!startDate}>
+                  Tiếp
+                </IonButton>
+              ) : (
+                <IonButton strong onClick={handleConfirm} disabled={!endDate}>
+                  Xong
+                </IonButton>
+              )}
+            </IonButtons>
+          </IonToolbar>
+        </IonHeader>
+
+        <IonContent className="ion-padding">
+          {/* Display selected dates */}
+          {(startDate || endDate) && (
+            <div className="p-4 mb-5 text-center">
+              <IonText color="medium">
+                <p className="text-xs uppercase tracking-wider font-medium mb-2">
+                  {step === 'start' ? 'Ngày bắt đầu' : 'Khoảng ngày'}
+                </p>
+              </IonText>
+              <IonText color="primary">
+                <h3 className="text-xl font-bold tracking-tight m-0">
+                  {startDate && format(new Date(startDate), "dd/MM/yyyy", { locale: vi })}
+                  {startDate && endDate && step === 'end' && ' → '}
+                  {endDate && step === 'end' && format(new Date(endDate), "dd/MM/yyyy", { locale: vi })}
+                </h3>
+              </IonText>
+            </div>
           )}
-          disabled={disabled}
-        >
-          <CalendarIcon className="mr-2 h-4 w-4" />
-          {dateRange?.from ? (
-            dateRange.to ? (
-              <>
-                {format(dateRange.from, "dd/MM/yyyy", { locale: vi })} -{" "}
-                {format(dateRange.to, "dd/MM/yyyy", { locale: vi })}
-              </>
-            ) : (
-              format(dateRange.from, "dd/MM/yyyy", { locale: vi })
-            )
-          ) : (
-            <span>{placeholder}</span>
-          )}
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent className="w-auto p-0" align="start">
-        <Calendar
-          mode="range"
-          defaultMonth={tempDateRange?.from}
-          selected={tempDateRange}
-          onSelect={setTempDateRange}
-          numberOfMonths={2}
-          locale={vi}
-        />
-      </PopoverContent>
-    </Popover>
+
+          <IonDatetime
+            presentation="date"
+            value={step === 'start' ? startDate : endDate}
+            onIonChange={step === 'start' ? handleStartDateChange : handleEndDateChange}
+            locale="vi-VN"
+            firstDayOfWeek={1}
+            preferWheel={false}
+            size="cover"
+            min={step === 'end' && startDate ? startDate : undefined}
+          />
+          <style>{`
+            ion-datetime::part(month-year-button) {
+              text-transform: capitalize;
+            }
+          `}</style>
+        </IonContent>
+      </IonModal>
+    </>
   );
 }
