@@ -61,9 +61,7 @@ export function IonicSegment<T extends string = string>({
   className,
   showContent = false,
 }: IonicSegmentProps<T>) {
-  const [selectedValue, setSelectedValue] = useState<T>(
-    defaultValue ?? (options[0]?.value as T)
-  );
+  const [selectedValue, setSelectedValue] = useState<T>(defaultValue ?? (options[0]?.value as T));
 
   const handleChange = (value: T) => {
     setSelectedValue(value);
@@ -74,17 +72,17 @@ export function IonicSegment<T extends string = string>({
 
   return (
     <div className={className}>
-        <IonSegment
-            className="py-0.5"
-          value={selectedValue}
-          onIonChange={(e) => handleChange(e.detail.value as T)}
-        >
-          {options.map((option) => (
-            <IonSegmentButton key={option.value} value={option.value}>
-              <IonLabel>{option.label}</IonLabel>
-            </IonSegmentButton>
-          ))}
-        </IonSegment>
+      <IonSegment
+        className="py-0.5"
+        value={selectedValue}
+        onIonChange={(e) => handleChange(e.detail.value as T)}
+      >
+        {options.map((option) => (
+          <IonSegmentButton key={option.value} value={option.value}>
+            <IonLabel>{option.label}</IonLabel>
+          </IonSegmentButton>
+        ))}
+      </IonSegment>
 
       {showContent && selectedOption?.content && (
         <div className="mt-4">{selectedOption.content}</div>

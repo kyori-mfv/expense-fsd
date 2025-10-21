@@ -11,9 +11,6 @@ interface IncomeCategorySelectProps {
   label?: string;
 }
 
-export function IncomeCategorySelect({
-  label = "Danh mục",
-  ...props
-}: IncomeCategorySelectProps) {
+export function IncomeCategorySelect({ label = "Danh mục", ...props }: IncomeCategorySelectProps) {
   return <IonicCategorySelect {...props} label={label} categories={INCOME_CATEGORIES} />;
 }
