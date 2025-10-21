@@ -1,18 +1,17 @@
-# Context - Load Project Documentation & Activate Multi-Agent System
+# Context - Load Project Documentation
 
-**IMPORTANT**: This command automatically activates the Multi-Agent System to analyze the project and adapt to any changes.
+**IMPORTANT**: This command loads project documentation for quick reference. Use the Task tool (multi-agent system) for actual implementation tasks, not for context analysis.
 
 ---
 
-## 🤖 Multi-Agent System - Context Analysis Task
+## 📖 Direct Context Loading
 
-You are the **Manager Agent** coordinating the AI development team. Your mission:
+Your mission:
 
-1. **Load and analyze** all project documentation
-2. **Detect any changes** since last documentation update
-3. **Identify inconsistencies** between code and documentation
-4. **Recommend updates** or improvements if needed
-5. **Provide intelligent context** for the user's next request
+1. **Load and read** all project documentation directly
+2. **Summarize** the current project state
+3. **Provide quick reference** for the user's next request
+4. **Be ready** to execute tasks using the multi-agent system when needed
 
 ---
 
@@ -31,72 +30,63 @@ You are the **Manager Agent** coordinating the AI development team. Your mission
 
 ---
 
-## 🎯 Analysis Tasks
+## 🎯 Reading Tasks
 
-### 1. **Architecture Expert Analysis**
-- Verify FSD layer structure matches documentation
-- Check if provider composition is documented correctly
-- Validate that all architectural patterns are up-to-date
+Read and summarize the following directly (NO multi-agent needed):
 
-### 2. **Business Expert Analysis**
-- Confirm all features listed in README exist in codebase
-- Verify tech stack versions match documentation
-- Check if any new features are undocumented
+### 1. **Project Overview**
+- Current architecture status from docs
+- Tech stack summary from package.json
+- Key features from README
 
-### 3. **Code Quality Expert Analysis**
-- Scan for any code smells or anti-patterns
-- Identify potential improvements
-- Check for consistency with documented rules
+### 2. **Architecture Constraints**
+- FSD layer structure and rules
+- Provider composition patterns
+- Routing and navigation approach
 
-### 4. **Documentation Expert Analysis**
-- Find gaps between code and documentation
-- Identify outdated information
-- Suggest documentation improvements
+### 3. **Coding Standards**
+- TypeScript rules and conventions
+- File naming conventions
+- Import/export patterns
+
+### 4. **Development Workflow**
+- Available npm scripts
+- Build and test processes
+- Git workflow if documented
 
 ---
 
 ## 📤 Expected Output
 
-Provide a comprehensive context report:
+Provide a concise context summary:
 
-### **1. Project Overview**
-- Current architecture status
-- Tech stack summary
-- Key features summary
+### **1. Project Status**
+- Architecture: FSD compliance status
+- Tech stack: Key dependencies
+- Current state: Production-ready or in-development
 
-### **2. Recent Changes Detected**
-- List any code changes not reflected in docs
-- List any architectural changes
-- List any dependency updates
+### **2. Key Constraints to Remember**
+- FSD rules (downward imports only, no cross-layer, etc.)
+- Naming conventions
+- Architectural patterns
 
-### **3. Inconsistencies Found**
-- Documentation vs code mismatches
-- Outdated examples or references
-- Missing documentation for new features
-
-### **4. Recommendations**
-- Suggested documentation updates
-- Potential code improvements
-- Architecture optimization opportunities
-
-### **5. Ready-to-Use Context**
-- Quick reference for next development task
-- Key architectural constraints to remember
-- Important patterns and conventions
+### **3. Ready for Next Task**
+- "Context loaded. Ready to execute implementation tasks."
+- When user requests implementation: USE the Task tool with multi-agent system
 
 ---
 
-## 🚀 Activation Instructions
+## 🚀 Execution Instructions
 
-**Step 1**: Use the Task tool to launch the general-purpose agent with this analysis task
+**Step 1**: Read all documentation files directly using the Read tool
 
-**Step 2**: The agent will autonomously:
-- Read all documentation files
-- Sample key source files
-- Compare and analyze
-- Generate comprehensive report
+**Step 2**: Summarize the project context concisely
 
-**Step 3**: Present findings to user in clear, actionable format
+**Step 3**: Be ready to use the Task tool for implementation work
+
+**IMPORTANT**:
+- ❌ DO NOT use Task tool for reading/analyzing context
+- ✅ DO use Task tool when implementing features, fixing bugs, or making code changes
 
 ---
 
@@ -148,4 +138,14 @@ pnpm verify      # Lint + type-check + build (MUST pass before commits)
 
 ---
 
-**Activate the Multi-Agent System now to provide intelligent, adaptive context analysis.**
+## 💡 When to Use Multi-Agent System
+
+**Context Loading (this command)**:
+- ❌ NO multi-agent needed
+- ✅ Just read docs directly
+
+**Implementation Tasks**:
+- ✅ USE Task tool with multi-agent system
+- Examples: "Add new feature", "Fix bug", "Refactor code", "Migrate to new library"
+
+**Now load the context directly and be ready for implementation tasks.**
