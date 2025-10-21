@@ -1,4 +1,15 @@
-import { IonButton, IonButtons, IonContent, IonDatetime, IonHeader, IonIcon, IonModal, IonText, IonTitle, IonToolbar } from "@ionic/react";
+import {
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonDatetime,
+  IonHeader,
+  IonIcon,
+  IonModal,
+  IonText,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
 import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 import { calendarOutline } from "ionicons/icons";
@@ -26,20 +37,18 @@ export function DateRangePicker({
   placeholder = "Chọn khoảng ngày",
 }: DateRangePickerProps) {
   const [isOpen, setIsOpen] = React.useState(false);
-  const [step, setStep] = React.useState<'start' | 'end'>('start');
+  const [step, setStep] = React.useState<"start" | "end">("start");
   const [startDate, setStartDate] = React.useState<string | undefined>(
     dateRange?.from?.toISOString()
   );
-  const [endDate, setEndDate] = React.useState<string | undefined>(
-    dateRange?.to?.toISOString()
-  );
+  const [endDate, setEndDate] = React.useState<string | undefined>(dateRange?.to?.toISOString());
 
   // Update dates when external value changes
   React.useEffect(() => {
     if (!isOpen) {
       setStartDate(dateRange?.from?.toISOString());
       setEndDate(dateRange?.to?.toISOString());
-      setStep('start');
+      setStep("start");
     }
   }, [dateRange, isOpen]);
 
@@ -48,7 +57,7 @@ export function DateRangePicker({
     setStartDate(value);
     // Automatically move to step 2 after selecting start date
     setTimeout(() => {
-      setStep('end');
+      setStep("end");
     }, 300);
   };
 
@@ -67,13 +76,13 @@ export function DateRangePicker({
   };
 
   const handleNext = () => {
-    if (step === 'start' && startDate) {
-      setStep('end');
+    if (step === "start" && startDate) {
+      setStep("end");
     }
   };
 
   const handleBack = () => {
-    setStep('start');
+    setStep("start");
   };
 
   const handleConfirm = () => {
@@ -88,7 +97,7 @@ export function DateRangePicker({
   const handleCancel = () => {
     setStartDate(dateRange?.from?.toISOString());
     setEndDate(dateRange?.to?.toISOString());
-    setStep('start');
+    setStep("start");
     setIsOpen(false);
   };
 
@@ -127,17 +136,15 @@ export function DateRangePicker({
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              {step === 'end' ? (
+              {step === "end" ? (
                 <IonButton onClick={handleBack}>Quay lại</IonButton>
               ) : (
                 <IonButton onClick={handleCancel}>Hủy</IonButton>
               )}
             </IonButtons>
-            <IonTitle>
-              {step === 'start' ? 'Chọn ngày bắt đầu' : 'Chọn ngày kết thúc'}
-            </IonTitle>
+            <IonTitle>{step === "start" ? "Chọn ngày bắt đầu" : "Chọn ngày kết thúc"}</IonTitle>
             <IonButtons slot="end">
-              {step === 'start' ? (
+              {step === "start" ? (
                 <IonButton strong onClick={handleNext} disabled={!startDate}>
                   Tiếp
                 </IonButton>
@@ -156,14 +163,16 @@ export function DateRangePicker({
             <div className="p-4 mb-5 text-center">
               <IonText color="medium">
                 <p className="text-xs uppercase tracking-wider font-medium mb-2">
-                  {step === 'start' ? 'Ngày bắt đầu' : 'Khoảng ngày'}
+                  {step === "start" ? "Ngày bắt đầu" : "Khoảng ngày"}
                 </p>
               </IonText>
               <IonText color="primary">
                 <h3 className="text-xl font-bold tracking-tight m-0">
                   {startDate && format(new Date(startDate), "dd/MM/yyyy", { locale: vi })}
-                  {startDate && endDate && step === 'end' && ' → '}
-                  {endDate && step === 'end' && format(new Date(endDate), "dd/MM/yyyy", { locale: vi })}
+                  {startDate && endDate && step === "end" && " → "}
+                  {endDate &&
+                    step === "end" &&
+                    format(new Date(endDate), "dd/MM/yyyy", { locale: vi })}
                 </h3>
               </IonText>
             </div>
@@ -171,13 +180,13 @@ export function DateRangePicker({
 
           <IonDatetime
             presentation="date"
-            value={step === 'start' ? startDate : endDate}
-            onIonChange={step === 'start' ? handleStartDateChange : handleEndDateChange}
+            value={step === "start" ? startDate : endDate}
+            onIonChange={step === "start" ? handleStartDateChange : handleEndDateChange}
             locale="vi-VN"
             firstDayOfWeek={1}
             preferWheel={false}
             size="cover"
-            min={step === 'end' && startDate ? startDate : undefined}
+            min={step === "end" && startDate ? startDate : undefined}
           />
           <style>{`
             ion-datetime::part(month-year-button) {

@@ -15,15 +15,14 @@ export function IncomePage() {
 
   return (
     <IonPage>
+      <PageHeader
+        icon={TrendingUp}
+        title="Thu nhập"
+        description="Quản lý và theo dõi các khoản thu nhập"
+        titleColor="text-income-foreground"
+      />
       <IonContent>
         <div className="container mx-auto p-4 max-w-4xl pb-6">
-          <PageHeader
-            icon={TrendingUp}
-            title="Thu nhập"
-            description="Quản lý và theo dõi các khoản thu nhập"
-            titleColor="text-income-foreground"
-          />
-
           <div className="space-y-6">
             {/* API Key Input - only show if not set */}
             {!apiKey && <ApiKeyInput />}

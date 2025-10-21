@@ -84,17 +84,15 @@ export function DashboardPage() {
 
   return (
     <IonPage>
+      <PageHeader
+        icon={LayoutDashboardIcon}
+        title="Tổng quan"
+        description="Tổng quan tài chính cá nhân"
+        titleColor="text-dashboard-foreground"
+        iconColor="text-dashboard-foreground"
+      />
       <IonContent>
         <div className="container mx-auto p-4 space-y-6 max-w-7xl">
-          {/* Page Header */}
-          <PageHeader
-            icon={LayoutDashboardIcon}
-            title="Tổng quan"
-            description="Tổng quan tài chính cá nhân"
-            titleColor="text-dashboard-foreground"
-            iconColor="text-dashboard-foreground"
-          />
-
           {/* Monthly Trends Chart (6 months fixed) */}
           <MonthlyTrends monthlyStats={monthlyStats} showNetLine />
 

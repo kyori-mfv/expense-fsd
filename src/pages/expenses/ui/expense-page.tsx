@@ -15,15 +15,14 @@ export function ExpensePage() {
 
   return (
     <IonPage>
+      <PageHeader
+        icon={TrendingDown}
+        title="Chi tiêu"
+        description="Quản lý và theo dõi các khoản chi tiêu"
+        titleColor="text-expense-foreground"
+      />
       <IonContent>
         <div className="container mx-auto p-4 max-w-4xl pb-6">
-          <PageHeader
-            icon={TrendingDown}
-            title="Chi tiêu"
-            description="Quản lý và theo dõi các khoản chi tiêu"
-            titleColor="text-expense-foreground"
-          />
-
           <div className="space-y-6">
             {/* API Key Input - only show if not set */}
             {!apiKey && <ApiKeyInput />}

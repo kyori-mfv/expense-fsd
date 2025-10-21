@@ -1,4 +1,5 @@
 import { ThemeToggle } from "@/shared/composite";
+import { IonHeader, IonTitle, IonToolbar } from "@ionic/react";
 import type { LucideIcon } from "lucide-react";
 
 interface PageHeaderProps {
@@ -17,17 +18,19 @@ export function PageHeader({
   titleColor,
 }: PageHeaderProps) {
   return (
-    <div className="mb-4">
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className={`text-2xl font-bold flex items-center gap-2 ${titleColor || ""}`}>
-            <Icon size={28} strokeWidth={2.5} className={iconColor || ""} />
-            {title}
-          </h1>
-          <p className="text-sm text-muted-foreground mt-1">{description}</p>
-        </div>
-        <ThemeToggle />
-      </div>
-    </div>
+    <>
+      <IonHeader className="shadow-md">
+        <IonToolbar>
+          <div className="flex flex-col justify-between p-2">
+            <h1 className={`text-2xl font-bold flex items-center gap-2 ${titleColor || ""}`}>
+              <Icon size={28} strokeWidth={2.5} className={iconColor || ""} />
+              {title}
+            </h1>
+            <p className="text-sm text-muted-foreground mt-1">{description}</p>
+          </div>
+        </IonToolbar>
+      </IonHeader>
+      <ThemeToggle />
+    </>
   );
 }
