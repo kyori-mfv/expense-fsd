@@ -296,7 +296,7 @@
 /* ============================================================================
    IONIC COMPONENT CUSTOMIZATIONS
    ============================================================================ */
-@layer base {
+@layer components {
   /* Tab navigation - Custom colors per tab */
   ion-tab-button {
     --color: var(--ion-color-muted-foreground);
