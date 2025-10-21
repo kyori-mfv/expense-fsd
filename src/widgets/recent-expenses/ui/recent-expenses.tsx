@@ -1,6 +1,7 @@
-import { ExpenseItem, useRecentExpenses } from "@/entities/expense";
+import { ExpenseCard, useRecentExpenses } from "@/entities/expense";
 import { EmptyState } from "@/shared/composite";
 import { DISPLAY_LIMITS } from "@/shared/config";
+import { TransparentList } from "@/shared/ui/transparent-list";
 import { ReceiptText } from "lucide-react";
 
 export function RecentExpenses() {
@@ -15,11 +16,11 @@ export function RecentExpenses() {
       {recentExpenses.length === 0 ? (
         <EmptyState icon={ReceiptText} description="Chưa có chi tiêu nào" />
       ) : (
-        <div className="space-y-3">
+        <TransparentList>
           {recentExpenses.map((expense) => (
-            <ExpenseItem key={expense.id} expense={expense} />
+            <ExpenseCard key={expense.id} expense={expense} />
           ))}
-        </div>
+        </TransparentList>
       )}
     </div>
   );

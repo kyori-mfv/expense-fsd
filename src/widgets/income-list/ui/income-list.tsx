@@ -1,4 +1,4 @@
-import { IncomeItem, useIncomeListData } from "@/entities/income";
+import { IncomeCardSwipeable, useIncomeListData } from "@/entities/income";
 import { DeleteIncomeButton } from "@/features/delete-income";
 import { EditIncomeButton } from "@/features/edit-income";
 import { IncomeFilterForm, useIncomeFilter } from "@/features/filter-incomes";
@@ -6,7 +6,7 @@ import { EmptyState } from "@/shared/composite";
 import { PaginationControls } from "@/shared/composite";
 import { PAGINATION } from "@/shared/config";
 import { usePagination } from "@/shared/react";
-import { Separator } from "@/shared/ui/separator";
+import { TransparentList } from "@/shared/ui/transparent-list";
 import { SearchX } from "lucide-react";
 
 export function IncomeList() {
@@ -48,16 +48,14 @@ export function IncomeList() {
       ) : (
         <>
           {/* Entity: Income List */}
-          <div className="space-y-3">
+          <TransparentList>
             {paginatedIncomes.map((income) => (
-              <IncomeItem
+              <IncomeCardSwipeable
                 key={income.id}
                 income={income}
                 actions={
                   <>
-                    {/* Feature: Edit */}
                     <EditIncomeButton income={income} />
-                    {/* Feature: Delete */}
                     <DeleteIncomeButton
                       incomeId={income.id}
                       incomeDescription={income.description}
@@ -66,7 +64,7 @@ export function IncomeList() {
                 }
               />
             ))}
-          </div>
+          </TransparentList>
 
           {/* Pagination */}
           <PaginationControls

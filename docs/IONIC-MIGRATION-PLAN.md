@@ -47,13 +47,29 @@
 - ✅ Zero CSS conflicts (shadcn/ui + Ionic coexist perfectly)
 - ✅ Accessibility maintained (WCAG AA)
 
+### ✅ Phase 4 Completed - Native Swipe Actions
+
+**What Was Achieved:**
+- ✅ Swipe-to-delete/edit on expense/income items
+- ✅ IonItemSliding with swipe-to-reveal actions
+- ✅ Mobile-first buttons (56×56px touch targets)
+- ✅ Ionicons integration (trashOutline, createOutline)
+- ✅ FSD-compliant architecture (composition pattern)
+- ✅ TransparentList component for Ionic CSS override
+- ✅ Tailwind utility classes throughout
+
+**Implementation Details:**
+- Created ExpenseCard/IncomeCard (base display components)
+- Created ExpenseCardSwipeable/IncomeCardSwipeable (interactive wrappers)
+- Refactored all edit/delete buttons with IonButton + Ionicons
+- Enhanced card styling with borders, shadows, transitions
+- Features maintain full business logic ownership
+- Widgets compose entities + features via render props
+
 ### 🚧 Future Enhancements (Not Yet Implemented)
 
 These features are documented in the original plan but not yet implemented:
 - ⏳ Pull-to-refresh on list pages
-- ⏳ Swipe-to-delete on expense/income items
-- ⏳ Haptic feedback (iOS)
-- ⏳ Material ripple effects (Android)
 - ⏳ Floating labels on form inputs
 - ⏳ Sheet modals (bottom slide-up)
 - ⏳ Native date/time pickers
@@ -1024,9 +1040,9 @@ For complete details of all phases, see the approved implementation plan.
 | **Bundle Size** | 525 KB gzipped | TBD | ≤ 600 KB |
 | **Initial Load** | 1.2s (4G) | TBD | ≤ 1.5s |
 | **Lighthouse Score** | 90 | TBD | ≥ 95 |
-| **Touch Targets** | 36px (too small) | 48px | ≥ 44px |
+| **Touch Targets** | 36px (too small) | 56px ✅ | ≥ 44px |
 | **iOS Swipe-Back** | ❌ | ✅ | ✅ |
-| **Pull-to-Refresh** | ❌ | ✅ | ✅ |
+| **Pull-to-Refresh** | ❌ | ⏳ | ✅ |
 | **Swipe-to-Delete** | ❌ | ✅ | ✅ |
 | **Haptic Feedback** | ❌ | ✅ (iOS) | ✅ |
 | **Ripple Effects** | ❌ | ✅ (Android) | ✅ |

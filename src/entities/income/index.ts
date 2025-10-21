@@ -1,4 +1,5 @@
 export { incomeService } from "./api/income.service";
-export { IncomeItem } from "./ui/income-item";
+export { IncomeCard } from "./ui/income-card";
+export { IncomeCardSwipeable } from "./ui/income-card-swipeable";
 export { IncomeCategorySelect } from "./ui/income-category-select";
 export { useRecentIncomes, useIncomeListData, useIncomesAll } from "./model/use-income-query";

@@ -1,6 +1,7 @@
-import { IncomeItem, useRecentIncomes } from "@/entities/income";
+import { IncomeCard, useRecentIncomes } from "@/entities/income";
 import { EmptyState } from "@/shared/composite";
 import { DISPLAY_LIMITS } from "@/shared/config";
+import { TransparentList } from "@/shared/ui/transparent-list";
 import { ReceiptText } from "lucide-react";
 
 export function RecentIncomes() {
@@ -15,11 +16,11 @@ export function RecentIncomes() {
       {recentIncomes.length === 0 ? (
         <EmptyState icon={ReceiptText} description="Chưa có thu nhập nào" />
       ) : (
-        <div className="space-y-3">
+        <TransparentList>
           {recentIncomes.map((income) => (
-            <IncomeItem key={income.id} income={income} />
+            <IncomeCard key={income.id} income={income} />
           ))}
-        </div>
+        </TransparentList>
       )}
     </div>
   );

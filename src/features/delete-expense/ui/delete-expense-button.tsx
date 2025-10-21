@@ -1,15 +1,21 @@
 import { ConfirmationDialog } from "@/shared/composite";
-import { Button } from "@/shared/ui/button";
-import { Trash2 } from "lucide-react";
+import { IonButton, IonIcon } from "@ionic/react";
+import { trashOutline } from "ionicons/icons";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useDeleteExpense } from "../model/use-delete-expense";
 
 interface DeleteExpenseButtonProps {
+  /** The ID of the expense to delete */
   expenseId: string;
+  /** Optional description to show in confirmation dialog */
   expenseDescription?: string;
 }
 
+/**
+ * Mobile-first delete button with Ionic design
+ * Displays icon-only button optimized for swipe actions
+ */
 export function DeleteExpenseButton({ expenseId, expenseDescription }: DeleteExpenseButtonProps) {
   const [open, setOpen] = useState(false);
   const { deleteExpense, isLoading } = useDeleteExpense();
@@ -27,14 +33,14 @@ export function DeleteExpenseButton({ expenseId, expenseDescription }: DeleteExp
 
   return (
     <>
-      <Button
-        variant="outline"
-        size="sm"
+      <IonButton
+        fill="clear"
+        color="danger"
         onClick={() => setOpen(true)}
-        className="h-7 px-2 text-destructive hover:text-destructive hover:bg-destructive/10"
+        className="ion-no-margin h-14 min-w-[56px] text-2xl px-3"
       >
-        <Trash2 size={14} />
-      </Button>
+        <IonIcon slot="icon-only" icon={trashOutline} />
+      </IonButton>
 
       <ConfirmationDialog
         open={open}
