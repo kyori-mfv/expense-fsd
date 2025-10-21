@@ -1,4 +1,4 @@
-import { CategorySelect } from "@/shared/composite";
+import { IonicCategorySelect } from "@/shared/composite";
 import { INCOME_CATEGORIES } from "@/shared/config";
 
 interface IncomeCategorySelectProps {
@@ -7,11 +7,13 @@ interface IncomeCategorySelectProps {
   disabled?: boolean;
   required?: boolean;
   placeholder?: string;
-  showIcons?: boolean;
   includeAllOption?: boolean;
-  className?: string;
+  label?: string;
 }
 
-export function IncomeCategorySelect(props: IncomeCategorySelectProps) {
-  return <CategorySelect {...props} categories={INCOME_CATEGORIES} />;
+export function IncomeCategorySelect({
+  label = "Danh mục",
+  ...props
+}: IncomeCategorySelectProps) {
+  return <IonicCategorySelect {...props} label={label} categories={INCOME_CATEGORIES} />;
 }

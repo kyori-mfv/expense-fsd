@@ -29,7 +29,7 @@ export function IncomePage() {
             {!apiKey && <ApiKeyInput />}
 
             {/* Income Input Tabs */}
-            <Tabs defaultValue="ai" className="w-full">
+            <Tabs defaultValue="manual" className="w-full">
               <TabsList className="grid grid-cols-2 p-1 max-w-md mx-auto w-full mb-2">
                 <TabsTrigger value="ai">Nhập AI</TabsTrigger>
                 <TabsTrigger value="manual">Nhập Thủ công</TabsTrigger>
@@ -46,7 +46,7 @@ export function IncomePage() {
               </TabsContent>
 
               <TabsContent value="manual">
-                <IncomeForm onError={(error) => toast.error(error)} />
+                <IncomeForm onError={(error) => toast.error(error)} inset={true} />
               </TabsContent>
             </Tabs>
 

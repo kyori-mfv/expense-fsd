@@ -66,6 +66,37 @@
 - Features maintain full business logic ownership
 - Widgets compose entities + features via render props
 
+### ✅ Phase 5 Completed - Ionic Category Select Cleanup
+
+**What Was Achieved:**
+- ✅ Removed icon rendering code from IonicCategorySelect (Ionic limitation)
+- ✅ Cleaned up unused imports (CategoryIcon, Grid3x3)
+- ✅ Removed showIcons prop from all category select components
+- ✅ Simplified CategoryItem interface (only id + name)
+- ✅ Updated all form fields to remove showIcons prop
+- ✅ Updated filter forms to remove showIcons prop
+- ✅ Deleted old shadcn/ui components (category-select.tsx, date-picker.tsx)
+
+**Technical Details:**
+- Discovered that Ionic's IonSelectOption with action-sheet interface only supports plain text strings
+- Cannot render custom React components or HTML inside IonSelectOption
+- CategoryIcon component preserved for use in CategoryBadge (still needed)
+- FSD architecture maintained - all imports follow proper layer hierarchy
+
+**Files Modified (Phase 5 Cleanup):**
+- `src/shared/composite/ionic-category-select.tsx` - Removed icon code, simplified interface
+- `src/entities/expense/ui/expense-category-select.tsx` - Removed showIcons prop
+- `src/entities/income/ui/income-category-select.tsx` - Removed showIcons prop
+- `src/entities/expense/ui/expense-form-fields.tsx` - Removed showIcons={true}
+- `src/entities/income/ui/income-form-fields.tsx` - Removed showIcons={true}
+- `src/features/filter-expenses/ui/expense-filter-form.tsx` - Removed showIcons={true}
+- `src/features/filter-incomes/ui/income-filter-form.tsx` - Removed showIcons={true}
+- `src/shared/composite/index.ts` - Removed deleted component exports
+
+**Files Deleted:**
+- `src/shared/composite/category-select.tsx` (1,899 bytes) - Old shadcn/ui version
+- `src/shared/composite/date-picker.tsx` (1,297 bytes) - Old shadcn/ui version
+
 ### 🚧 Future Enhancements (Not Yet Implemented)
 
 These features are documented in the original plan but not yet implemented:

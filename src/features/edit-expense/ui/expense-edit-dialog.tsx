@@ -1,10 +1,14 @@
-import { ExpenseCategorySelect } from "@/entities/expense";
-import { DatePicker } from "@/shared/composite";
+import { ExpenseFormFields } from "@/entities/expense";
 import type { ExpenseRecord } from "@/shared/contract";
-import { Button } from "@/shared/ui/button";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/shared/ui/dialog";
-import { Input } from "@/shared/ui/input";
-import { Label } from "@/shared/ui/label";
+import {
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonModal,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
 import { useEffect, useState } from "react";
 import { useEditExpense } from "../model/use-edit-expense";
 
@@ -61,66 +65,42 @@ export function ExpenseEditDialog({
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Chỉnh sửa chi tiêu</DialogTitle>
-        </DialogHeader>
+    <IonModal
+      isOpen={open}
+      onDidDismiss={() => onOpenChange(false)}
+      breakpoints={[0, 0.5, 1]}
+      initialBreakpoint={0.5}
+      className="expense-edit-modal"
+    >
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonButton onClick={() => onOpenChange(false)}>Hủy</IonButton>
+          </IonButtons>
+          <IonTitle>Chỉnh sửa chi tiêu</IonTitle>
+          <IonButtons slot="end">
+            <IonButton onClick={handleSubmit} strong disabled={isLoading}>
+              {isLoading ? "Đang lưu..." : "Lưu"}
+            </IonButton>
+          </IonButtons>
+        </IonToolbar>
+      </IonHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="edit-amount">Số tiền (VNĐ)</Label>
-            <Input
-              id="edit-amount"
-              type="number"
-              inputMode="numeric"
-              value={amount}
-              onChange={(e) => setAmount(e.target.value)}
-              placeholder="100000"
-              disabled={isLoading}
-              required
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="edit-category">Danh mục</Label>
-            <ExpenseCategorySelect
-              value={category}
-              onValueChange={setCategory}
-              disabled={isLoading}
-              required
-              showIcons={true}
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="edit-description">Mô tả</Label>
-            <Input
-              id="edit-description"
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Mô tả chi tiêu..."
-              disabled={isLoading}
-              required
-            />
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="edit-date">Ngày</Label>
-            <DatePicker date={date} onDateChange={setDate} disabled={isLoading} />
-          </div>
-
-          <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-              Hủy
-            </Button>
-            <Button type="submit" disabled={isLoading}>
-              {isLoading ? "Đang cập nhật..." : "Cập nhật"}
-            </Button>
-          </DialogFooter>
+      <IonContent className="ion-padding">
+        <form onSubmit={handleSubmit}>
+          <ExpenseFormFields
+            amount={amount}
+            onAmountChange={setAmount}
+            category={category}
+            onCategoryChange={setCategory}
+            description={description}
+            onDescriptionChange={setDescription}
+            date={date}
+            onDateChange={setDate}
+            disabled={isLoading}
+          />
         </form>
-      </DialogContent>
-    </Dialog>
+      </IonContent>
+    </IonModal>
   );
 }

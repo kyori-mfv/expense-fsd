@@ -52,7 +52,6 @@ export function IncomeFilterForm({ form, onReset, onFilterChange }: IncomeFilter
                     handleFieldChange();
                   }}
                   placeholder="Lọc theo danh mục"
-                  showIcons={true}
                   includeAllOption={true}
                 />
               </FormControl>

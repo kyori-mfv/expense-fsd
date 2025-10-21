@@ -52,7 +52,6 @@ export function ExpenseFilterForm({ form, onReset, onFilterChange }: ExpenseFilt
                     handleFieldChange();
                   }}
                   placeholder="Lọc theo danh mục"
-                  showIcons={true}
                   includeAllOption={true}
                 />
               </FormControl>

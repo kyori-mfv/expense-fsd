@@ -1,10 +1,10 @@
 // Public API for shared components
 export { CategoryBadge } from "./category-badge";
 export { CategoryIcon } from "./category-icon";
-export { CategorySelect } from "./category-select";
 export { ConfirmationDialog } from "./confirmation-dialog";
-export { DatePicker } from "./date-picker";
 export { DateRangePicker } from "./date-range-picker";
 export { EmptyState } from "./empty-state";
+export { IonicCategorySelect } from "./ionic-category-select";
+export { IonicDatePicker } from "./ionic-date-picker";
 export { PaginationControls } from "./pagination-controls";
 export { ThemeToggle } from "./theme-toggle";

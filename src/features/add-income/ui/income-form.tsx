@@ -1,17 +1,14 @@
-import { IncomeCategorySelect } from "@/entities/income";
-import { DatePicker } from "@/shared/composite";
-import { Button } from "@/shared/ui/button";
-import { Card } from "@/shared/ui/card";
-import { Input } from "@/shared/ui/input";
-import { Label } from "@/shared/ui/label";
+import { IncomeFormFields } from "@/entities/income";
+import { IonButton } from "@ionic/react";
 import { useState } from "react";
 import { useAddIncome } from "../model/use-add-income";
 
 interface IncomeFormProps {
   onError?: (error: string) => void;
+  inset?: boolean;
 }
 
-export function IncomeForm({ onError }: IncomeFormProps) {
+export function IncomeForm({ onError, inset = false }: IncomeFormProps) {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -47,55 +44,25 @@ export function IncomeForm({ onError }: IncomeFormProps) {
   };
 
   return (
-    <Card className="p-4">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="space-y-2">
-          <Label htmlFor="amount">Số tiền (VNĐ)</Label>
-          <Input
-            id="amount"
-            type="number"
-            inputMode="numeric"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            placeholder="100000"
-            disabled={isLoading}
-            required
-          />
-        </div>
+    <form onSubmit={handleSubmit} className="mb-4">
+      <IncomeFormFields
+        amount={amount}
+        onAmountChange={setAmount}
+        category={category}
+        onCategoryChange={setCategory}
+        description={description}
+        onDescriptionChange={setDescription}
+        date={date}
+        onDateChange={setDate}
+        disabled={isLoading}
+        inset={inset}
+      />
 
-        <div className="space-y-2">
-          <Label htmlFor="category">Danh mục</Label>
-          <IncomeCategorySelect
-            value={category}
-            onValueChange={setCategory}
-            disabled={isLoading}
-            required
-            showIcons={true}
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="description">Mô tả</Label>
-          <Input
-            id="description"
-            type="text"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder="Mô tả thu nhập..."
-            disabled={isLoading}
-            required
-          />
-        </div>
-
-        <div className="space-y-2">
-          <Label htmlFor="date">Ngày</Label>
-          <DatePicker date={date} onDateChange={setDate} disabled={isLoading} />
-        </div>
-
-        <Button type="submit" disabled={isLoading} className="w-full">
+      <div className="px-4 mt-4">
+        <IonButton expand="block" type="submit" disabled={isLoading}>
           {isLoading ? "Đang thêm..." : "Thêm thu nhập"}
-        </Button>
-      </form>
-    </Card>
+        </IonButton>
+      </div>
+    </form>
   );
 }

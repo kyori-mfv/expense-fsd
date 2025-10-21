@@ -1,4 +1,4 @@
-import { CategorySelect } from "@/shared/composite";
+import { IonicCategorySelect } from "@/shared/composite";
 import { EXPENSE_CATEGORIES } from "@/shared/config";
 
 interface ExpenseCategorySelectProps {
@@ -7,11 +7,13 @@ interface ExpenseCategorySelectProps {
   disabled?: boolean;
   required?: boolean;
   placeholder?: string;
-  showIcons?: boolean;
   includeAllOption?: boolean;
-  className?: string;
+  label?: string;
 }
 
-export function ExpenseCategorySelect(props: ExpenseCategorySelectProps) {
-  return <CategorySelect {...props} categories={EXPENSE_CATEGORIES} />;
+export function ExpenseCategorySelect({
+  label = "Danh mục",
+  ...props
+}: ExpenseCategorySelectProps) {
+  return <IonicCategorySelect {...props} label={label} categories={EXPENSE_CATEGORIES} />;
 }
