@@ -1,4 +1,4 @@
-import { IonItem, IonSelect, IonSelectOption } from "@ionic/react";
+import { IonSelect, IonSelectOption } from "@ionic/react";
 import type { SelectCustomEvent } from "@ionic/react";
 import { useRef } from "react";
 
@@ -18,6 +18,17 @@ interface IonicCategorySelectProps {
   className?: string;
 }
 
+/**
+ * IonicCategorySelect - Category select component without IonItem wrapper
+ *
+ * This component should be wrapped in IonItem when used in forms with IonList.
+ * Example:
+ * <IonList>
+ *   <IonItem>
+ *     <IonicCategorySelect label="Category" value={category} onValueChange={setCategory} categories={CATEGORIES} />
+ *   </IonItem>
+ * </IonList>
+ */
 export function IonicCategorySelect({
   value,
   onValueChange,
@@ -50,25 +61,24 @@ export function IonicCategorySelect({
   const selectValue = value === "" ? undefined : value;
 
   return (
-    <IonItem className={className} lines="full">
-      <IonSelect
-        ref={selectRef}
-        label={label}
-        labelPlacement="floating"
-        value={selectValue}
-        onIonChange={handleChange}
-        onIonDismiss={handleDismiss}
-        interface="action-sheet"
-        placeholder={placeholder}
-        disabled={disabled}
-      >
-        {includeAllOption && <IonSelectOption value="all">Tất cả danh mục</IonSelectOption>}
-        {categories.map((cat) => (
-          <IonSelectOption key={cat.id} value={cat.name}>
-            {cat.name}
-          </IonSelectOption>
-        ))}
-      </IonSelect>
-    </IonItem>
+    <IonSelect
+      ref={selectRef}
+      label={label}
+      labelPlacement="floating"
+      value={selectValue}
+      onIonChange={handleChange}
+      onIonDismiss={handleDismiss}
+      interface="action-sheet"
+      placeholder={placeholder}
+      disabled={disabled}
+      className={className}
+    >
+      {includeAllOption && <IonSelectOption value="all">Tất cả danh mục</IonSelectOption>}
+      {categories.map((cat) => (
+        <IonSelectOption key={cat.id} value={cat.name}>
+          {cat.name}
+        </IonSelectOption>
+      ))}
+    </IonSelect>
   );
 }

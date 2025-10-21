@@ -45,7 +45,7 @@ export function IncomePage() {
                 {
                   value: "manual",
                   label: "Nhập Thủ công",
-                  content: <IncomeForm onError={(error) => toast.error(error)} inset={true} />,
+                  content: <IncomeForm onError={(error) => toast.error(error)} />,
                 },
               ]}
               defaultValue="manual"

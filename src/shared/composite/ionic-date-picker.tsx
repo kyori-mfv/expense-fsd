@@ -5,7 +5,6 @@ import {
   IonDatetime,
   IonHeader,
   IonInput,
-  IonItem,
   IonModal,
   IonTitle,
   IonToolbar,
@@ -24,6 +23,18 @@ export interface IonicDatePickerProps {
   className?: string;
 }
 
+/**
+ * IonicDatePicker - Date picker component without IonItem wrapper
+ *
+ * This component should be wrapped in IonItem when used in forms with IonList.
+ * The IonItem should have button prop to enable click interaction.
+ * Example:
+ * <IonList>
+ *   <IonItem button>
+ *     <IonicDatePicker label="Date" date={date} onDateChange={setDate} />
+ *   </IonItem>
+ * </IonList>
+ */
 export function IonicDatePicker({
   label,
   date,
@@ -47,21 +58,16 @@ export function IonicDatePicker({
 
   return (
     <>
-      <IonItem
-        button
-        onClick={() => !disabled && setIsOpen(true)}
+      <IonInput
+        label={label}
+        labelPlacement="floating"
+        value={formattedDate}
+        readonly
+        placeholder={placeholder}
         disabled={disabled}
+        onClick={() => !disabled && setIsOpen(true)}
         className={className}
-        lines="full"
-      >
-        <IonInput
-          label={label}
-          labelPlacement="floating"
-          value={formattedDate}
-          readonly
-          placeholder={placeholder}
-        />
-      </IonItem>
+      />
 
       <IonModal
         isOpen={isOpen}

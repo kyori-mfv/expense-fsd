@@ -1,6 +1,5 @@
 import { IonicDatePicker } from "@/shared/composite";
-import { IonicInput } from "@/shared/ui/ionic-input";
-import { IonList } from "@ionic/react";
+import { IonInput, IonItem, IonList } from "@ionic/react";
 import { IncomeCategorySelect } from "./income-category-select";
 
 interface IncomeFormFieldsProps {
@@ -30,36 +29,47 @@ export function IncomeFormFields({
 }: IncomeFormFieldsProps) {
   return (
     <IonList inset={inset}>
-      <IonicInput
-        label="Số tiền (VNĐ)"
-        type="text"
-        inputmode="numeric"
-        pattern="[0-9]*"
-        value={amount}
-        onValueChange={onAmountChange}
-        placeholder="100000"
-        disabled={disabled}
-        required
-      />
+      <IonItem lines="full">
+        <IonInput
+          label="Số tiền (VNĐ)"
+          labelPlacement="floating"
+          type="text"
+          inputmode="numeric"
+          value={amount}
+          onIonInput={(e) => onAmountChange(e.detail.value || "")}
+          placeholder="100000"
+          disabled={disabled}
+          required
+          clearInput
+        />
+      </IonItem>
 
-      <IncomeCategorySelect
-        value={category}
-        onValueChange={onCategoryChange}
-        disabled={disabled}
-        required
-      />
+      <IonItem lines="full">
+        <IncomeCategorySelect
+          value={category}
+          onValueChange={onCategoryChange}
+          disabled={disabled}
+          required
+        />
+      </IonItem>
 
-      <IonicInput
-        label="Mô tả"
-        type="text"
-        value={description}
-        onValueChange={onDescriptionChange}
-        placeholder="Mô tả thu nhập..."
-        disabled={disabled}
-        required
-      />
+      <IonItem lines="full">
+        <IonInput
+          label="Mô tả"
+          labelPlacement="floating"
+          type="text"
+          value={description}
+          onIonInput={(e) => onDescriptionChange(e.detail.value || "")}
+          placeholder="Mô tả thu nhập..."
+          disabled={disabled}
+          required
+          clearInput
+        />
+      </IonItem>
 
-      <IonicDatePicker label="Ngày" date={date} onDateChange={onDateChange} disabled={disabled} />
+      <IonItem button lines="full">
+        <IonicDatePicker label="Ngày" date={date} onDateChange={onDateChange} disabled={disabled} />
+      </IonItem>
     </IonList>
   );
 }
