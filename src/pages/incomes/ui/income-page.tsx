@@ -1,6 +1,4 @@
-import { AIIncomeInput, IncomeForm } from "@/features/add-income";
-import { ApiKeyInput, useApiKey } from "@/features/manage-api-key";
-import { IonicSegment } from "@/shared/composite";
+import { IncomeForm } from "@/features/add-income";
 import { Separator } from "@/shared/ui/separator";
 import { IncomeList } from "@/widgets/income-list";
 import { ManageIncomeData } from "@/widgets/manage-income-data";
@@ -11,8 +9,6 @@ import { TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 
 export function IncomePage() {
-  const { apiKey } = useApiKey();
-
   return (
     <IonPage>
       <PageHeader
@@ -24,33 +20,8 @@ export function IncomePage() {
       <IonContent>
         <div className="container mx-auto p-4 max-w-4xl pb-6">
           <div className="space-y-6">
-            {/* API Key Input - only show if not set */}
-            {!apiKey && <ApiKeyInput />}
-
-            {/* Income Input Segment */}
-            <IonicSegment
-              options={[
-                {
-                  value: "ai",
-                  label: "Nhập AI",
-                  content: apiKey ? (
-                    <AIIncomeInput apiKey={apiKey} onError={(error) => toast.error(error)} />
-                  ) : (
-                    <div className="text-center text-muted-foreground py-8">
-                      Vui lòng nhập API key để sử dụng tính năng AI
-                    </div>
-                  ),
-                },
-                {
-                  value: "manual",
-                  label: "Nhập Thủ công",
-                  content: <IncomeForm onError={(error) => toast.error(error)} />,
-                },
-              ]}
-              defaultValue="manual"
-              showContent
-              className="space-y-4"
-            />
+            {/* Income Input Form */}
+            <IncomeForm onError={(error) => toast.error(error)} />
 
             <Separator />
 

@@ -1,6 +1,4 @@
-import { AIExpenseInput, ExpenseForm } from "@/features/add-expense";
-import { ApiKeyInput, useApiKey } from "@/features/manage-api-key";
-import { IonicSegment } from "@/shared/composite";
+import { ExpenseForm } from "@/features/add-expense";
 import { Separator } from "@/shared/ui/separator";
 import { ExpenseList } from "@/widgets/expense-list";
 import { ManageExpenseData } from "@/widgets/manage-expense-data";
@@ -11,8 +9,6 @@ import { TrendingDown } from "lucide-react";
 import { toast } from "sonner";
 
 export function ExpensePage() {
-  const { apiKey } = useApiKey();
-
   return (
     <IonPage>
       <PageHeader
@@ -24,33 +20,8 @@ export function ExpensePage() {
       <IonContent>
         <div className="container mx-auto p-4 max-w-4xl pb-6">
           <div className="space-y-6">
-            {/* API Key Input - only show if not set */}
-            {!apiKey && <ApiKeyInput />}
-
-            {/* Expense Input Segment */}
-            <IonicSegment
-              options={[
-                {
-                  value: "ai",
-                  label: "Nhập AI",
-                  content: apiKey ? (
-                    <AIExpenseInput apiKey={apiKey} onError={(error) => toast.error(error)} />
-                  ) : (
-                    <div className="text-center text-muted-foreground py-8">
-                      Vui lòng nhập API key để sử dụng tính năng AI
-                    </div>
-                  ),
-                },
-                {
-                  value: "manual",
-                  label: "Nhập Thủ công",
-                  content: <ExpenseForm onError={(error) => toast.error(error)} />,
-                },
-              ]}
-              defaultValue="manual"
-              showContent
-              className="space-y-4"
-            />
+            {/* Expense Input Form */}
+            <ExpenseForm onError={(error) => toast.error(error)} />
 
             <Separator />
 
