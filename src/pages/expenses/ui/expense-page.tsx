@@ -1,7 +1,7 @@
 import { AIExpenseInput, ExpenseForm } from "@/features/add-expense";
 import { ApiKeyInput, useApiKey } from "@/features/manage-api-key";
+import { IonicSegment } from "@/shared/composite";
 import { Separator } from "@/shared/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { ExpenseList } from "@/widgets/expense-list";
 import { ManageExpenseData } from "@/widgets/manage-expense-data";
 import { PageHeader } from "@/widgets/page-header";
@@ -28,27 +28,30 @@ export function ExpensePage() {
             {/* API Key Input - only show if not set */}
             {!apiKey && <ApiKeyInput />}
 
-            {/* Expense Input Tabs */}
-            <Tabs defaultValue="manual" className="w-full">
-              <TabsList className="grid grid-cols-2 p-1 max-w-md mx-auto w-full mb-2">
-                <TabsTrigger value="ai">Nhập AI</TabsTrigger>
-                <TabsTrigger value="manual">Nhập Thủ công</TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="ai">
-                {apiKey ? (
-                  <AIExpenseInput apiKey={apiKey} onError={(error) => toast.error(error)} />
-                ) : (
-                  <div className="text-center text-muted-foreground py-8">
-                    Vui lòng nhập API key để sử dụng tính năng AI
-                  </div>
-                )}
-              </TabsContent>
-
-              <TabsContent value="manual">
-                <ExpenseForm onError={(error) => toast.error(error)} inset={true} />
-              </TabsContent>
-            </Tabs>
+            {/* Expense Input Segment */}
+            <IonicSegment
+              options={[
+                {
+                  value: "ai",
+                  label: "Nhập AI",
+                  content: apiKey ? (
+                    <AIExpenseInput apiKey={apiKey} onError={(error) => toast.error(error)} />
+                  ) : (
+                    <div className="text-center text-muted-foreground py-8">
+                      Vui lòng nhập API key để sử dụng tính năng AI
+                    </div>
+                  ),
+                },
+                {
+                  value: "manual",
+                  label: "Nhập Thủ công",
+                  content: <ExpenseForm onError={(error) => toast.error(error)} inset={true} />,
+                },
+              ]}
+              defaultValue="manual"
+              showContent
+              className="space-y-4"
+            />
 
             <Separator />
 

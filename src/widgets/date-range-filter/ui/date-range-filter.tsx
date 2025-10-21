@@ -1,6 +1,5 @@
-import { DateRangePicker } from "@/shared/composite";
+import { DateRangePicker, IonicSegment } from "@/shared/composite";
 import type { DatePreset } from "@/shared/lib/date-presets";
-import { Button } from "@/shared/ui/button";
 import type { DateRange } from "react-day-picker";
 
 interface DateRangeFilterProps {
@@ -18,36 +17,16 @@ export function DateRangeFilter({
 }: DateRangeFilterProps) {
   return (
     <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
-      {/* Preset Buttons */}
-      <div className="inline-flex gap-2 p-1 bg-muted rounded-lg">
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => onPresetChange("thisMonth")}
-          className="data-[active=true]:bg-background data-[active=true]:shadow-sm"
-          data-active={preset === "thisMonth"}
-        >
-          Tháng này
-        </Button>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => onPresetChange("lastMonth")}
-          className="data-[active=true]:bg-background data-[active=true]:shadow-sm"
-          data-active={preset === "lastMonth"}
-        >
-          Tháng trước
-        </Button>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={() => onPresetChange("thisYear")}
-          className="data-[active=true]:bg-background data-[active=true]:shadow-sm"
-          data-active={preset === "thisYear"}
-        >
-          Năm nay
-        </Button>
-      </div>
+      {/* Preset Segment */}
+      <IonicSegment
+        options={[
+          { value: "thisMonth", label: "Tháng này" },
+          { value: "lastMonth", label: "Tháng trước" },
+          { value: "thisYear", label: "Năm nay" },
+        ]}
+        defaultValue={preset}
+        onValueChange={onPresetChange}
+      />
 
       {/* Custom Date Range Picker */}
       <div className="w-[260px]">

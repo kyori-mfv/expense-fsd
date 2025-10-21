@@ -6,5 +6,7 @@ export { DateRangePicker } from "./date-range-picker";
 export { EmptyState } from "./empty-state";
 export { IonicCategorySelect } from "./ionic-category-select";
 export { IonicDatePicker } from "./ionic-date-picker";
+export { IonicSegment } from "./ionic-segment";
+export type { IonicSegmentProps, SegmentOption } from "./ionic-segment";
 export { PaginationControls } from "./pagination-controls";
 export { ThemeToggle } from "./theme-toggle";

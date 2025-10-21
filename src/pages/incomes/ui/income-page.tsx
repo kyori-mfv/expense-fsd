@@ -1,7 +1,7 @@
 import { AIIncomeInput, IncomeForm } from "@/features/add-income";
 import { ApiKeyInput, useApiKey } from "@/features/manage-api-key";
+import { IonicSegment } from "@/shared/composite";
 import { Separator } from "@/shared/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/shared/ui/tabs";
 import { IncomeList } from "@/widgets/income-list";
 import { ManageIncomeData } from "@/widgets/manage-income-data";
 import { PageHeader } from "@/widgets/page-header";
@@ -28,27 +28,30 @@ export function IncomePage() {
             {/* API Key Input - only show if not set */}
             {!apiKey && <ApiKeyInput />}
 
-            {/* Income Input Tabs */}
-            <Tabs defaultValue="manual" className="w-full">
-              <TabsList className="grid grid-cols-2 p-1 max-w-md mx-auto w-full mb-2">
-                <TabsTrigger value="ai">Nhập AI</TabsTrigger>
-                <TabsTrigger value="manual">Nhập Thủ công</TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="ai">
-                {apiKey ? (
-                  <AIIncomeInput apiKey={apiKey} onError={(error) => toast.error(error)} />
-                ) : (
-                  <div className="text-center text-muted-foreground py-8">
-                    Vui lòng nhập API key để sử dụng tính năng AI
-                  </div>
-                )}
-              </TabsContent>
-
-              <TabsContent value="manual">
-                <IncomeForm onError={(error) => toast.error(error)} inset={true} />
-              </TabsContent>
-            </Tabs>
+            {/* Income Input Segment */}
+            <IonicSegment
+              options={[
+                {
+                  value: "ai",
+                  label: "Nhập AI",
+                  content: apiKey ? (
+                    <AIIncomeInput apiKey={apiKey} onError={(error) => toast.error(error)} />
+                  ) : (
+                    <div className="text-center text-muted-foreground py-8">
+                      Vui lòng nhập API key để sử dụng tính năng AI
+                    </div>
+                  ),
+                },
+                {
+                  value: "manual",
+                  label: "Nhập Thủ công",
+                  content: <IncomeForm onError={(error) => toast.error(error)} inset={true} />,
+                },
+              ]}
+              defaultValue="manual"
+              showContent
+              className="space-y-4"
+            />
 
             <Separator />
 
