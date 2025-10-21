@@ -1,4 +1,4 @@
-import { ExpenseCardSwipeable, useExpenseListData } from "@/entities/expense";
+import { ExpenseCard, useExpenseListData } from "@/entities/expense";
 import { DeleteExpenseButton } from "@/features/delete-expense";
 import { EditExpenseButton } from "@/features/edit-expense";
 import { ExpenseFilterForm, useExpenseFilter } from "@/features/filter-expenses";
@@ -50,7 +50,7 @@ export function ExpenseList() {
           {/* Entity: Expense List */}
           <TransparentList>
             {paginatedExpenses.map((expense) => (
-              <ExpenseCardSwipeable
+              <ExpenseCard
                 key={expense.id}
                 expense={expense}
                 actions={

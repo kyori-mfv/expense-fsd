@@ -1,4 +1,4 @@
-import { IncomeCardSwipeable, useIncomeListData } from "@/entities/income";
+import { IncomeCard, useIncomeListData } from "@/entities/income";
 import { DeleteIncomeButton } from "@/features/delete-income";
 import { EditIncomeButton } from "@/features/edit-income";
 import { IncomeFilterForm, useIncomeFilter } from "@/features/filter-incomes";
@@ -50,7 +50,7 @@ export function IncomeList() {
           {/* Entity: Income List */}
           <TransparentList>
             {paginatedIncomes.map((income) => (
-              <IncomeCardSwipeable
+              <IncomeCard
                 key={income.id}
                 income={income}
                 actions={

@@ -1,4 +1,6 @@
 import { IncomeCard, useRecentIncomes } from "@/entities/income";
+import { DeleteIncomeButton } from "@/features/delete-income";
+import { EditIncomeButton } from "@/features/edit-income";
 import { EmptyState } from "@/shared/composite";
 import { DISPLAY_LIMITS } from "@/shared/config";
 import { TransparentList } from "@/shared/ui/transparent-list";
@@ -18,7 +20,16 @@ export function RecentIncomes() {
       ) : (
         <TransparentList>
           {recentIncomes.map((income) => (
-            <IncomeCard key={income.id} income={income} />
+            <IncomeCard
+              key={income.id}
+              income={income}
+              actions={
+                <>
+                  <EditIncomeButton income={income} />
+                  <DeleteIncomeButton incomeId={income.id} incomeDescription={income.description} />
+                </>
+              }
+            />
           ))}
         </TransparentList>
       )}

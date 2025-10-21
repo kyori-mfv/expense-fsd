@@ -1,4 +1,6 @@
 import { ExpenseCard, useRecentExpenses } from "@/entities/expense";
+import { DeleteExpenseButton } from "@/features/delete-expense";
+import { EditExpenseButton } from "@/features/edit-expense";
 import { EmptyState } from "@/shared/composite";
 import { DISPLAY_LIMITS } from "@/shared/config";
 import { TransparentList } from "@/shared/ui/transparent-list";
@@ -18,7 +20,19 @@ export function RecentExpenses() {
       ) : (
         <TransparentList>
           {recentExpenses.map((expense) => (
-            <ExpenseCard key={expense.id} expense={expense} />
+            <ExpenseCard
+              key={expense.id}
+              expense={expense}
+              actions={
+                <>
+                  <EditExpenseButton expense={expense} />
+                  <DeleteExpenseButton
+                    expenseId={expense.id}
+                    expenseDescription={expense.description}
+                  />
+                </>
+              }
+            />
           ))}
         </TransparentList>
       )}

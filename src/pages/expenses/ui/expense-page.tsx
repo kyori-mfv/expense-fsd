@@ -44,7 +44,7 @@ export function ExpensePage() {
                 {
                   value: "manual",
                   label: "Nhập Thủ công",
-                  content: <ExpenseForm onError={(error) => toast.error(error)} inset={true} />,
+                  content: <ExpenseForm onError={(error) => toast.error(error)} />,
                 },
               ]}
               defaultValue="manual"
