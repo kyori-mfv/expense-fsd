@@ -1,13 +1,4 @@
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/shared/ui/alert-dialog";
+import { IonAlert } from "@ionic/react";
 
 interface ConfirmationDialogProps {
   open: boolean;
@@ -23,12 +14,17 @@ interface ConfirmationDialogProps {
   onConfirm: () => void | Promise<void>;
 }
 
+/**
+ * ConfirmationDialog - Native mobile confirmation dialog
+ *
+ * A composite component that provides native iOS/Android alert dialogs for confirmations.
+ * Uses IonAlert for platform-specific UI with proper button styling.
+ */
 export function ConfirmationDialog({
   open,
   onOpenChange,
   title,
   description,
-  icon,
   confirmLabel = "Xác nhận",
   cancelLabel = "Hủy",
   variant = "default",
@@ -41,28 +37,27 @@ export function ConfirmationDialog({
   };
 
   return (
-    <AlertDialog open={open} onOpenChange={onOpenChange}>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          {icon && (
-            <div
-              className={`mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full ${
-                variant === "destructive" ? "bg-destructive/10" : "bg-primary/10"
-              }`}
-            >
-              {icon}
-            </div>
-          )}
-          <AlertDialogTitle>{title}</AlertDialogTitle>
-          <AlertDialogDescription>{description}</AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel disabled={isLoading}>{cancelLabel}</AlertDialogCancel>
-          <AlertDialogAction onClick={handleConfirm} disabled={isLoading} variant={variant}>
-            {isLoading ? loadingText : confirmLabel}
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <IonAlert
+      isOpen={open}
+      onDidDismiss={() => onOpenChange(false)}
+      header={title}
+      message={description}
+      buttons={[
+        {
+          text: cancelLabel,
+          role: "cancel",
+          handler: () => {
+            onOpenChange(false);
+          },
+        },
+        {
+          text: isLoading ? loadingText : confirmLabel,
+          role: variant === "destructive" ? "destructive" : "confirm",
+          handler: () => {
+            handleConfirm();
+          },
+        },
+      ]}
+    />
   );
 }
