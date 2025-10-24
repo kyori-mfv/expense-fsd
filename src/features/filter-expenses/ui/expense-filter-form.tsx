@@ -1,8 +1,7 @@
 import { ExpenseCategoryButtonSelect } from "@/entities/expense";
 import { DateRangePicker } from "@/shared/composite";
-import { Button } from "@/shared/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/shared/ui/form";
-import { IonIcon, IonInput } from "@ionic/react";
+import { IonButton, IonIcon, IonInput } from "@ionic/react";
 import { closeOutline, searchOutline } from "ionicons/icons";
 import type { UseFormReturn } from "react-hook-form";
 import type { ExpenseFilterValues } from "../model/filter-schema";
@@ -83,10 +82,10 @@ export function ExpenseFilterForm({ form, onReset, onFilterChange }: ExpenseFilt
           )}
         />
 
-        <Button type="button" variant="link" onClick={onReset} className="w-full">
-          <IonIcon icon={closeOutline} className="text-base mr-2" />
+        <IonButton type="button" fill="clear" onClick={onReset} expand="block">
+          <IonIcon icon={closeOutline} slot="start" className="text-base" />
           Xóa bộ lọc
-        </Button>
+        </IonButton>
       </form>
     </Form>
   );

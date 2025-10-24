@@ -1,8 +1,7 @@
 import { useAIProvider } from "@/entities/ai-provider";
 import { EXPENSE_CATEGORIES, EXPENSE_CATEGORY_KEYWORDS } from "@/shared/config";
-import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
-import { IonIcon, IonInput } from "@ionic/react";
+import { IonButton, IonIcon, IonInput } from "@ionic/react";
 import { sparklesOutline } from "ionicons/icons";
 import { useState } from "react";
 import { useAddExpense } from "../model/use-add-expense";
@@ -80,9 +79,9 @@ export function AIExpenseInput({ apiKey, onError }: AIExpenseInputProps) {
           />
         </div>
 
-        <Button type="submit" disabled={!input.trim() || isProcessing} className="w-full">
+        <IonButton type="submit" disabled={!input.trim() || isProcessing} expand="block">
           {isProcessing ? "Đang xử lý..." : "Thêm chi tiêu"}
-        </Button>
+        </IonButton>
       </form>
     </Card>
   );

@@ -1,8 +1,7 @@
 import { useAIProvider } from "@/entities/ai-provider";
 import { INCOME_CATEGORIES, INCOME_CATEGORY_KEYWORDS } from "@/shared/config";
-import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
-import { IonIcon, IonInput } from "@ionic/react";
+import { IonButton, IonIcon, IonInput } from "@ionic/react";
 import { sparklesOutline } from "ionicons/icons";
 import { useState } from "react";
 import { useAddIncome } from "../model/use-add-income";
@@ -80,9 +79,9 @@ export function AIIncomeInput({ apiKey, onError }: AIIncomeInputProps) {
           />
         </div>
 
-        <Button type="submit" disabled={!input.trim() || isProcessing} className="w-full">
+        <IonButton type="submit" disabled={!input.trim() || isProcessing} expand="block">
           {isProcessing ? "Đang xử lý..." : "Thêm thu nhập"}
-        </Button>
+        </IonButton>
       </form>
     </Card>
   );

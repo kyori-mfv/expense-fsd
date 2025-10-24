@@ -1,5 +1,5 @@
-import { Button } from "@/shared/ui/button";
-import { Upload } from "lucide-react";
+import { IonButton, IonIcon } from "@ionic/react";
+import { cloudUploadOutline } from "ionicons/icons";
 import { useRef } from "react";
 import { toast } from "sonner";
 import { useImportIncomes } from "../model/use-import-incomes";
@@ -43,10 +43,16 @@ export function ImportIncomesButton() {
         onChange={handleFileChange}
         className="hidden"
       />
-      <Button onClick={handleClick} disabled={isImporting} variant="outline">
-        <Upload className="h-4 w-4 mr-2" />
+      <IonButton
+        onClick={handleClick}
+        disabled={isImporting}
+        fill="outline"
+        size="small"
+        className="gap-2"
+      >
+        <IonIcon icon={cloudUploadOutline} slot="start" />
         {isImporting ? "Đang nhập..." : "Nhập dữ liệu"}
-      </Button>
+      </IonButton>
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { ConfirmationDialog } from "@/shared/composite";
-import { Button } from "@/shared/ui/button";
-import { Trash2 } from "lucide-react";
+import { IonButton, IonIcon } from "@ionic/react";
+import { trashOutline } from "ionicons/icons";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useDeleteAllExpenses } from "../model/use-delete-all-expenses";
@@ -21,9 +21,9 @@ export function DeleteAllExpensesButton() {
 
   return (
     <>
-      <Button variant="destructive" onClick={() => setOpen(true)} disabled={isDeleting}>
-        <Trash2 className="h-4 w-4" />
-      </Button>
+      <IonButton color="danger" onClick={() => setOpen(true)} disabled={isDeleting}>
+        <IonIcon icon={trashOutline} slot="icon-only" />
+      </IonButton>
 
       <ConfirmationDialog
         open={open}

@@ -17,7 +17,7 @@ export function ManageExpenseData() {
 
         <Separator />
 
-        <div className="flex flex-wrap gap-3 [&>*]:flex-1">
+        <div className="flex flex-wrap gap-3 [&>*]:flex-1 [&>*:first-child]:flex-0">
           <DeleteAllExpensesButton />
           <ExportExpensesButton />
           <ImportExpensesButton />

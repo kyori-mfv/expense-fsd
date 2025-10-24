@@ -1,7 +1,6 @@
-import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
 import { Label } from "@/shared/ui/label";
-import { IonIcon, IonInput } from "@ionic/react";
+import { IonButton, IonIcon, IonInput } from "@ionic/react";
 import { checkmarkOutline, closeOutline, eyeOffOutline, eyeOutline } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { useApiKey } from "../model/use-api-key";
@@ -64,9 +63,9 @@ export function ApiKeyInput({ onApiKeyChange }: ApiKeyInputProps) {
                 />
               </IonInput>
             </div>
-            <Button onClick={handleSave} variant={isValid === true ? "default" : "secondary"}>
+            <IonButton onClick={handleSave} color={isValid === true ? "primary" : "medium"}>
               {isValid === true ? <IonIcon icon={checkmarkOutline} className="text-base" /> : "Lưu"}
-            </Button>
+            </IonButton>
           </div>
           {isValid === false && (
             <p className="text-xs text-destructive mt-1 flex items-center gap-1">
