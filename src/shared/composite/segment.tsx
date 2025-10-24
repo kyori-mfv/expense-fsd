@@ -11,7 +11,7 @@ export interface SegmentOption<T extends string = string> {
   content?: ReactNode;
 }
 
-export interface IonicSegmentProps<T extends string = string> {
+export interface SegmentProps<T extends string = string> {
   /** Array of segment options */
   options: SegmentOption<T>[];
   /** Initial selected segment value */
@@ -25,7 +25,7 @@ export interface IonicSegmentProps<T extends string = string> {
 }
 
 /**
- * IonicSegment - Reusable Ionic segment control component
+ * Segment - Reusable Ionic segment control component
  *
  * A general-purpose composite component that wraps IonSegment with state management
  * and optional content rendering. Provides a native mobile UI for multi-choice selection.
@@ -33,7 +33,7 @@ export interface IonicSegmentProps<T extends string = string> {
  * @example
  * ```tsx
  * // Simple segment without content
- * <IonicSegment
+ * <Segment
  *   options={[
  *     { value: 'thisMonth', label: 'Tháng này' },
  *     { value: 'lastMonth', label: 'Tháng trước' },
@@ -44,7 +44,7 @@ export interface IonicSegmentProps<T extends string = string> {
  * />
  *
  * // Segment with content rendering
- * <IonicSegment
+ * <Segment
  *   options={[
  *     { value: 'ai', label: 'Nhập AI', content: <AIInput /> },
  *     { value: 'manual', label: 'Nhập Thủ công', content: <ManualForm /> },
@@ -54,13 +54,13 @@ export interface IonicSegmentProps<T extends string = string> {
  * />
  * ```
  */
-export function IonicSegment<T extends string = string>({
+export function Segment<T extends string = string>({
   options,
   defaultValue,
   onValueChange,
   className,
   showContent = false,
-}: IonicSegmentProps<T>) {
+}: SegmentProps<T>) {
   const [selectedValue, setSelectedValue] = useState<T>(defaultValue ?? (options[0]?.value as T));
 
   const handleChange = (value: T) => {

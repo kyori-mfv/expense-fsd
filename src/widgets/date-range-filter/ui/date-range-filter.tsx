@@ -1,4 +1,4 @@
-import { DateRangePicker, IonicSegment } from "@/shared/composite";
+import { DateRangePicker, Segment } from "@/shared/composite";
 import type { DatePreset } from "@/shared/lib/date-presets";
 import type { DateRange } from "react-day-picker";
 
@@ -18,7 +18,7 @@ export function DateRangeFilter({
   return (
     <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
       {/* Preset Segment */}
-      <IonicSegment
+      <Segment
         options={[
           { value: "thisMonth", label: "Tháng này" },
           { value: "lastMonth", label: "Tháng trước" },
