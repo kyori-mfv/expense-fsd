@@ -3,7 +3,7 @@ import { DateRangePicker } from "@/shared/composite";
 import { Button } from "@/shared/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/shared/ui/form";
 import { IonIcon, IonInput } from "@ionic/react";
-import { searchOutline, closeOutline } from "ionicons/icons";
+import { closeOutline, searchOutline } from "ionicons/icons";
 import type { UseFormReturn } from "react-hook-form";
 import type { IncomeFilterValues } from "../model/filter-schema";
 

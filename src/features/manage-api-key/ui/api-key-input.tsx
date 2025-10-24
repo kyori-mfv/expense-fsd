@@ -2,7 +2,7 @@ import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
 import { Label } from "@/shared/ui/label";
 import { IonIcon, IonInput } from "@ionic/react";
-import { checkmarkOutline, eyeOutline, eyeOffOutline, closeOutline } from "ionicons/icons";
+import { checkmarkOutline, closeOutline, eyeOffOutline, eyeOutline } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { useApiKey } from "../model/use-api-key";
 

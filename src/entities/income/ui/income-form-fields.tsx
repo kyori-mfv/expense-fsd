@@ -12,7 +12,7 @@ interface IncomeFormFieldsProps {
   date: Date | undefined;
   onDateChange: (date: Date | undefined) => void;
   disabled?: boolean;
-  inset?: boolean;
+  className?: string;
 }
 
 export function IncomeFormFields({
@@ -25,10 +25,10 @@ export function IncomeFormFields({
   date,
   onDateChange,
   disabled = false,
-  inset = false,
+  className,
 }: IncomeFormFieldsProps) {
   return (
-    <IonList inset={inset}>
+    <IonList className={className}>
       <IonItem lines="full">
         <IonInput
           label="Số tiền (VNĐ)"
