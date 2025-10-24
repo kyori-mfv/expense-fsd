@@ -16,36 +16,39 @@
 @source "./src/**/*.{js,jsx,ts,tsx}";
 
 /* ============================================================================
-   LIGHT MODE THEME - Exact HSL values from design system
+   LIGHT MODE THEME - Exact HSL values from shadcn design system
    ============================================================================ */
 :root {
-  /* Core Ionic colors - Foundation for everything */
-  --ion-background-color: hsl(280 33.3333% 96.4706%);
-  --ion-text-color: hsl(216.9231 19.1176% 26.6667%);
-  --ion-border-color: hsl(267.5676 90.2439% 91.9608%);
+  /* Core Ionic colors - Foundation from shadcn tokens */
+  --ion-background-color: hsl(204 12.1951% 91.9608%);
+  --ion-text-color: hsl(0 0% 20%);
+  --ion-border-color: hsl(210 9.375% 87.451%);
 
-  /* Ionic semantic colors */
-  --ion-color-primary: hsl(255.1351 91.7355% 76.2745%);
-  --ion-color-primary-rgb: 161, 57, 245;
+  /* Ionic semantic colors - from shadcn primary */
+  --ion-color-primary: hsl(13.2143 73.0435% 54.902%);
+  --ion-color-primary-rgb: 237, 93, 56;
   --ion-color-primary-contrast: hsl(0 0% 100%);
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: hsl(255.1351 91.7355% 68%);
-  --ion-color-primary-tint: hsl(255.1351 91.7355% 82%);
+  --ion-color-primary-shade: hsl(13.2143 73.0435% 49%);
+  --ion-color-primary-tint: hsl(13.2143 73.0435% 62%);
 
-  --ion-color-secondary: hsl(267.5676 90.2439% 91.9608%);
-  --ion-color-secondary-rgb: 232, 217, 247;
+  /* Secondary - from shadcn secondary */
+  --ion-color-secondary: hsl(220 14.2857% 95.8824%);
+  --ion-color-secondary-rgb: 241, 242, 245;
   --ion-color-secondary-contrast: hsl(215 13.7931% 34.1176%);
   --ion-color-secondary-contrast-rgb: 75, 80, 99;
-  --ion-color-secondary-shade: hsl(267.5676 90.2439% 83%);
-  --ion-color-secondary-tint: hsl(267.5676 90.2439% 95%);
+  --ion-color-secondary-shade: hsl(220 14.2857% 86%);
+  --ion-color-secondary-tint: hsl(220 14.2857% 98%);
 
-  --ion-color-tertiary: hsl(268.6957 100% 95.4902%);
-  --ion-color-tertiary-rgb: 243, 231, 255;
+  /* Tertiary - from shadcn muted */
+  --ion-color-tertiary: hsl(210 20% 98.0392%);
+  --ion-color-tertiary-rgb: 248, 249, 250;
   --ion-color-tertiary-contrast: hsl(220 8.9362% 46.0784%);
   --ion-color-tertiary-contrast-rgb: 106, 110, 125;
-  --ion-color-tertiary-shade: hsl(268.6957 100% 86%);
-  --ion-color-tertiary-tint: hsl(268.6957 100% 97%);
+  --ion-color-tertiary-shade: hsl(210 20% 88%);
+  --ion-color-tertiary-tint: hsl(210 20% 99%);
 
+  /* Success - keep green */
   --ion-color-success: hsl(142 76% 36%);
   --ion-color-success-rgb: 22, 163, 74;
   --ion-color-success-contrast: hsl(0 0% 100%);
@@ -53,39 +56,41 @@
   --ion-color-success-shade: hsl(142 76% 32%);
   --ion-color-success-tint: hsl(142 76% 45%);
 
-  --ion-color-warning: hsl(255.1351 91.7355% 76.2745%);
-  --ion-color-warning-rgb: 161, 57, 245;
+  /* Warning - use primary */
+  --ion-color-warning: hsl(13.2143 73.0435% 54.902%);
+  --ion-color-warning-rgb: 237, 93, 56;
   --ion-color-warning-contrast: hsl(0 0% 100%);
   --ion-color-warning-contrast-rgb: 255, 255, 255;
-  --ion-color-warning-shade: hsl(255.1351 91.7355% 68%);
-  --ion-color-warning-tint: hsl(255.1351 91.7355% 82%);
+  --ion-color-warning-shade: hsl(13.2143 73.0435% 49%);
+  --ion-color-warning-tint: hsl(13.2143 73.0435% 62%);
 
-  --ion-color-danger: hsl(0 93.5484% 81.7647%);
-  --ion-color-danger-rgb: 248, 168, 168;
+  /* Danger - from shadcn destructive */
+  --ion-color-danger: hsl(0 84.2365% 60.1961%);
+  --ion-color-danger-rgb: 239, 68, 68;
   --ion-color-danger-contrast: hsl(0 0% 100%);
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: hsl(0 93.5484% 73%);
-  --ion-color-danger-tint: hsl(0 93.5484% 88%);
+  --ion-color-danger-shade: hsl(0 84.2365% 54%);
+  --ion-color-danger-tint: hsl(0 84.2365% 70%);
 
   /* Ionic component-specific */
   --ion-card-background: hsl(0 0% 100%);
   --ion-item-background: hsl(0 0% 100%);
-  --ion-toolbar-background: hsl(280 33.3333% 96.4706%);
-  --ion-tab-bar-background: hsl(280 33.3333% 96.4706%);
-  --ion-tab-bar-border-color: hsl(267.5676 90.2439% 91.9608%);
+  --ion-toolbar-background: hsl(204 12.1951% 91.9608%);
+  --ion-tab-bar-background: hsl(204 12.1951% 91.9608%);
+  --ion-tab-bar-border-color: hsl(210 9.375% 87.451%);
 
-  /* Additional app colors */
-  --ion-color-muted: hsl(268.6957 100% 95.4902%);
+  /* Additional app colors - from shadcn tokens */
+  --ion-color-muted: hsl(210 20% 98.0392%);
   --ion-color-muted-foreground: hsl(220 8.9362% 46.0784%);
-  --ion-color-accent: hsl(292.5 44.4444% 92.9412%);
-  --ion-color-accent-foreground: hsl(216.9231 19.1176% 26.6667%);
+  --ion-color-accent: hsl(207.6923 46.4286% 89.0196%);
+  --ion-color-accent-foreground: hsl(224.4444 64.2857% 32.9412%);
   --ion-color-popover: hsl(0 0% 100%);
-  --ion-color-popover-foreground: hsl(216.9231 19.1176% 26.6667%);
+  --ion-color-popover-foreground: hsl(0 0% 20%);
 
-  /* Domain-specific colors */
-  --ion-color-expense: hsl(0 93.5484% 81.7647%);
-  --ion-color-expense-foreground: hsl(0 93.5484% 81.7647%);
-  --ion-color-expense-light: hsl(0 93.5484% 96%);
+  /* Domain-specific colors - keep existing */
+  --ion-color-expense: hsl(0 84.2365% 60.1961%);
+  --ion-color-expense-foreground: hsl(0 84.2365% 60.1961%);
+  --ion-color-expense-light: hsl(0 84.2365% 96%);
 
   --ion-color-income: hsl(142 76% 36%);
   --ion-color-income-foreground: hsl(142 76% 36%);
@@ -95,54 +100,57 @@
   --ion-color-dashboard-foreground: hsl(217 91% 60%);
   --ion-color-dashboard-light: hsl(217 91% 96%);
 
-  --ion-color-savings: hsl(255.1351 91.7355% 76.2745%);
-  --ion-color-savings-foreground: hsl(255.1351 91.7355% 76.2745%);
+  --ion-color-savings: hsl(13.2143 73.0435% 54.902%);
+  --ion-color-savings-foreground: hsl(13.2143 73.0435% 54.902%);
 
-  /* Design tokens */
-  --radius: 1.5rem;
+  /* Design tokens - from shadcn */
+  --radius: 0.75rem;
 
-  /* Shadows */
-  --shadow-2xs: 0px 8px 16px -4px hsl(0 0% 0% / 0.04);
-  --shadow-xs: 0px 8px 16px -4px hsl(0 0% 0% / 0.04);
-  --shadow-sm: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 1px 2px -5px hsl(0 0% 0% / 0.08);
-  --shadow: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 1px 2px -5px hsl(0 0% 0% / 0.08);
-  --shadow-md: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 2px 4px -5px hsl(0 0% 0% / 0.08);
-  --shadow-lg: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 4px 6px -5px hsl(0 0% 0% / 0.08);
-  --shadow-xl: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 8px 10px -5px hsl(0 0% 0% / 0.08);
-  --shadow-2xl: 0px 8px 16px -4px hsl(0 0% 0% / 0.2);
+  /* Shadows - from shadcn */
+  --shadow-2xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.25);
 }
 
 /* ============================================================================
-   DARK MODE THEME - Exact HSL values from design system
+   DARK MODE THEME - Exact HSL values from shadcn design system
    ============================================================================ */
 [data-theme="dark"] {
-  /* Core Ionic colors */
-  --ion-background-color: hsl(24 9.8039% 10%);
-  --ion-text-color: hsl(226.4516 100% 93.9216%);
-  --ion-border-color: hsl(272.5 19.3548% 24.3137%);
+  /* Core Ionic colors - from shadcn dark tokens */
+  --ion-background-color: hsl(219.1304 29.1139% 15.4902%);
+  --ion-text-color: hsl(0 0% 89.8039%);
+  --ion-border-color: hsl(224.3478 15.8621% 28.4314%);
 
-  /* Ionic semantic colors - adjusted for dark mode */
-  --ion-color-primary: hsl(255.9036 95.4023% 82.9412%);
-  --ion-color-primary-rgb: 186, 88, 255;
-  --ion-color-primary-contrast: hsl(24 9.8039% 10%);
-  --ion-color-primary-contrast-rgb: 23, 23, 26;
-  --ion-color-primary-shade: hsl(255.9036 95.4023% 74%);
-  --ion-color-primary-tint: hsl(255.9036 95.4023% 88%);
+  /* Ionic semantic colors - from shadcn dark primary */
+  --ion-color-primary: hsl(13.2143 73.0435% 54.902%);
+  --ion-color-primary-rgb: 237, 93, 56;
+  --ion-color-primary-contrast: hsl(0 0% 100%);
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: hsl(13.2143 73.0435% 49%);
+  --ion-color-primary-tint: hsl(13.2143 73.0435% 62%);
 
-  --ion-color-secondary: hsl(272.5 19.3548% 24.3137%);
-  --ion-color-secondary-rgb: 71, 61, 79;
-  --ion-color-secondary-contrast: hsl(216 12.1951% 83.9216%);
-  --ion-color-secondary-contrast-rgb: 208, 210, 219;
-  --ion-color-secondary-shade: hsl(272.5 19.3548% 22%);
-  --ion-color-secondary-tint: hsl(272.5 19.3548% 30%);
+  /* Secondary - from shadcn dark secondary */
+  --ion-color-secondary: hsl(222 19.2308% 20.3922%);
+  --ion-color-secondary-rgb: 41, 45, 55;
+  --ion-color-secondary-contrast: hsl(0 0% 89.8039%);
+  --ion-color-secondary-contrast-rgb: 229, 229, 229;
+  --ion-color-secondary-shade: hsl(222 19.2308% 18%);
+  --ion-color-secondary-tint: hsl(222 19.2308% 25%);
 
-  --ion-color-tertiary: hsl(265.2632 28.3582% 13.1373%);
-  --ion-color-tertiary-rgb: 29, 25, 42;
-  --ion-color-tertiary-contrast: hsl(217.8947 10.6145% 64.9020%);
-  --ion-color-tertiary-contrast-rgb: 155, 160, 174;
-  --ion-color-tertiary-shade: hsl(265.2632 28.3582% 12%);
-  --ion-color-tertiary-tint: hsl(265.2632 28.3582% 18%);
+  /* Tertiary - from shadcn dark muted */
+  --ion-color-tertiary: hsl(222 19.2308% 20.3922%);
+  --ion-color-tertiary-rgb: 41, 45, 55;
+  --ion-color-tertiary-contrast: hsl(0 0% 63.9216%);
+  --ion-color-tertiary-contrast-rgb: 163, 163, 163;
+  --ion-color-tertiary-shade: hsl(222 19.2308% 18%);
+  --ion-color-tertiary-tint: hsl(222 19.2308% 25%);
 
+  /* Success - brighter for dark mode */
   --ion-color-success: hsl(142 76% 46%);
   --ion-color-success-rgb: 28, 206, 94;
   --ion-color-success-contrast: hsl(0 0% 100%);
@@ -150,39 +158,41 @@
   --ion-color-success-shade: hsl(142 76% 41%);
   --ion-color-success-tint: hsl(142 76% 55%);
 
-  --ion-color-warning: hsl(255.9036 95.4023% 82.9412%);
-  --ion-color-warning-rgb: 186, 88, 255;
-  --ion-color-warning-contrast: hsl(24 9.8039% 10%);
-  --ion-color-warning-contrast-rgb: 23, 23, 26;
-  --ion-color-warning-shade: hsl(255.9036 95.4023% 74%);
-  --ion-color-warning-tint: hsl(255.9036 95.4023% 88%);
+  /* Warning - same as primary in dark mode */
+  --ion-color-warning: hsl(13.2143 73.0435% 54.902%);
+  --ion-color-warning-rgb: 237, 93, 56;
+  --ion-color-warning-contrast: hsl(0 0% 100%);
+  --ion-color-warning-contrast-rgb: 255, 255, 255;
+  --ion-color-warning-shade: hsl(13.2143 73.0435% 49%);
+  --ion-color-warning-tint: hsl(13.2143 73.0435% 62%);
 
-  --ion-color-danger: hsl(0 93.5484% 81.7647%);
-  --ion-color-danger-rgb: 248, 168, 168;
-  --ion-color-danger-contrast: hsl(24 9.8039% 10%);
-  --ion-color-danger-contrast-rgb: 23, 23, 26;
-  --ion-color-danger-shade: hsl(0 93.5484% 73%);
-  --ion-color-danger-tint: hsl(0 93.5484% 88%);
+  /* Danger - from shadcn dark destructive */
+  --ion-color-danger: hsl(0 84.2365% 60.1961%);
+  --ion-color-danger-rgb: 239, 68, 68;
+  --ion-color-danger-contrast: hsl(0 0% 100%);
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: hsl(0 84.2365% 54%);
+  --ion-color-danger-tint: hsl(0 84.2365% 70%);
 
-  /* Ionic component-specific */
-  --ion-card-background: hsl(270 17.7778% 17.6471%);
-  --ion-item-background: hsl(270 17.7778% 17.6471%);
-  --ion-toolbar-background: hsl(24 9.8039% 10%);
-  --ion-tab-bar-background: hsl(24 9.8039% 10%);
-  --ion-tab-bar-border-color: hsl(272.5 19.3548% 24.3137%);
+  /* Ionic component-specific - from shadcn dark card */
+  --ion-card-background: hsl(223.6364 20.7547% 20.7843%);
+  --ion-item-background: hsl(223.6364 20.7547% 20.7843%);
+  --ion-toolbar-background: hsl(219.1304 29.1139% 15.4902%);
+  --ion-tab-bar-background: hsl(219.1304 29.1139% 15.4902%);
+  --ion-tab-bar-border-color: hsl(224.3478 15.8621% 28.4314%);
 
-  /* Additional app colors */
-  --ion-color-muted: hsl(265.2632 28.3582% 13.1373%);
-  --ion-color-muted-foreground: hsl(217.8947 10.6145% 64.9020%);
-  --ion-color-accent: hsl(266.8966 19.2053% 29.6078%);
-  --ion-color-accent-foreground: hsl(216 12.1951% 83.9216%);
-  --ion-color-popover: hsl(270 17.7778% 17.6471%);
-  --ion-color-popover-foreground: hsl(226.4516 100% 93.9216%);
+  /* Additional app colors - from shadcn dark tokens */
+  --ion-color-muted: hsl(222 19.2308% 20.3922%);
+  --ion-color-muted-foreground: hsl(0 0% 63.9216%);
+  --ion-color-accent: hsl(223.6364 34.375% 25.098%);
+  --ion-color-accent-foreground: hsl(213.3333 96.9231% 87.2549%);
+  --ion-color-popover: hsl(223.3333 19.1489% 18.4314%);
+  --ion-color-popover-foreground: hsl(0 0% 89.8039%);
 
   /* Domain-specific colors - brighter for dark mode */
-  --ion-color-expense: hsl(0 93.5484% 81.7647%);
-  --ion-color-expense-foreground: hsl(0 93.5484% 81.7647%);
-  --ion-color-expense-light: hsl(0 93.5484% 20%);
+  --ion-color-expense: hsl(0 84.2365% 60.1961%);
+  --ion-color-expense-foreground: hsl(0 84.2365% 70%);
+  --ion-color-expense-light: hsl(0 84.2365% 20%);
 
   --ion-color-income: hsl(142 76% 46%);
   --ion-color-income-foreground: hsl(142 76% 56%);
@@ -192,18 +202,18 @@
   --ion-color-dashboard-foreground: hsl(217 91% 70%);
   --ion-color-dashboard-light: hsl(217 91% 20%);
 
-  --ion-color-savings: hsl(255.9036 95.4023% 82.9412%);
-  --ion-color-savings-foreground: hsl(255.9036 95.4023% 82.9412%);
+  --ion-color-savings: hsl(13.2143 73.0435% 62%);
+  --ion-color-savings-foreground: hsl(13.2143 73.0435% 62%);
 
-  /* Shadows */
-  --shadow-2xs: 0px 8px 16px -4px hsl(0 0% 0% / 0.04);
-  --shadow-xs: 0px 8px 16px -4px hsl(0 0% 0% / 0.04);
-  --shadow-sm: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 1px 2px -5px hsl(0 0% 0% / 0.08);
-  --shadow: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 1px 2px -5px hsl(0 0% 0% / 0.08);
-  --shadow-md: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 2px 4px -5px hsl(0 0% 0% / 0.08);
-  --shadow-lg: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 4px 6px -5px hsl(0 0% 0% / 0.08);
-  --shadow-xl: 0px 8px 16px -4px hsl(0 0% 0% / 0.08), 0px 8px 10px -5px hsl(0 0% 0% / 0.08);
-  --shadow-2xl: 0px 8px 16px -4px hsl(0 0% 0% / 0.2);
+  /* Shadows - same as light mode */
+  --shadow-2xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.05);
+  --shadow-sm: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 1px 2px -1px hsl(0 0% 0% / 0.1);
+  --shadow-md: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 2px 4px -1px hsl(0 0% 0% / 0.1);
+  --shadow-lg: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 4px 6px -1px hsl(0 0% 0% / 0.1);
+  --shadow-xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.1), 0px 8px 10px -1px hsl(0 0% 0% / 0.1);
+  --shadow-2xl: 0px 1px 3px 0px hsl(0 0% 0% / 0.25);
 }
 
 /* ============================================================================
@@ -255,12 +265,12 @@
   --color-savings: var(--ion-color-savings);
   --color-savings-foreground: var(--ion-color-savings-foreground);
 
-  /* Chart colors - extended palette */
-  --color-chart-1: hsl(255.1351 91.7355% 76.2745%);
-  --color-chart-2: hsl(258.3117 89.5349% 66.2745%);
-  --color-chart-3: hsl(262.1229 83.2558% 57.8431%);
-  --color-chart-4: hsl(263.3898 69.9605% 50.3922%);
-  --color-chart-5: hsl(263.3557 69.3023% 42.1569%);
+  /* Chart colors - from shadcn */
+  --color-chart-1: hsl(210 37.5% 65.4902%);
+  --color-chart-2: hsl(12.9032 73.2283% 75.098%);
+  --color-chart-3: hsl(213.1579 29.9213% 50.1961%);
+  --color-chart-4: hsl(216.9231 35.7798% 42.7451%);
+  --color-chart-5: hsl(221.0127 43.6464% 35.4902%);
 
   /* Sidebar colors (for future use) */
   --color-sidebar: var(--ion-color-secondary);
@@ -272,7 +282,7 @@
   --color-sidebar-border: var(--ion-border-color);
   --color-sidebar-ring: var(--ion-color-primary);
 
-  /* Border radius */
+  /* Border radius - from shadcn */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -348,11 +358,12 @@
     --color: var(--ion-text-color);
   }
 
-  /* Make lists and list items same background as cards */
-  ion-list {
-    --background: var(--ion-card-background);
-    --ion-background-color: var(--ion-card-background);
-    background: var(--ion-card-background);
+  /* Make lists transparent - items will have their own backgrounds */
+  ion-list,
+  ion-list.list-ios {
+    --background: transparent !important;
+    --ion-background-color: transparent !important;
+    background: transparent !important;
   }
 
   ion-item {
