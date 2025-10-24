@@ -3,7 +3,7 @@ import { DeleteExpenseButton } from "@/features/delete-expense";
 import { EditExpenseButton } from "@/features/edit-expense";
 import { EmptyState } from "@/shared/composite";
 import { DISPLAY_LIMITS } from "@/shared/config";
-import { TransparentList } from "@/shared/ui/transparent-list";
+import { IonList } from "@ionic/react";
 import { ReceiptText } from "lucide-react";
 
 export function RecentExpenses() {
@@ -18,7 +18,7 @@ export function RecentExpenses() {
       {recentExpenses.length === 0 ? (
         <EmptyState icon={ReceiptText} description="Chưa có chi tiêu nào" />
       ) : (
-        <TransparentList>
+        <IonList className="ion-no-padding">
           {recentExpenses.map((expense) => (
             <ExpenseCard
               key={expense.id}
@@ -34,7 +34,7 @@ export function RecentExpenses() {
               }
             />
           ))}
-        </TransparentList>
+        </IonList>
       )}
     </div>
   );

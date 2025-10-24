@@ -6,7 +6,7 @@ import { EmptyState } from "@/shared/composite";
 import { PaginationControls } from "@/shared/composite";
 import { PAGINATION } from "@/shared/config";
 import { usePagination } from "@/shared/react";
-import { TransparentList } from "@/shared/ui/transparent-list";
+import { IonList } from "@ionic/react";
 import { SearchX } from "lucide-react";
 
 export function ExpenseList() {
@@ -48,7 +48,7 @@ export function ExpenseList() {
       ) : (
         <>
           {/* Entity: Expense List */}
-          <TransparentList>
+          <IonList className="ion-no-padding">
             {paginatedExpenses.map((expense) => (
               <ExpenseCard
                 key={expense.id}
@@ -64,7 +64,7 @@ export function ExpenseList() {
                 }
               />
             ))}
-          </TransparentList>
+          </IonList>
 
           {/* Pagination */}
           <PaginationControls

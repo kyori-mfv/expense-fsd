@@ -3,7 +3,7 @@ import { DeleteIncomeButton } from "@/features/delete-income";
 import { EditIncomeButton } from "@/features/edit-income";
 import { EmptyState } from "@/shared/composite";
 import { DISPLAY_LIMITS } from "@/shared/config";
-import { TransparentList } from "@/shared/ui/transparent-list";
+import { IonList } from "@ionic/react";
 import { ReceiptText } from "lucide-react";
 
 export function RecentIncomes() {
@@ -18,7 +18,7 @@ export function RecentIncomes() {
       {recentIncomes.length === 0 ? (
         <EmptyState icon={ReceiptText} description="Chưa có thu nhập nào" />
       ) : (
-        <TransparentList>
+        <IonList className="ion-no-padding">
           {recentIncomes.map((income) => (
             <IncomeCard
               key={income.id}
@@ -31,7 +31,7 @@ export function RecentIncomes() {
               }
             />
           ))}
-        </TransparentList>
+        </IonList>
       )}
     </div>
   );
