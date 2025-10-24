@@ -1,4 +1,4 @@
-import { ExpenseCategorySelect } from "@/entities/expense";
+import { ExpenseCategoryButtonSelect } from "@/entities/expense";
 import { DateRangePicker } from "@/shared/composite";
 import { Button } from "@/shared/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/shared/ui/form";
@@ -45,7 +45,7 @@ export function ExpenseFilterForm({ form, onReset, onFilterChange }: ExpenseFilt
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <ExpenseCategorySelect
+                <ExpenseCategoryButtonSelect
                   value={field.value}
                   onValueChange={(value) => {
                     field.onChange(value);

@@ -1,4 +1,4 @@
-import { IncomeCategorySelect } from "@/entities/income";
+import { IncomeCategoryButtonSelect } from "@/entities/income";
 import { DateRangePicker } from "@/shared/composite";
 import { Button } from "@/shared/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/shared/ui/form";
@@ -45,7 +45,7 @@ export function IncomeFilterForm({ form, onReset, onFilterChange }: IncomeFilter
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <IncomeCategorySelect
+                <IncomeCategoryButtonSelect
                   value={field.value}
                   onValueChange={(value) => {
                     field.onChange(value);

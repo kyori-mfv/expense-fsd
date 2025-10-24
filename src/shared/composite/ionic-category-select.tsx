@@ -69,6 +69,7 @@ export function IonicCategorySelect({
       onIonChange={handleChange}
       onIonDismiss={handleDismiss}
       interface="action-sheet"
+      cancelText="Hủy"
       placeholder={placeholder}
       disabled={disabled}
       className={className}
