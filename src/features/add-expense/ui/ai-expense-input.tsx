@@ -2,8 +2,8 @@ import { useAIProvider } from "@/entities/ai-provider";
 import { EXPENSE_CATEGORIES, EXPENSE_CATEGORY_KEYWORDS } from "@/shared/config";
 import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
-import { Input } from "@/shared/ui/input";
-import { Sparkles } from "lucide-react";
+import { IonIcon, IonInput } from "@ionic/react";
+import { sparklesOutline } from "ionicons/icons";
 import { useState } from "react";
 import { useAddExpense } from "../model/use-add-expense";
 
@@ -63,20 +63,20 @@ export function AIExpenseInput({ apiKey, onError }: AIExpenseInputProps) {
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="ai-input" className="text-sm font-medium mb-2 flex items-center gap-2">
-            <Sparkles size={16} className="text-primary" />
+            <IonIcon icon={sparklesOutline} className="text-base text-primary" />
             Nhập chi tiêu bằng AI
           </label>
           <p className="text-xs text-muted-foreground mb-3">
             Ví dụ: "ăn sáng 50k", "mua sắm quần áo 500k"
           </p>
-          <Input
-            id="ai-input"
+          <IonInput
             type="text"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onIonInput={(e) => setInput(e.detail.value as string)}
             placeholder="Nhập mô tả chi tiêu..."
             disabled={isProcessing}
-            className="mb-3"
+            fill="outline"
+            clearInput
           />
         </div>
 

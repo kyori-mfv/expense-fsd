@@ -2,8 +2,8 @@ import { IncomeCategoryButtonSelect } from "@/entities/income";
 import { DateRangePicker } from "@/shared/composite";
 import { Button } from "@/shared/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/shared/ui/form";
-import { Input } from "@/shared/ui/input";
-import { Search, X } from "lucide-react";
+import { IonIcon, IonInput } from "@ionic/react";
+import { searchOutline, closeOutline } from "ionicons/icons";
 import type { UseFormReturn } from "react-hook-form";
 import type { IncomeFilterValues } from "../model/filter-schema";
 
@@ -65,26 +65,26 @@ export function IncomeFilterForm({ form, onReset, onFilterChange }: IncomeFilter
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <div className="relative">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    type="text"
-                    placeholder="Tìm kiếm theo mô tả..."
-                    className="pl-9"
-                    {...field}
-                    onChange={(e) => {
-                      field.onChange(e);
-                      handleFieldChange();
-                    }}
-                  />
-                </div>
+                <IonInput
+                  type="text"
+                  placeholder="Tìm kiếm theo mô tả..."
+                  value={field.value}
+                  onIonInput={(e) => {
+                    field.onChange(e.detail.value);
+                    handleFieldChange();
+                  }}
+                  clearInput
+                  className="ion-input-filter-button w-full border-1 border-primary rounded-lg px-4 py-2.5 text-center min-h-[44px]"
+                >
+                  <IonIcon slot="start" icon={searchOutline} className="text-xl" />
+                </IonInput>
               </FormControl>
             </FormItem>
           )}
         />
 
         <Button type="button" variant="link" onClick={onReset} className="w-full">
-          <X className="h-4 w-4 mr-2" />
+          <IonIcon icon={closeOutline} className="text-base mr-2" />
           Xóa bộ lọc
         </Button>
       </form>

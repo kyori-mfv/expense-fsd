@@ -1,8 +1,8 @@
 import { Button } from "@/shared/ui/button";
 import { Card } from "@/shared/ui/card";
-import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
-import { Check, Eye, EyeOff, X } from "lucide-react";
+import { IonIcon, IonInput } from "@ionic/react";
+import { checkmarkOutline, eyeOutline, eyeOffOutline, closeOutline } from "ionicons/icons";
 import { useEffect, useState } from "react";
 import { useApiKey } from "../model/use-api-key";
 
@@ -41,42 +41,42 @@ export function ApiKeyInput({ onApiKeyChange }: ApiKeyInputProps) {
         <div>
           <Label htmlFor="api-key">Gemini API Key</Label>
           <div className="flex gap-2 mt-2">
-            <div className="relative flex-1">
-              <Input
-                id="api-key"
+            <div className="flex-1">
+              <IonInput
                 type={showKey ? "text" : "password"}
                 value={localKey}
-                onChange={(e) => handleChange(e.target.value)}
+                onIonInput={(e) => handleChange(e.detail.value as string)}
                 placeholder="Nhập Gemini API key..."
+                fill="outline"
                 className={
                   isValid === false
-                    ? "border-destructive"
+                    ? "ion-input-error"
                     : isValid === true
-                      ? "border-green-500"
+                      ? "ion-input-success"
                       : ""
                 }
-              />
-              <button
-                type="button"
-                onClick={() => setShowKey(!showKey)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
               >
-                {showKey ? <EyeOff size={16} /> : <Eye size={16} />}
-              </button>
+                <IonIcon
+                  slot="end"
+                  icon={showKey ? eyeOffOutline : eyeOutline}
+                  onClick={() => setShowKey(!showKey)}
+                  className="cursor-pointer text-[var(--ion-color-medium)] hover:text-[var(--ion-text-color)]"
+                />
+              </IonInput>
             </div>
             <Button onClick={handleSave} variant={isValid === true ? "default" : "secondary"}>
-              {isValid === true ? <Check size={16} /> : "Lưu"}
+              {isValid === true ? <IonIcon icon={checkmarkOutline} className="text-base" /> : "Lưu"}
             </Button>
           </div>
           {isValid === false && (
             <p className="text-xs text-destructive mt-1 flex items-center gap-1">
-              <X size={12} />
+              <IonIcon icon={closeOutline} className="text-xs" />
               API key không hợp lệ (tối thiểu 10 ký tự)
             </p>
           )}
           {isValid === true && (
             <p className="text-xs text-green-600 mt-1 flex items-center gap-1">
-              <Check size={12} />
+              <IonIcon icon={checkmarkOutline} className="text-xs" />
               API key đã được lưu
             </p>
           )}
