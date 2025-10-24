@@ -13,7 +13,7 @@ import { format } from "date-fns";
 import { vi } from "date-fns/locale";
 import { useState } from "react";
 
-export interface IonicDatePickerProps {
+export interface DatePickerProps {
   label: string;
   date: Date | undefined;
   onDateChange: (date: Date | undefined) => void;
@@ -24,18 +24,18 @@ export interface IonicDatePickerProps {
 }
 
 /**
- * IonicDatePicker - Date picker component without IonItem wrapper
+ * DatePicker - Date picker component without IonItem wrapper
  *
  * This component should be wrapped in IonItem when used in forms with IonList.
  * The IonItem should have button prop to enable click interaction.
  * Example:
  * <IonList>
  *   <IonItem button>
- *     <IonicDatePicker label="Date" date={date} onDateChange={setDate} />
+ *     <DatePicker label="Date" date={date} onDateChange={setDate} />
  *   </IonItem>
  * </IonList>
  */
-export function IonicDatePicker({
+export function DatePicker({
   label,
   date,
   onDateChange,
@@ -43,7 +43,7 @@ export function IonicDatePicker({
   placeholder = "Chọn ngày...",
   presentation = "date",
   className,
-}: IonicDatePickerProps) {
+}: DatePickerProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleChange = (value: string | string[] | null | undefined) => {

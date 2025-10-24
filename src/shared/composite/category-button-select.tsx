@@ -7,7 +7,7 @@ interface CategoryItem {
   name: string;
 }
 
-interface IonicCategoryButtonSelectProps {
+interface CategoryButtonSelectProps {
   value: string;
   onValueChange: (value: string) => void;
   categories: readonly CategoryItem[];
@@ -18,7 +18,7 @@ interface IonicCategoryButtonSelectProps {
 }
 
 /**
- * IonicCategoryButtonSelect - Button-style category selector with action sheet
+ * CategoryButtonSelect - Button-style category selector with action sheet
  *
  * Displays as an IonButton (outline) that opens an IonActionSheet for selection.
  * Matches the design pattern of DateRangePicker in filter forms.
@@ -30,7 +30,7 @@ interface IonicCategoryButtonSelectProps {
  * - Opens action sheet for selection
  * - Optional "All categories" option
  */
-export function IonicCategoryButtonSelect({
+export function CategoryButtonSelect({
   value,
   onValueChange,
   categories,
@@ -38,7 +38,7 @@ export function IonicCategoryButtonSelect({
   placeholder = "Chọn danh mục",
   includeAllOption = false,
   className = "",
-}: IonicCategoryButtonSelectProps) {
+}: CategoryButtonSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   // Find the display name for the current value

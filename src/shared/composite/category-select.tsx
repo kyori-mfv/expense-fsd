@@ -7,7 +7,7 @@ interface CategoryItem {
   name: string;
 }
 
-interface IonicCategorySelectProps {
+interface CategorySelectProps {
   value: string;
   onValueChange: (value: string) => void;
   categories: readonly CategoryItem[];
@@ -19,17 +19,17 @@ interface IonicCategorySelectProps {
 }
 
 /**
- * IonicCategorySelect - Category select component without IonItem wrapper
+ * CategorySelect - Category select component without IonItem wrapper
  *
  * This component should be wrapped in IonItem when used in forms with IonList.
  * Example:
  * <IonList>
  *   <IonItem>
- *     <IonicCategorySelect label="Category" value={category} onValueChange={setCategory} categories={CATEGORIES} />
+ *     <CategorySelect label="Category" value={category} onValueChange={setCategory} categories={CATEGORIES} />
  *   </IonItem>
  * </IonList>
  */
-export function IonicCategorySelect({
+export function CategorySelect({
   value,
   onValueChange,
   categories,
@@ -38,7 +38,7 @@ export function IonicCategorySelect({
   label,
   includeAllOption = false,
   className,
-}: IonicCategorySelectProps) {
+}: CategorySelectProps) {
   const selectRef = useRef<HTMLIonSelectElement>(null);
 
   const handleChange = (e: SelectCustomEvent) => {

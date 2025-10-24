@@ -1,4 +1,4 @@
-import { IonicCategoryButtonSelect } from "@/shared/composite";
+import { CategoryButtonSelect } from "@/shared/composite";
 import { EXPENSE_CATEGORIES } from "@/shared/config";
 
 interface ExpenseCategoryButtonSelectProps {
@@ -20,5 +20,5 @@ interface ExpenseCategoryButtonSelectProps {
  * For form inputs with floating labels, use ExpenseCategorySelect instead.
  */
 export function ExpenseCategoryButtonSelect(props: ExpenseCategoryButtonSelectProps) {
-  return <IonicCategoryButtonSelect {...props} categories={EXPENSE_CATEGORIES} />;
+  return <CategoryButtonSelect {...props} categories={EXPENSE_CATEGORIES} />;
 }

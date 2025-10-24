@@ -1,4 +1,4 @@
-import { IonicDatePicker } from "@/shared/composite";
+import { DatePicker } from "@/shared/composite";
 import { IonInput, IonItem, IonList } from "@ionic/react";
 import { ExpenseCategorySelect } from "./expense-category-select";
 
@@ -68,7 +68,7 @@ export function ExpenseFormFields({
       </IonItem>
 
       <IonItem button lines="full">
-        <IonicDatePicker label="Ngày" date={date} onDateChange={onDateChange} disabled={disabled} />
+        <DatePicker label="Ngày" date={date} onDateChange={onDateChange} disabled={disabled} />
       </IonItem>
     </IonList>
   );
