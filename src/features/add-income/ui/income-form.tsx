@@ -43,7 +43,7 @@ export function IncomeForm({ onError }: IncomeFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <IonListHeader>
         <IonLabel>
           <h2 className="text-base font-semibold">Thêm thu nhập mới</h2>
@@ -61,7 +61,7 @@ export function IncomeForm({ onError }: IncomeFormProps) {
         date={date}
         onDateChange={setDate}
         disabled={isLoading}
-        inset={true}
+        className="rounded-sm"
       />
 
       <div className="px-4 pb-4">

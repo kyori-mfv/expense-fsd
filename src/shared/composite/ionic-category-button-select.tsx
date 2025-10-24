@@ -89,7 +89,9 @@ export function IonicCategoryButtonSelect({
         className={`space-x-3 ${className}`}
       >
         <IonIcon slot="start" icon={layersOutline} className="text-xl" />
-        <span className={isPlaceholder ? "text-[var(--ion-color-medium)]" : ""}>{getDisplayName()}</span>
+        <span className={isPlaceholder ? "text-[var(--ion-color-medium)]" : ""}>
+          {getDisplayName()}
+        </span>
       </IonButton>
 
       <IonActionSheet

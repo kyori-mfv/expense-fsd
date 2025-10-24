@@ -12,7 +12,7 @@ interface ExpenseFormFieldsProps {
   date: Date | undefined;
   onDateChange: (date: Date | undefined) => void;
   disabled?: boolean;
-  inset?: boolean;
+  className?: string;
 }
 
 export function ExpenseFormFields({
@@ -25,10 +25,10 @@ export function ExpenseFormFields({
   date,
   onDateChange,
   disabled = false,
-  inset = false,
+  className,
 }: ExpenseFormFieldsProps) {
   return (
-    <IonList inset={inset}>
+    <IonList className={className}>
       <IonItem lines="full">
         <IonInput
           label="Số tiền (VNĐ)"
