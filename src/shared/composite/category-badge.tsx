@@ -1,6 +1,5 @@
 import { CategoryIcon } from "@/shared/composite/category-icon";
-import { Badge, type badgeVariants } from "@/shared/ui/badge";
-import type { VariantProps } from "class-variance-authority";
+import { IonBadge } from "@ionic/react";
 
 interface CategoryItem {
   id: string;
@@ -13,7 +12,7 @@ interface CategoryBadgeProps {
   categoryName: string;
   categories: readonly CategoryItem[];
   iconSize?: number;
-  variant?: VariantProps<typeof badgeVariants>["variant"];
+  color?: string;
   className?: string;
 }
 
@@ -21,15 +20,18 @@ export function CategoryBadge({
   categoryName,
   categories,
   iconSize = 12,
-  variant = "default",
-  className = "text-xs px-2 py-0.5",
+  color = "primary",
+  className = "",
 }: CategoryBadgeProps) {
   const category = categories.find((cat) => cat.name === categoryName);
 
   return (
-    <Badge variant={variant} className={className}>
+    <IonBadge
+      color={color}
+      className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md whitespace-nowrap w-auto ${className}`}
+    >
       <CategoryIcon iconName={category?.icon ?? ""} size={iconSize} />
-      {categoryName}
-    </Badge>
+      <span>{categoryName}</span>
+    </IonBadge>
   );
 }
