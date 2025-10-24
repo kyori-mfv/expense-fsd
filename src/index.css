@@ -75,8 +75,8 @@
   /* Ionic component-specific */
   --ion-card-background: hsl(0 0% 100%);
   --ion-item-background: hsl(0 0% 100%);
-  --ion-toolbar-background: hsl(204 12.1951% 91.9608%);
-  --ion-tab-bar-background: hsl(204 12.1951% 91.9608%);
+  --ion-toolbar-background: hsl(0 0% 100%);
+  --ion-tab-bar-background: hsl(0 0% 100%);
   --ion-tab-bar-border-color: hsl(210 9.375% 87.451%);
 
   /* Additional app colors - from shadcn tokens */
@@ -102,6 +102,9 @@
 
   --ion-color-savings: hsl(13.2143 73.0435% 54.902%);
   --ion-color-savings-foreground: hsl(13.2143 73.0435% 54.902%);
+
+  --ion-color-net-balance-positive: hsl(217 91% 60%);
+  --ion-color-net-balance-negative: hsl(0 84.2365% 60.1961%);
 
   /* Design tokens - from shadcn */
   --radius: 0.75rem;
@@ -205,6 +208,9 @@
   --ion-color-savings: hsl(13.2143 73.0435% 62%);
   --ion-color-savings-foreground: hsl(13.2143 73.0435% 62%);
 
+  --ion-color-net-balance-positive: hsl(217 91% 70%);
+  --ion-color-net-balance-negative: hsl(0 84.2365% 60.1961%);
+
   /* Shadows - same as light mode */
   --shadow-2xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.05);
   --shadow-xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.05);
@@ -264,6 +270,9 @@
 
   --color-savings: var(--ion-color-savings);
   --color-savings-foreground: var(--ion-color-savings-foreground);
+
+  --color-net-balance-positive: var(--ion-color-net-balance-positive);
+  --color-net-balance-negative: var(--ion-color-net-balance-negative);
 
   /* Chart colors - from shadcn */
   --color-chart-1: hsl(210 37.5% 65.4902%);

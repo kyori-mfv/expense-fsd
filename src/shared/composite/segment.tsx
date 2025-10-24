@@ -73,13 +73,13 @@ export function Segment<T extends string = string>({
   return (
     <div className={className}>
       <IonSegment
-        className="py-0.5"
+        className="p-1 min-h-[40px]"
         value={selectedValue}
         onIonChange={(e) => handleChange(e.detail.value as T)}
       >
         {options.map((option) => (
-          <IonSegmentButton key={option.value} value={option.value}>
-            <IonLabel>{option.label}</IonLabel>
+          <IonSegmentButton key={option.value} value={option.value} className="min-h-[36px]">
+            <IonLabel className="text-sm py-1.5">{option.label}</IonLabel>
           </IonSegmentButton>
         ))}
       </IonSegment>
