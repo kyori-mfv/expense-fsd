@@ -1,14 +1,13 @@
 import { ExpenseFormFields } from "@/entities/expense";
-import { IonButton } from "@ionic/react";
+import { IonButton, IonLabel, IonListHeader } from "@ionic/react";
 import { useState } from "react";
 import { useAddExpense } from "../model/use-add-expense";
 
 interface ExpenseFormProps {
   onError?: (error: string) => void;
-  inset?: boolean;
 }
 
-export function ExpenseForm({ onError, inset = false }: ExpenseFormProps) {
+export function ExpenseForm({ onError }: ExpenseFormProps) {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -44,7 +43,14 @@ export function ExpenseForm({ onError, inset = false }: ExpenseFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
+    <form onSubmit={handleSubmit}>
+      <IonListHeader>
+        <IonLabel>
+          <h2 className="text-base font-semibold">Thêm chi tiêu mới</h2>
+          <p className="text-sm text-muted-foreground">Nhập thông tin giao dịch chi tiêu</p>
+        </IonLabel>
+      </IonListHeader>
+
       <ExpenseFormFields
         amount={amount}
         onAmountChange={setAmount}
@@ -55,10 +61,10 @@ export function ExpenseForm({ onError, inset = false }: ExpenseFormProps) {
         date={date}
         onDateChange={setDate}
         disabled={isLoading}
-        inset={inset}
+        inset={true}
       />
 
-      <div className="px-4 mt-4">
+      <div className="px-4 pb-4">
         <IonButton expand="block" type="submit" disabled={isLoading}>
           {isLoading ? "Đang thêm..." : "Thêm chi tiêu"}
         </IonButton>

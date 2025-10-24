@@ -1,14 +1,13 @@
 import { IncomeFormFields } from "@/entities/income";
-import { IonButton } from "@ionic/react";
+import { IonButton, IonLabel, IonListHeader } from "@ionic/react";
 import { useState } from "react";
 import { useAddIncome } from "../model/use-add-income";
 
 interface IncomeFormProps {
   onError?: (error: string) => void;
-  inset?: boolean;
 }
 
-export function IncomeForm({ onError, inset = false }: IncomeFormProps) {
+export function IncomeForm({ onError }: IncomeFormProps) {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -44,7 +43,14 @@ export function IncomeForm({ onError, inset = false }: IncomeFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mb-4">
+    <form onSubmit={handleSubmit}>
+      <IonListHeader>
+        <IonLabel>
+          <h2 className="text-base font-semibold">Thêm thu nhập mới</h2>
+          <p className="text-sm text-muted-foreground">Nhập thông tin giao dịch thu nhập</p>
+        </IonLabel>
+      </IonListHeader>
+
       <IncomeFormFields
         amount={amount}
         onAmountChange={setAmount}
@@ -55,10 +61,10 @@ export function IncomeForm({ onError, inset = false }: IncomeFormProps) {
         date={date}
         onDateChange={setDate}
         disabled={isLoading}
-        inset={inset}
+        inset={true}
       />
 
-      <div className="px-4 mt-4">
+      <div className="px-4 pb-4">
         <IonButton expand="block" type="submit" disabled={isLoading}>
           {isLoading ? "Đang thêm..." : "Thêm thu nhập"}
         </IonButton>
