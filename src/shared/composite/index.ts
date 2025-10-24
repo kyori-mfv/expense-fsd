@@ -10,4 +10,6 @@ export { IonicDatePicker } from "./ionic-date-picker";
 export { IonicSegment } from "./ionic-segment";
 export type { IonicSegmentProps, SegmentOption } from "./ionic-segment";
 export { PaginationControls } from "./pagination-controls";
+export { PieChartCard } from "./pie-chart-card";
+export type { PieChartData } from "./pie-chart-card";
 export { ThemeToggle } from "./theme-toggle";
