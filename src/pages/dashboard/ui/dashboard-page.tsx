@@ -22,7 +22,7 @@ import { MonthlyTrends } from "@/widgets/monthly-trends";
 import { PageHeader } from "@/widgets/page-header";
 import { IonContent, IonPage } from "@ionic/react";
 import { LayoutDashboardIcon } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
+import { useState } from "react";
 import type { DateRange } from "react-day-picker";
 
 export function DashboardPage() {
@@ -30,7 +30,7 @@ export function DashboardPage() {
   const [dateRangeState, setDateRangeState] = useState<DateRangeWithPreset>(getThisMonth);
 
   // Calculate 6-month date range for trends (independent of filter)
-  const trendDateRange = useMemo(() => getLastNMonths(6), []);
+  const trendDateRange = getLastNMonths(6);
 
   // Query expenses and incomes for dashboard filter (no pagination)
   const expenses = useExpensesAll({
@@ -55,32 +55,24 @@ export function DashboardPage() {
   });
 
   // Calculate statistics for filtered data
-  const financialStats = useMemo(
-    () => calculateFinancialStats(expenses, incomes),
-    [expenses, incomes]
-  );
-
-  const expenseCategoryStats = useMemo(() => calculateExpenseCategoryStats(expenses), [expenses]);
-
-  const incomeCategoryStats = useMemo(() => calculateIncomeCategoryStats(incomes), [incomes]);
+  const financialStats = calculateFinancialStats(expenses, incomes);
+  const expenseCategoryStats = calculateExpenseCategoryStats(expenses);
+  const incomeCategoryStats = calculateIncomeCategoryStats(incomes);
 
   // Calculate monthly trends for 6 months (independent of filter)
-  const monthlyStats = useMemo(
-    () => calculateMonthlyTrends(sixMonthExpenses, sixMonthIncomes, 6),
-    [sixMonthExpenses, sixMonthIncomes]
-  );
+  const monthlyStats = calculateMonthlyTrends(sixMonthExpenses, sixMonthIncomes, 6);
 
   // Date range handlers
-  const handlePresetChange = useCallback((preset: DatePreset) => {
+  const handlePresetChange = (preset: DatePreset) => {
     if (preset === "custom") return; // Custom is handled by handleCustomRangeChange
     setDateRangeState(datePresets[preset]());
-  }, []);
+  };
 
-  const handleCustomRangeChange = useCallback((range: DateRange | undefined) => {
+  const handleCustomRangeChange = (range: DateRange | undefined) => {
     if (range?.from && range?.to) {
       setDateRangeState(createCustomRange(range.from, range.to));
     }
-  }, []);
+  };
 
   return (
     <IonPage>

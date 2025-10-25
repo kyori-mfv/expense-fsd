@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 /**
  * Reusable pagination hook
@@ -17,26 +17,26 @@ interface UsePaginationReturn {
 export function usePagination(initialPage = 1): UsePaginationReturn {
   const [currentPage, setCurrentPage] = useState(initialPage);
 
-  const setPage = useCallback((page: number) => {
+  const setPage = (page: number) => {
     setCurrentPage(page);
-  }, []);
+  };
 
-  const nextPage = useCallback(() => {
+  const nextPage = () => {
     setCurrentPage((prev) => prev + 1);
-  }, []);
+  };
 
-  const prevPage = useCallback(() => {
+  const prevPage = () => {
     setCurrentPage((prev) => Math.max(1, prev - 1));
-  }, []);
+  };
 
-  const resetPage = useCallback(() => {
+  const resetPage = () => {
     setCurrentPage(initialPage);
-  }, [initialPage]);
+  };
 
-  const goToPage = useCallback((page: number, totalPages: number) => {
+  const goToPage = (page: number, totalPages: number) => {
     const validPage = Math.max(1, Math.min(page, totalPages));
     setCurrentPage(validPage);
-  }, []);
+  };
 
   return {
     currentPage,

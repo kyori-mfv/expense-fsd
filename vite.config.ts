@@ -10,7 +10,18 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [
-    react(),
+    react({
+      babel: {
+        plugins: [
+          [
+            "babel-plugin-react-compiler",
+            {
+              target: "19",
+            },
+          ],
+        ],
+      },
+    }),
     VitePWA({
       registerType: "autoUpdate",
       devOptions: {
@@ -25,7 +36,7 @@ export default defineConfig({
       manifest: {
         name: "Expense Manager",
         short_name: "Expenses",
-        description: "AI-powered expense tracking with Feature-Sliced Design",
+        description: "Mobile-first expense tracking with Feature-Sliced Design",
         theme_color: "#ef4444",
         background_color: "#611c69",
         display: "standalone",

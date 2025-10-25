@@ -1,7 +1,6 @@
 import { formatAmount } from "@/shared/lib/format";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { PieChartIcon } from "lucide-react";
-import { useMemo } from "react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 
 export interface PieChartData {

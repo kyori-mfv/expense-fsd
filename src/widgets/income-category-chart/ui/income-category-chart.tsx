@@ -1,28 +1,23 @@
 import { PieChartCard, type PieChartData } from "@/shared/composite";
 import { INCOME_CATEGORY_MAP } from "@/shared/config";
 import type { CategoryStats } from "@/shared/lib/calculate-stats";
-import { useMemo } from "react";
 
 interface IncomeCategoryChartProps {
   categoryStats: CategoryStats[];
 }
 
 export function IncomeCategoryChart({ categoryStats }: IncomeCategoryChartProps) {
-  // Map category stats to chart data with colors - memoized for performance
-  const chartData: PieChartData[] = useMemo(
-    () =>
-      categoryStats.map((stat) => {
-        const category = INCOME_CATEGORY_MAP.get(stat.category);
-        return {
-          name: stat.category,
-          value: stat.amount,
-          color: category?.color || "#6b7280",
-          count: stat.count,
-          percentage: stat.percentage,
-        };
-      }),
-    [categoryStats]
-  );
+  // Map category stats to chart data with colors
+  const chartData: PieChartData[] = categoryStats.map((stat) => {
+    const category = INCOME_CATEGORY_MAP.get(stat.category);
+    return {
+      name: stat.category,
+      value: stat.amount,
+      color: category?.color || "#6b7280",
+      count: stat.count,
+      percentage: stat.percentage,
+    };
+  });
 
   return (
     <PieChartCard
