@@ -97,7 +97,6 @@ export function CategoryButtonSelect({
       <IonActionSheet
         isOpen={isOpen}
         onDidDismiss={() => setIsOpen(false)}
-        header="Chọn danh mục"
         buttons={buttons}
       />
     </>
