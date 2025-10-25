@@ -1,4 +1,5 @@
 import { ExpenseFormFields } from "@/entities/expense";
+import { SectionHeader } from "@/shared/composite";
 import { useToast } from "@/shared/react";
 import { IonButton, IonLabel, IonListHeader } from "@ionic/react";
 import { useState } from "react";
@@ -43,13 +44,7 @@ export function ExpenseForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <IonListHeader>
-        <IonLabel>
-          <h2 className="text-base font-semibold">Thêm chi tiêu mới</h2>
-          <p className="text-sm text-muted-foreground">Nhập thông tin giao dịch chi tiêu</p>
-        </IonLabel>
-      </IonListHeader>
-
+      <SectionHeader title="Thêm chi tiêu mới" description="Nhập thông tin giao dịch chi tiêu" />
       <ExpenseFormFields
         amount={amount}
         onAmountChange={setAmount}
