@@ -28,7 +28,7 @@ export function CategoryBadge({
   return (
     <IonBadge
       color={color}
-      className={`inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md whitespace-nowrap w-auto ${className}`}
+      className={`inline-flex h-6 items-center shrink-0 gap-1 px-2 py-1 text-xs font-medium rounded-md whitespace-nowrap w-auto ${className}`}
     >
       <CategoryIcon iconName={category?.icon ?? ""} size={iconSize} />
       <span>{categoryName}</span>
