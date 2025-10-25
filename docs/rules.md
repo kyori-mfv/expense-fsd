@@ -15,7 +15,7 @@ This document outlines mandatory rules and best practices for contributing to th
 add-expense-form.tsx
 use-expense-query.ts
 expense-category-select.tsx
-ai-expense-input.tsx
+expense-form.tsx
 ```
 
 ❌ **Incorrect**:
@@ -23,7 +23,7 @@ ai-expense-input.tsx
 AddExpenseForm.tsx       // PascalCase
 useExpenseQuery.ts       // camelCase
 expenseCategorySelect.tsx // camelCase
-AIExpenseInput.tsx       // PascalCase
+ExpenseForm.tsx          // PascalCase
 ```
 
 **Exceptions**:
@@ -188,7 +188,6 @@ import { expenseService } from '../../entities/expense';
 
 ```typescript
 // features/add-expense/index.ts
-export { AIExpenseInput } from './ui/ai-expense-input';
 export { ExpenseForm } from './ui/expense-form';
 // Internal hooks NOT exported if only used internally
 ```
@@ -196,11 +195,153 @@ export { ExpenseForm } from './ui/expense-form';
 **Consumers MUST import from public API**:
 ```typescript
 // ✅ Correct
-import { AIExpenseInput } from '@/features/add-expense';
+import { ExpenseForm } from '@/features/add-expense';
 
 // ❌ Wrong
-import { AIExpenseInput } from '@/features/add-expense/ui/ai-expense-input';
+import { ExpenseForm } from '@/features/add-expense/ui/expense-form';
 ```
+
+---
+
+## 🎨 UI Component Selection: Ionic vs shadcn
+
+### When to Use Ionic Components
+
+**Use Ionic for mobile-native interactions**:
+
+```typescript
+// ✅ Use Ionic for:
+- IonPage / IonContent    → Page structure & scroll management
+- IonButton               → Native buttons with ripple effects
+- IonInput / IonTextarea  → Native inputs with floating labels
+- IonList / IonItem       → Native lists with swipe gestures
+- IonItemSliding          → Swipe-to-delete actions
+- IonIcon                 → Icon rendering (ionicons library)
+- IonToast                → Native toast notifications
+- IonModal                → Native modals with sheet behavior
+- IonTabBar               → Bottom navigation with haptics
+- IonSegment              → Segmented controls
+- IonRefresher            → Pull-to-refresh (if needed)
+```
+
+**Example**:
+```typescript
+// ✅ Correct: Native mobile form
+<IonPage>
+  <IonContent scrollY={true} scrollEvents={true}>
+    <form onSubmit={handleSubmit}>
+      <IonList>
+        <IonItem>
+          <IonInput
+            label="Amount"
+            type="number"
+            inputMode="numeric"
+            placeholder="Enter amount"
+          />
+        </IonItem>
+        <IonItem>
+          <IonButton expand="block" type="submit">
+            Save
+          </IonButton>
+        </IonItem>
+      </IonList>
+    </form>
+  </IonContent>
+</IonPage>
+```
+
+### When to Use shadcn Components
+
+**Use shadcn for modern web UI and data visualization**:
+
+```typescript
+// ✅ Use shadcn for:
+- Card                    → Dashboard cards, stat containers
+- Badge                   → Category badges, status indicators
+- Separator               → Visual section dividers
+- Dialog                  → Confirmation dialogs (web-style)
+- Popover                 → Filter menus, dropdown content
+- Calendar                → Date picker for custom ranges
+- Avatar                  → User profile images
+- Accordion               → Collapsible sections
+- Tabs                    → Content organization (web context)
+```
+
+**Example**:
+```typescript
+// ✅ Correct: Modern dashboard UI
+<div className="grid gap-4 md:grid-cols-2">
+  <Card className="p-6">
+    <div className="flex items-center justify-between">
+      <div>
+        <p className="text-sm text-muted-foreground">Total Income</p>
+        <h3 className="text-2xl font-bold">{formatAmount(totalIncome)}</h3>
+      </div>
+      <Badge variant="success">
+        <TrendingUp className="w-4 h-4" />
+      </Badge>
+    </div>
+  </Card>
+  <Card className="p-6">
+    {/* More stats... */}
+  </Card>
+</div>
+```
+
+### Decision Matrix
+
+| Component Type | Use Ionic | Use shadcn | Reason |
+|---------------|-----------|------------|---------|
+| Forms & Inputs | ✅ | ❌ | Keyboard handling, native input behavior |
+| Buttons (actions) | ✅ | ❌ | Ripple effects, platform-specific styling |
+| Lists & Items | ✅ | ❌ | Swipe gestures, native feel |
+| Page Structure | ✅ | ❌ | Scroll management, safe area handling |
+| Navigation | ✅ | ❌ | Tab bar, routing with haptics |
+| Toasts | ✅ | ❌ | Native positioning, platform styling |
+| Dashboard Cards | ❌ | ✅ | Modern web aesthetics |
+| Data Viz | ❌ | ✅ | Charts, stats, metrics |
+| Badges & Labels | ❌ | ✅ | Flexible styling, custom designs |
+| Dialogs (confirm) | ❌ | ✅ | Web-style confirmations |
+| Popovers & Filters | ❌ | ✅ | Advanced positioning, rich content |
+
+### ❌ Common Mistakes
+
+```typescript
+// ❌ Wrong: Using shadcn Button in forms
+<form>
+  <input type="text" />
+  <Button type="submit">Save</Button>  // NO! Use IonButton
+</form>
+
+// ✅ Correct: Using IonButton in forms
+<form>
+  <IonInput type="text" />
+  <IonButton type="submit">Save</IonButton>
+</form>
+
+// ❌ Wrong: Using Ionic for dashboard cards
+<IonCard>
+  <IonCardHeader>
+    <IonCardTitle>Stats</IonCardTitle>
+  </IonCardHeader>
+</IonCard>
+
+// ✅ Correct: Using shadcn Card for dashboard
+<Card>
+  <CardHeader>
+    <CardTitle>Stats</CardTitle>
+  </CardHeader>
+</Card>
+```
+
+### Hybrid Approach Benefits
+
+**Why combine both?**:
+- ✅ Native mobile feel where users expect it (forms, lists, navigation)
+- ✅ Modern web aesthetics for data visualization
+- ✅ Best performance (GPU-accelerated Ionic components)
+- ✅ Platform consistency (iOS/Android conventions)
+- ✅ Flexible styling (Tailwind works with both)
 
 ---
 

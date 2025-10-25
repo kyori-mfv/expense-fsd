@@ -260,12 +260,6 @@ entities/
 │   │   ├── income-item.tsx
 │   │   └── income-category-select.tsx
 │   └── index.ts
-└── ai-provider/
-    ├── api/
-    │   └── gemini-provider.ts
-    ├── model/
-    │   └── use-ai-provider.ts
-    └── index.ts
 ```
 
 **Segments**:
@@ -556,7 +550,6 @@ Every slice must have an `index.ts` that acts as a public API:
 
 ```typescript
 // features/add-expense/index.ts
-export { AIExpenseInput } from './ui/ai-expense-input';
 export { ExpenseForm } from './ui/expense-form';
 // Note: internal hooks are NOT exported if they're only used within the feature
 ```
