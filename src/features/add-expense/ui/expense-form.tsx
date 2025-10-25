@@ -1,13 +1,11 @@
 import { ExpenseFormFields } from "@/entities/expense";
+import { useToast } from "@/shared/react";
 import { IonButton, IonLabel, IonListHeader } from "@ionic/react";
 import { useState } from "react";
 import { useAddExpense } from "../model/use-add-expense";
 
-interface ExpenseFormProps {
-  onError?: (error: string) => void;
-}
-
-export function ExpenseForm({ onError }: ExpenseFormProps) {
+export function ExpenseForm() {
+  const toast = useToast();
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -19,7 +17,7 @@ export function ExpenseForm({ onError }: ExpenseFormProps) {
     e.preventDefault();
 
     if (!amount || !category || !description || !date) {
-      onError?.("Vui lòng điền đầy đủ thông tin");
+      toast.error("Vui lòng điền đầy đủ thông tin");
       return;
     }
 
@@ -36,9 +34,10 @@ export function ExpenseForm({ onError }: ExpenseFormProps) {
       setCategory("");
       setDescription("");
       setDate(new Date());
-      // No need for onSuccess - useLiveQuery will auto-update!
+      // Show success feedback
+      toast.success("Đã thêm chi tiêu");
     } else {
-      onError?.("Không thể thêm chi tiêu");
+      toast.error("Không thể thêm chi tiêu");
     }
   };
 

@@ -1,5 +1,6 @@
 import { useAIProvider } from "@/entities/ai-provider";
 import { EXPENSE_CATEGORIES, EXPENSE_CATEGORY_KEYWORDS } from "@/shared/config";
+import { useToast } from "@/shared/react";
 import { Card } from "@/shared/ui/card";
 import { IonButton, IonIcon, IonInput } from "@ionic/react";
 import { sparklesOutline } from "ionicons/icons";
@@ -8,10 +9,10 @@ import { useAddExpense } from "../model/use-add-expense";
 
 interface AIExpenseInputProps {
   apiKey: string;
-  onError?: (error: string) => void;
 }
 
-export function AIExpenseInput({ apiKey, onError }: AIExpenseInputProps) {
+export function AIExpenseInput({ apiKey }: AIExpenseInputProps) {
+  const toast = useToast();
   const [input, setInput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const { addExpense } = useAddExpense();
@@ -44,13 +45,13 @@ export function AIExpenseInput({ apiKey, onError }: AIExpenseInputProps) {
 
       if (result) {
         setInput("");
-        // No need for onSuccess - useLiveQuery will auto-update!
+        toast.success("Đã thêm chi tiêu bằng AI");
       } else {
-        onError?.("Không thể thêm chi tiêu");
+        toast.error("Không thể thêm chi tiêu");
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Lỗi khi phân tích chi tiêu";
-      onError?.(errorMessage);
+      toast.error(errorMessage);
       console.error("AI parsing error:", err);
     } finally {
       setIsProcessing(false);

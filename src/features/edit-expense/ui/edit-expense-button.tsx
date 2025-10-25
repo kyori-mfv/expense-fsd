@@ -7,15 +7,13 @@ import { ExpenseEditDialog } from "./expense-edit-dialog";
 interface EditExpenseButtonProps {
   /** The expense record to edit */
   expense: ExpenseRecord;
-  /** Optional error handler callback */
-  onError?: (error: string) => void;
 }
 
 /**
  * Mobile-first edit button with Ionic design
  * Displays icon-only button optimized for swipe actions
  */
-export function EditExpenseButton({ expense, onError }: EditExpenseButtonProps) {
+export function EditExpenseButton({ expense }: EditExpenseButtonProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
@@ -29,12 +27,7 @@ export function EditExpenseButton({ expense, onError }: EditExpenseButtonProps) 
         <IonIcon slot="icon-only" icon={createOutline} />
       </IonButton>
 
-      <ExpenseEditDialog
-        expense={expense}
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}
-        onError={onError}
-      />
+      <ExpenseEditDialog expense={expense} open={dialogOpen} onOpenChange={setDialogOpen} />
     </>
   );
 }

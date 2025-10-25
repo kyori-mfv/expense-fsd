@@ -1,9 +1,10 @@
+import { useToast } from "@/shared/react";
 import { IonButton, IonIcon } from "@ionic/react";
 import { downloadOutline } from "ionicons/icons";
-import { toast } from "sonner";
 import { useExportIncomes } from "../model/use-export-incomes";
 
 export function ExportIncomesButton() {
+  const toast = useToast();
   const { exportToJSON, isExporting } = useExportIncomes();
 
   const handleExport = async () => {

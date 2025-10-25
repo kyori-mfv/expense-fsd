@@ -1,5 +1,6 @@
 import { ExpenseFormFields } from "@/entities/expense";
 import type { ExpenseRecord } from "@/shared/contract";
+import { useToast } from "@/shared/react";
 import {
   IonButton,
   IonButtons,
@@ -16,20 +17,15 @@ interface ExpenseEditDialogProps {
   expense: ExpenseRecord | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onError?: (error: string) => void;
 }
 
-export function ExpenseEditDialog({
-  expense,
-  open,
-  onOpenChange,
-  onError,
-}: ExpenseEditDialogProps) {
+export function ExpenseEditDialog({ expense, open, onOpenChange }: ExpenseEditDialogProps) {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState<Date | undefined>(undefined);
 
+  const toast = useToast();
   const { editExpense, isLoading } = useEditExpense();
 
   useEffect(() => {
@@ -45,7 +41,7 @@ export function ExpenseEditDialog({
     e.preventDefault();
 
     if (!expense || !amount || !category || !description || !date) {
-      onError?.("Vui lòng điền đầy đủ thông tin");
+      toast.error("Vui lòng điền đầy đủ thông tin");
       return;
     }
 
@@ -58,9 +54,9 @@ export function ExpenseEditDialog({
 
     if (success) {
       onOpenChange(false);
-      // No need for onSuccess - useLiveQuery will auto-update!
+      toast.success("Đã cập nhật chi tiêu");
     } else {
-      onError?.("Không thể cập nhật chi tiêu");
+      toast.error("Không thể cập nhật chi tiêu");
     }
   };
 

@@ -6,7 +6,6 @@ import { PageHeader } from "@/widgets/page-header";
 import { RecentExpenses } from "@/widgets/recent-expenses";
 import { IonContent, IonPage } from "@ionic/react";
 import { TrendingDown } from "lucide-react";
-import { toast } from "sonner";
 
 export function ExpensePage() {
   return (
@@ -21,7 +20,7 @@ export function ExpensePage() {
         <div className="container mx-auto p-4 max-w-4xl pb-6">
           <div className="space-y-6">
             {/* Expense Input Form */}
-            <ExpenseForm onError={(error) => toast.error(error)} />
+            <ExpenseForm />
 
             <Separator />
 

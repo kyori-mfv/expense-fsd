@@ -7,15 +7,13 @@ import { IncomeEditDialog } from "./income-edit-dialog";
 interface EditIncomeButtonProps {
   /** The income record to edit */
   income: IncomeRecord;
-  /** Optional error handler callback */
-  onError?: (error: string) => void;
 }
 
 /**
  * Mobile-first edit button with Ionic design
  * Displays icon-only button optimized for swipe actions
  */
-export function EditIncomeButton({ income, onError }: EditIncomeButtonProps) {
+export function EditIncomeButton({ income }: EditIncomeButtonProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
@@ -29,12 +27,7 @@ export function EditIncomeButton({ income, onError }: EditIncomeButtonProps) {
         <IonIcon slot="icon-only" icon={createOutline} />
       </IonButton>
 
-      <IncomeEditDialog
-        income={income}
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}
-        onError={onError}
-      />
+      <IncomeEditDialog income={income} open={dialogOpen} onOpenChange={setDialogOpen} />
     </>
   );
 }

@@ -1,10 +1,11 @@
+import { useToast } from "@/shared/react";
 import { IonButton, IonIcon } from "@ionic/react";
 import { cloudUploadOutline } from "ionicons/icons";
 import { useRef } from "react";
-import { toast } from "sonner";
 import { useImportExpenses } from "../model/use-import-expenses";
 
 export function ImportExpensesButton() {
+  const toast = useToast();
   const { importFromJSON, isImporting } = useImportExpenses();
   const fileInputRef = useRef<HTMLInputElement>(null);
 

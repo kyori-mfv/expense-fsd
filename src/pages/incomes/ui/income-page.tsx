@@ -6,7 +6,6 @@ import { PageHeader } from "@/widgets/page-header";
 import { RecentIncomes } from "@/widgets/recent-incomes";
 import { IonContent, IonPage } from "@ionic/react";
 import { TrendingUp } from "lucide-react";
-import { toast } from "sonner";
 
 export function IncomePage() {
   return (
@@ -21,7 +20,7 @@ export function IncomePage() {
         <div className="container mx-auto p-4 max-w-4xl pb-6">
           <div className="space-y-6">
             {/* Income Input Form */}
-            <IncomeForm onError={(error) => toast.error(error)} />
+            <IncomeForm />
 
             <Separator />
 

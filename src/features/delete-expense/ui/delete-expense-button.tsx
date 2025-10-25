@@ -1,8 +1,8 @@
 import { ConfirmationDialog } from "@/shared/composite";
+import { useToast } from "@/shared/react";
 import { IonButton, IonIcon } from "@ionic/react";
 import { trashOutline } from "ionicons/icons";
 import { useState } from "react";
-import { toast } from "sonner";
 import { useDeleteExpense } from "../model/use-delete-expense";
 
 interface DeleteExpenseButtonProps {
@@ -17,6 +17,7 @@ interface DeleteExpenseButtonProps {
  * Displays icon-only button optimized for swipe actions
  */
 export function DeleteExpenseButton({ expenseId, expenseDescription }: DeleteExpenseButtonProps) {
+  const toast = useToast();
   const [open, setOpen] = useState(false);
   const { deleteExpense, isLoading } = useDeleteExpense();
 

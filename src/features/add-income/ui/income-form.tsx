@@ -1,13 +1,11 @@
 import { IncomeFormFields } from "@/entities/income";
+import { useToast } from "@/shared/react";
 import { IonButton, IonLabel, IonListHeader } from "@ionic/react";
 import { useState } from "react";
 import { useAddIncome } from "../model/use-add-income";
 
-interface IncomeFormProps {
-  onError?: (error: string) => void;
-}
-
-export function IncomeForm({ onError }: IncomeFormProps) {
+export function IncomeForm() {
+  const toast = useToast();
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
@@ -19,7 +17,7 @@ export function IncomeForm({ onError }: IncomeFormProps) {
     e.preventDefault();
 
     if (!amount || !category || !description || !date) {
-      onError?.("Vui lòng điền đầy đủ thông tin");
+      toast.error("Vui lòng điền đầy đủ thông tin");
       return;
     }
 
@@ -36,9 +34,10 @@ export function IncomeForm({ onError }: IncomeFormProps) {
       setCategory("");
       setDescription("");
       setDate(new Date());
-      // No need for onSuccess - useLiveQuery will auto-update!
+      // Show success feedback
+      toast.success("Đã thêm thu nhập");
     } else {
-      onError?.("Không thể thêm thu nhập");
+      toast.error("Không thể thêm thu nhập");
     }
   };
 

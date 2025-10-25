@@ -94,11 +94,7 @@ export function CategoryButtonSelect({
         </span>
       </IonButton>
 
-      <IonActionSheet
-        isOpen={isOpen}
-        onDidDismiss={() => setIsOpen(false)}
-        buttons={buttons}
-      />
+      <IonActionSheet isOpen={isOpen} onDidDismiss={() => setIsOpen(false)} buttons={buttons} />
     </>
   );
 }

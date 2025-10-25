@@ -1,5 +1,6 @@
 import { IncomeFormFields } from "@/entities/income";
 import type { IncomeRecord } from "@/shared/contract";
+import { useToast } from "@/shared/react";
 import {
   IonButton,
   IonButtons,
@@ -16,15 +17,15 @@ interface IncomeEditDialogProps {
   income: IncomeRecord | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onError?: (error: string) => void;
 }
 
-export function IncomeEditDialog({ income, open, onOpenChange, onError }: IncomeEditDialogProps) {
+export function IncomeEditDialog({ income, open, onOpenChange }: IncomeEditDialogProps) {
   const [amount, setAmount] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState<Date | undefined>(undefined);
 
+  const toast = useToast();
   const { editIncome, isLoading } = useEditIncome();
 
   useEffect(() => {
@@ -40,7 +41,7 @@ export function IncomeEditDialog({ income, open, onOpenChange, onError }: Income
     e.preventDefault();
 
     if (!income || !amount || !category || !description || !date) {
-      onError?.("Vui lòng điền đầy đủ thông tin");
+      toast.error("Vui lòng điền đầy đủ thông tin");
       return;
     }
 
@@ -53,9 +54,9 @@ export function IncomeEditDialog({ income, open, onOpenChange, onError }: Income
 
     if (success) {
       onOpenChange(false);
-      // No need for onSuccess - useLiveQuery will auto-update!
+      toast.success("Đã cập nhật thu nhập");
     } else {
-      onError?.("Không thể cập nhật thu nhập");
+      toast.error("Không thể cập nhật thu nhập");
     }
   };
 

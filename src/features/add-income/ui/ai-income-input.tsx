@@ -1,5 +1,6 @@
 import { useAIProvider } from "@/entities/ai-provider";
 import { INCOME_CATEGORIES, INCOME_CATEGORY_KEYWORDS } from "@/shared/config";
+import { useToast } from "@/shared/react";
 import { Card } from "@/shared/ui/card";
 import { IonButton, IonIcon, IonInput } from "@ionic/react";
 import { sparklesOutline } from "ionicons/icons";
@@ -8,10 +9,10 @@ import { useAddIncome } from "../model/use-add-income";
 
 interface AIIncomeInputProps {
   apiKey: string;
-  onError?: (error: string) => void;
 }
 
-export function AIIncomeInput({ apiKey, onError }: AIIncomeInputProps) {
+export function AIIncomeInput({ apiKey }: AIIncomeInputProps) {
+  const toast = useToast();
   const [input, setInput] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
   const { addIncome } = useAddIncome();
@@ -44,13 +45,14 @@ export function AIIncomeInput({ apiKey, onError }: AIIncomeInputProps) {
 
       if (result) {
         setInput("");
-        // No need for onSuccess - useLiveQuery will auto-update!
+        // Show success feedback
+        toast.success("Đã thêm thu nhập bằng AI");
       } else {
-        onError?.("Không thể thêm thu nhập");
+        toast.error("Không thể thêm thu nhập");
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Lỗi khi phân tích thu nhập";
-      onError?.(errorMessage);
+      toast.error(errorMessage);
       console.error("AI parsing error:", err);
     } finally {
       setIsProcessing(false);

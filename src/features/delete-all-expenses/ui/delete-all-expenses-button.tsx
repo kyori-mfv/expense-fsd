@@ -1,11 +1,12 @@
 import { ConfirmationDialog } from "@/shared/composite";
+import { useToast } from "@/shared/react";
 import { IonButton, IonIcon } from "@ionic/react";
 import { trashOutline } from "ionicons/icons";
 import { useState } from "react";
-import { toast } from "sonner";
 import { useDeleteAllExpenses } from "../model/use-delete-all-expenses";
 
 export function DeleteAllExpensesButton() {
+  const toast = useToast();
   const [open, setOpen] = useState(false);
   const { deleteAll, isDeleting } = useDeleteAllExpenses();
 
