@@ -80,6 +80,12 @@ app → pages → widgets → features → entities → shared
 4. ✅ Complete separation of expense and income domains
 5. ✅ All imports must use public API (index.ts) exports
 
+**Architecture Philosophy**:
+- **Duplication > Abstraction**: ~1200 lines intentionally duplicated for domain independence
+- **Explicit > DRY**: Maintains FSD compliance (10/10) over code reduction
+- **Independence > Coupling**: Expense and income evolve independently
+- See [ARCHITECTURE.md](docs/ARCHITECTURE.md#duplication-philosophy-explicit-over-dry) for details
+
 #### Project Structure
 ```
 src/

@@ -625,32 +625,227 @@ function Dashboard() {
 }
 ```
 
-### When to Abstract vs Duplicate
+### Duplication Philosophy: Explicit Over DRY
 
-**Abstract to Shared**:
-- Pure utilities (format, validation)
-- UI components (Button, Card)
-- Infrastructure (database client)
+This project **intentionally duplicates** ~1200-1500 lines of code across expense/income domains. This is a **conscious architectural decision**, not an oversight.
 
-**Duplicate**:
-- Entity-specific logic
-- Domain calculations
-- Business rules
+#### Why We Accept Duplication
 
-**Example**:
+**1. FSD Compliance (10/10)**
+- Complete entity isolation
+- No cross-domain coupling
+- Clear public APIs
+- Follows FSD philosophy: "Explicit is better than clever"
+
+**2. Domain Independence**
+- Expense and income can evolve independently
+- Different requirements won't create coupling
+- Easy to add expense-specific or income-specific features
+- No shared abstractions to maintain
+
+**3. Code Clarity**
+- Straightforward, easy-to-understand code
+- No generic abstractions to learn
+- Clear type safety (ExpenseRecord vs IncomeRecord)
+- Better IDE autocomplete and navigation
+
+**4. Low Risk**
+- Changes to expense don't affect income
+- Bug fixes are isolated
+- No hidden coupling through abstractions
+- Easy to refactor individual domains
+
+#### Duplication Statistics
+
+**Current Duplication:**
+- 2 entities (expense, income): ~336 lines
+- 14 features (7 pairs): ~700-900 lines
+- 4 widgets (2 pairs): ~200-300 lines
+- **Total: ~1200-1500 lines (~10-12% of codebase)**
+
+**Why This is Acceptable:**
+- Small codebase (~12,000 lines total)
+- Duplication is **intentional** and **documented**
+- Maintains architectural purity
+- Cost of duplication < cost of abstraction complexity
+
+#### Abstraction Decision Matrix
+
+| Code Type | Abstract? | Location | Reason |
+|-----------|-----------|----------|---------|
+| **Pure utilities** | ✅ Yes | `shared/lib/` | No business logic, reusable |
+| **UI components** | ✅ Yes | `shared/ui/` | Generic, no domain knowledge |
+| **Infrastructure** | ✅ Yes | `shared/api/` | Database setup, generic |
+| **CRUD operations** | ❌ No | `entities/*/api/` | Domain-specific, entity-coupled |
+| **Entity services** | ❌ No | `entities/*/` | Business logic, domain rules |
+| **Feature logic** | ❌ No | `features/*/` | User interactions, domain-specific |
+| **Domain calculations** | ❌ No | `entities/*/model/` | Business rules, may diverge |
+
+#### When to Abstract vs Duplicate
+
+**✅ Abstract to Shared (Pure Utilities Only):**
 ```typescript
-// ✅ SHARED: Pure utility
+// ✅ GOOD: Pure utility, no business logic
 export function formatAmount(amount: number) {
   return new Intl.NumberFormat('vi-VN').format(amount);
 }
 
-// ✅ DUPLICATE: Entity-specific
+// ✅ GOOD: Generic helper, no domain knowledge
+export function generateUUID(): string {
+  return crypto.randomUUID();
+}
+
+// ✅ GOOD: Pure formatting utility
+export function formatDate(date: Date): string {
+  return format(date, 'dd/MM/yyyy');
+}
+```
+
+**❌ Keep Duplicated (Domain Logic):**
+```typescript
+// ✅ DUPLICATE: Entity-specific CRUD
 // entities/expense/api/expense.service.ts
-export async function addExpense(expense: ExpenseRecord) { ... }
+export const expenseService = {
+  async getAll(): Promise<ExpenseRecord[]> {
+    return await db.expenses.orderBy("date").reverse().toArray();
+  },
+  async add(expense: Omit<ExpenseRecord, "id" | "createdAt" | "updatedAt">): Promise<ExpenseRecord> {
+    const now = new Date();
+    const newExpense: ExpenseRecord = {
+      ...expense,
+      id: generateUUID(),
+      createdAt: now,
+      updatedAt: now,
+    };
+    await db.expenses.add(newExpense);
+    return newExpense;
+  },
+  // ... more methods
+};
 
 // entities/income/api/income.service.ts
-export async function addIncome(income: IncomeRecord) { ... }
+export const incomeService = {
+  async getAll(): Promise<IncomeRecord[]> {
+    return await db.incomes.orderBy("date").reverse().toArray();
+  },
+  async add(income: Omit<IncomeRecord, "id" | "createdAt" | "updatedAt">): Promise<IncomeRecord> {
+    const now = new Date();
+    const newIncome: IncomeRecord = {
+      ...income,
+      id: generateUUID(),
+      createdAt: now,
+      updatedAt: now,
+    };
+    await db.incomes.add(newIncome);
+    return newIncome;
+  },
+  // ... more methods
+};
 ```
+
+#### Why Not Create Generic `createCRUDService<T>()`?
+
+**We explicitly avoid this pattern:**
+```typescript
+// ❌ BAD: Violates FSD - business logic in shared layer
+// shared/api/create-crud-service.ts
+export function createCRUDService<T>(tableName: string) {
+  return {
+    async getAll(): Promise<T[]> {
+      return await db[tableName].toArray();  // Business logic!
+    },
+    // ...
+  };
+}
+
+// entities/expense/api/expense.service.ts
+export const expenseService = createCRUDService<ExpenseRecord>('expenses');
+```
+
+**Why this is bad:**
+1. ❌ **Violates FSD**: Business logic in shared layer
+2. ❌ **Shared knows domains**: `shared/` knows about expense/income tables
+3. ❌ **Hidden coupling**: Changes affect both entities
+4. ❌ **Reduced flexibility**: Hard to customize per entity
+5. ❌ **Abstraction tax**: Generic code is harder to understand
+6. ❌ **FSD Compliance**: Drops from 10/10 to 3/10
+
+#### Trade-off Analysis
+
+**Current Approach (Duplication):**
+- ✅ FSD Compliance: 10/10
+- ✅ Domain Independence: High
+- ✅ Code Clarity: High
+- ✅ Flexibility: High
+- ❌ Code Size: +1200 lines
+- ❌ Maintenance: Apply fixes twice
+
+**Alternative (Abstraction):**
+- ❌ FSD Compliance: 3/10
+- ❌ Domain Independence: Low (coupled through abstraction)
+- ❌ Code Clarity: Medium (generics add complexity)
+- ❌ Flexibility: Low (shared abstraction constrains both)
+- ✅ Code Size: -1200 lines
+- ✅ Maintenance: Single fix point
+
+**Conclusion:** The architectural benefits outweigh the maintenance cost.
+
+#### Maintenance Strategy
+
+**When fixing bugs:**
+1. Fix in one entity (e.g., expense)
+2. Test thoroughly
+3. Apply same fix to other entity (income)
+4. Test both entities
+5. Consider if fix reveals need for refactoring
+
+**When adding features:**
+1. Implement in one entity first
+2. Validate design
+3. Implement in other entity
+4. Keep implementations consistent (copy-paste is OK!)
+
+**When requirements diverge:**
+- This duplication strategy makes divergence **easy**
+- No need to "break" shared abstractions
+- Each entity evolves independently
+- Validates our architectural choice
+
+#### Real-World Example
+
+```typescript
+// If expense needs tax deduction tracking:
+// entities/expense/api/expense.service.ts
+export interface ExpenseRecord {
+  // ... existing fields
+  isTaxDeductible?: boolean;  // New field
+  taxCategory?: string;
+}
+
+// Income stays unchanged - no coupling!
+// entities/income/api/income.service.ts
+export interface IncomeRecord {
+  // ... existing fields (no tax fields needed)
+}
+```
+
+This independence is only possible because we **duplicated** instead of abstracted.
+
+#### Summary
+
+**Our Philosophy:**
+- **Duplication > Abstraction** when it preserves domain boundaries
+- **Explicit > DRY** when it improves FSD compliance
+- **Simple > Clever** when it improves maintainability
+- **Independence > Code Size** when it enables flexibility
+
+**Key Metrics:**
+- FSD Compliance: 10/10 ✅
+- Duplication: ~1200 lines (~10% of codebase) ✅ Acceptable
+- Domain Independence: Perfect ✅
+- Future Flexibility: High ✅
+
+**This is intentional architecture, not technical debt.**
 
 ---
 

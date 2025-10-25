@@ -73,6 +73,8 @@ import { useEditExpense } from '@/features/edit-expense'; // in features/add-exp
 
 ### 3. Complete Expense/Income Separation
 
+**Philosophy**: This project intentionally duplicates ~1200-1500 lines of code to maintain perfect FSD compliance and domain independence. This is **architectural design**, not technical debt.
+
 **FORBIDDEN Patterns**:
 ```typescript
 // ❌ NO union types
@@ -898,6 +900,234 @@ useEffect(() => {
 // ✅ Correct: Live query
 const expenses = useLiveQuery(() => db.expenses.toArray()) ?? [];
 ```
+
+---
+
+## 🔄 Code Duplication Guidelines
+
+### Philosophy: Duplication > Abstraction (for Domain Logic)
+
+This project **intentionally duplicates** ~1200-1500 lines of code across expense/income domains. This is a conscious architectural decision to maintain FSD compliance and domain independence.
+
+### When to Duplicate (REQUIRED)
+
+**✅ MUST duplicate these:**
+
+```typescript
+// ✅ Entity services - database operations
+// entities/expense/api/expense.service.ts
+export const expenseService = {
+  async getAll(): Promise<ExpenseRecord[]> { /* ... */ },
+  async add(expense: ExpenseRecord): Promise<void> { /* ... */ },
+};
+
+// entities/income/api/income.service.ts
+export const incomeService = {
+  async getAll(): Promise<IncomeRecord[]> { /* ... */ },
+  async add(income: IncomeRecord): Promise<void> { /* ... */ },
+};
+
+// ✅ Feature hooks - user interactions
+// features/add-expense/model/use-add-expense.ts
+export function useAddExpense() { /* ... */ }
+
+// features/add-income/model/use-add-income.ts
+export function useAddIncome() { /* ... */ }
+
+// ✅ Domain calculations
+// entities/expense/model/calculate-expense-stats.ts
+export function calculateExpenseStats(expenses: ExpenseRecord[]) { /* ... */ }
+
+// entities/income/model/calculate-income-stats.ts
+export function calculateIncomeStats(incomes: IncomeRecord[]) { /* ... */ }
+```
+
+**Why?**
+- Maintains FSD compliance (10/10)
+- Enables independent domain evolution
+- No hidden coupling
+- Clear type safety
+
+### When to Abstract (ALLOWED)
+
+**✅ CAN abstract these to `shared/`:**
+
+```typescript
+// ✅ Pure utilities - no business logic
+// shared/lib/format.ts
+export function formatAmount(amount: number): string {
+  return new Intl.NumberFormat('vi-VN').format(amount);
+}
+
+// ✅ Generic helpers - no domain knowledge
+// shared/lib/utils.ts
+export function generateUUID(): string {
+  return crypto.randomUUID();
+}
+
+// ✅ UI components - no domain logic
+// shared/ui/button.tsx
+export function Button({ children, onClick }: ButtonProps) {
+  return <button onClick={onClick}>{children}</button>;
+}
+```
+
+**Why?**
+- Pure functions with no business logic
+- No knowledge of expense or income domains
+- Generic, reusable across entire app
+
+### When NOT to Abstract (FORBIDDEN)
+
+**❌ NEVER abstract these:**
+
+```typescript
+// ❌ FORBIDDEN: Generic CRUD service in shared
+// shared/api/create-crud-service.ts
+export function createCRUDService<T>(tableName: string) {
+  return {
+    async getAll(): Promise<T[]> {
+      return await db[tableName].toArray();  // Business logic in shared!
+    },
+  };
+}
+
+// ❌ FORBIDDEN: Combined entity types
+// shared/types/transaction.ts
+export type Transaction = ExpenseRecord | IncomeRecord;
+
+// ❌ FORBIDDEN: Shared domain components
+// shared/components/transaction-item.tsx
+export function TransactionItem({
+  transaction
+}: {
+  transaction: ExpenseRecord | IncomeRecord
+}) {
+  // Mixing domains!
+}
+```
+
+**Why NOT?**
+- Violates FSD (business logic in shared)
+- Creates coupling between domains
+- Reduces flexibility
+- Drops FSD compliance from 10/10 to 3/10
+
+### Duplication Checklist
+
+Before abstracting code, ask:
+
+1. **Is it pure?**
+   - ✅ No database access → Can abstract
+   - ❌ Uses `db.expenses` or `db.incomes` → Must duplicate
+
+2. **Does it have domain knowledge?**
+   - ✅ Generic (works with any type) → Can abstract
+   - ❌ Knows about ExpenseRecord/IncomeRecord → Must duplicate
+
+3. **Is it business logic?**
+   - ✅ Pure utility (format, validate) → Can abstract
+   - ❌ CRUD, calculations, rules → Must duplicate
+
+4. **Would it couple domains?**
+   - ✅ Independent utility → Can abstract
+   - ❌ Shared by expense & income → Must duplicate
+
+### Copy-Paste is OK!
+
+**When implementing features:**
+
+```typescript
+// Step 1: Implement in expense
+// features/add-expense/ui/expense-form.tsx
+export function ExpenseForm() {
+  const { addExpense, isLoading } = useAddExpense();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    // ... implementation
+  };
+
+  return <form onSubmit={handleSubmit}>{/* ... */}</form>;
+}
+
+// Step 2: Copy-paste to income (this is encouraged!)
+// features/add-income/ui/income-form.tsx
+export function IncomeForm() {
+  const { addIncome, isLoading } = useAddIncome();  // Change name
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    // ... same implementation
+  };
+
+  return <form onSubmit={handleSubmit}>{/* ... */}</form>;
+}
+```
+
+**This is good because:**
+- ✅ Explicit and clear
+- ✅ Easy to customize later
+- ✅ No hidden dependencies
+- ✅ Maintains FSD compliance
+
+### Maintenance Strategy
+
+**When fixing bugs:**
+1. Fix in one domain (test thoroughly)
+2. Copy fix to other domain
+3. Test both domains independently
+4. Commit with clear message
+
+**When refactoring:**
+1. Refactor one domain first
+2. Validate improvement
+3. Apply to other domain
+4. Keep implementations aligned
+
+**When adding features:**
+1. Design once
+2. Implement in expense
+3. Test and iterate
+4. Copy to income
+5. Maintain symmetry
+
+### Trade-off Summary
+
+| Approach | FSD Score | Pros | Cons | Verdict |
+|----------|-----------|------|------|---------|
+| **Duplication** | 10/10 | Domain independence, clarity, flexibility | +1200 lines | ✅ **Use this** |
+| **Abstraction** | 3/10 | -1200 lines | Coupling, complexity, FSD violation | ❌ Avoid |
+
+### Real-World Example
+
+**If expense needs tax tracking:**
+
+```typescript
+// ✅ EASY: Modify expense only
+// entities/expense/model/expense.schema.ts
+export interface ExpenseRecord {
+  // ... existing fields
+  isTaxDeductible?: boolean;      // New field
+  taxCategory?: string;            // New field
+}
+
+// Income stays unchanged - no coupling!
+// entities/income/model/income.schema.ts
+export interface IncomeRecord {
+  // ... existing fields (no changes needed)
+}
+```
+
+**This flexibility validates our duplication strategy.**
+
+### Key Principle
+
+> **"Duplication is far cheaper than the wrong abstraction"**
+> — Sandi Metz
+
+In FSD architecture:
+- Duplication maintains boundaries ✅
+- Abstraction creates coupling ❌
+- When in doubt, duplicate ✅
 
 ---
 
