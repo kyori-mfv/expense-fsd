@@ -91,7 +91,7 @@ export const expenseService = {
     return results;
   },
 
-  // Query expenses with filters and pagination
+  // Query expenses with filters and pagination (optimized with DB-level pagination)
   async queryExpensesPaginated(params: {
     category?: string;
     dateFrom: Date;
@@ -102,20 +102,42 @@ export const expenseService = {
   }): Promise<{ items: ExpenseRecord[]; total: number }> {
     const { category, dateFrom, dateTo, searchText, page, limit } = params;
 
-    // Get all matching records first
-    const allResults = await expenseService.queryExpensesAll({
-      category,
-      dateFrom,
-      dateTo,
-      searchText,
-    });
-
-    // Get total
-    const total = allResults.length;
-
-    // Paginate
+    const hasCategory = category && category !== "all";
     const offset = (page - 1) * limit;
-    const items = allResults.slice(offset, offset + limit);
+
+    // Step 1: Build query with compound index
+    const indexKey = hasCategory ? "[category+date+createdAt]" : "[date+createdAt]";
+    const bounds = hasCategory
+      ? [
+          [category, dateFrom, Dexie.minKey],
+          [category, dateTo, Dexie.maxKey],
+        ]
+      : [
+          [dateFrom, Dexie.minKey],
+          [dateTo, Dexie.maxKey],
+        ];
+
+    const query = db.expenses.where(indexKey).between(bounds[0], bounds[1], true, true).reverse(); // DESC order by date
+
+    // Step 2: Handle text search (requires special treatment for accurate pagination)
+    if (searchText) {
+      // For text search, we need to fetch all matching records first
+      // then paginate in memory (IndexedDB doesn't support compound text search)
+      const allResults = await query.toArray();
+      const searchLower = searchText.toLowerCase();
+      const filteredResults = allResults.filter((e) =>
+        e.description.toLowerCase().includes(searchLower)
+      );
+
+      const total = filteredResults.length;
+      const items = filteredResults.slice(offset, offset + limit);
+
+      return { items, total };
+    }
+
+    // Step 3: No text search - use pure DB-level pagination (optimal performance)
+    const total = await query.count();
+    const items = await query.offset(offset).limit(limit).toArray();
 
     return { items, total };
   },
