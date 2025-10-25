@@ -1,4 +1,5 @@
 import { IncomeForm } from "@/features/add-income";
+import { SectionHeader } from "@/shared/composite";
 import { Separator } from "@/shared/ui/separator";
 import { IncomeList } from "@/widgets/income-list";
 import { ManageIncomeData } from "@/widgets/manage-income-data";
@@ -19,7 +20,6 @@ export function IncomePage() {
       <IonContent>
         <div className="container mx-auto p-4 max-w-4xl pb-6">
           <div className="space-y-6">
-            {/* Income Input Form */}
             <IncomeForm />
 
             <Separator />
@@ -30,15 +30,7 @@ export function IncomePage() {
             <Separator />
 
             {/* All Incomes with Search/Filter */}
-            <div>
-              <div className="mb-4">
-                <h2 className="text-xl font-semibold">Tất cả thu nhập</h2>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Danh sách đầy đủ các khoản thu nhập với lọc và tìm kiếm
-                </p>
-              </div>
-              <IncomeList />
-            </div>
+            <IncomeList />
 
             <Separator />
 

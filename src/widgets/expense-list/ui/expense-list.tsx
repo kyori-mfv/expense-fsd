@@ -2,8 +2,7 @@ import { ExpenseCard, useExpenseListData } from "@/entities/expense";
 import { DeleteExpenseButton } from "@/features/delete-expense";
 import { EditExpenseButton } from "@/features/edit-expense";
 import { ExpenseFilterForm, useExpenseFilter } from "@/features/filter-expenses";
-import { EmptyState } from "@/shared/composite";
-import { PaginationControls } from "@/shared/composite";
+import { EmptyState, PaginationControls, SectionHeader } from "@/shared/composite";
 import { PAGINATION } from "@/shared/config";
 import { usePagination } from "@/shared/react";
 import { IonList } from "@ionic/react";
@@ -44,6 +43,11 @@ export function ExpenseList() {
 
   return (
     <div className="space-y-4">
+      <SectionHeader
+        title="Tất cả chi tiêu"
+        description="Danh sách đầy đủ các khoản chi tiêu với lọc và tìm kiếm"
+      />
+
       {/* Feature: Filter Form */}
       <ExpenseFilterForm
         form={form}

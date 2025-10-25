@@ -1,7 +1,7 @@
 import { ExpenseCard, useRecentExpenses } from "@/entities/expense";
 import { DeleteExpenseButton } from "@/features/delete-expense";
 import { EditExpenseButton } from "@/features/edit-expense";
-import { EmptyState } from "@/shared/composite";
+import { EmptyState, SectionHeader } from "@/shared/composite";
 import { DISPLAY_LIMITS } from "@/shared/config";
 import { IonList } from "@ionic/react";
 import { ReceiptText } from "lucide-react";
@@ -11,10 +11,8 @@ export function RecentExpenses() {
 
   return (
     <div className="space-y-4">
-      <div>
-        <h3 className="text-lg font-semibold">Chi tiêu gần đây</h3>
-        <p className="text-sm text-muted-foreground mt-1">5 chi tiêu được thêm gần nhất</p>
-      </div>
+      <SectionHeader title="Chi tiêu gần đây" description="5 chi tiêu được thêm gần nhất" />
+
       {recentExpenses.length === 0 ? (
         <EmptyState icon={ReceiptText} description="Chưa có chi tiêu nào" />
       ) : (

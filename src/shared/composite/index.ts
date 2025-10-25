@@ -11,6 +11,7 @@ export { EmptyState } from "./empty-state";
 export { PaginationControls } from "./pagination-controls";
 export { PieChartCard } from "./pie-chart-card";
 export type { PieChartData } from "./pie-chart-card";
+export { SectionHeader } from "./section-header";
 export { Segment } from "./segment";
 export type { SegmentProps, SegmentOption } from "./segment";
 export { ThemeToggle } from "./theme-toggle";

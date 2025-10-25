@@ -1,4 +1,5 @@
 import { ExpenseForm } from "@/features/add-expense";
+import { SectionHeader } from "@/shared/composite";
 import { Separator } from "@/shared/ui/separator";
 import { ExpenseList } from "@/widgets/expense-list";
 import { ManageExpenseData } from "@/widgets/manage-expense-data";
@@ -19,7 +20,6 @@ export function ExpensePage() {
       <IonContent>
         <div className="container mx-auto p-4 max-w-4xl pb-6">
           <div className="space-y-6">
-            {/* Expense Input Form */}
             <ExpenseForm />
 
             <Separator />
@@ -30,15 +30,7 @@ export function ExpensePage() {
             <Separator />
 
             {/* All Expenses with Search/Filter */}
-            <div>
-              <div className="mb-4">
-                <h2 className="text-xl font-semibold">Tất cả chi tiêu</h2>
-                <p className="text-sm text-muted-foreground mt-1">
-                  Danh sách đầy đủ các khoản chi tiêu với lọc và tìm kiếm
-                </p>
-              </div>
-              <ExpenseList />
-            </div>
+            <ExpenseList />
 
             <Separator />
 

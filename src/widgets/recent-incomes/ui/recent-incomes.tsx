@@ -1,7 +1,7 @@
 import { IncomeCard, useRecentIncomes } from "@/entities/income";
 import { DeleteIncomeButton } from "@/features/delete-income";
 import { EditIncomeButton } from "@/features/edit-income";
-import { EmptyState } from "@/shared/composite";
+import { EmptyState, SectionHeader } from "@/shared/composite";
 import { DISPLAY_LIMITS } from "@/shared/config";
 import { IonList } from "@ionic/react";
 import { ReceiptText } from "lucide-react";
@@ -11,10 +11,8 @@ export function RecentIncomes() {
 
   return (
     <div className="space-y-4">
-      <div>
-        <h3 className="text-lg font-semibold">Thu nhập gần đây</h3>
-        <p className="text-sm text-muted-foreground mt-1">5 thu nhập được thêm gần nhất</p>
-      </div>
+      <SectionHeader title="Thu nhập gần đây" description="5 thu nhập được thêm gần nhất" />
+
       {recentIncomes.length === 0 ? (
         <EmptyState icon={ReceiptText} description="Chưa có thu nhập nào" />
       ) : (

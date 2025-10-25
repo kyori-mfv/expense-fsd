@@ -2,7 +2,7 @@ import { IncomeCard, useIncomeListData } from "@/entities/income";
 import { DeleteIncomeButton } from "@/features/delete-income";
 import { EditIncomeButton } from "@/features/edit-income";
 import { IncomeFilterForm, useIncomeFilter } from "@/features/filter-incomes";
-import { EmptyState } from "@/shared/composite";
+import { EmptyState, SectionHeader } from "@/shared/composite";
 import { PaginationControls } from "@/shared/composite";
 import { PAGINATION } from "@/shared/config";
 import { usePagination } from "@/shared/react";
@@ -44,6 +44,10 @@ export function IncomeList() {
 
   return (
     <div className="space-y-4">
+      <SectionHeader
+        title="Tất cả thu nhập"
+        description="Danh sách đầy đủ các khoản thu nhập với lọc và tìm kiếm"
+      />
       {/* Feature: Filter Form */}
       <IncomeFilterForm
         form={form}

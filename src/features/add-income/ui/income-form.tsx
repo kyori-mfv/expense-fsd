@@ -1,4 +1,5 @@
 import { IncomeFormFields } from "@/entities/income";
+import { SectionHeader } from "@/shared/composite";
 import { useToast } from "@/shared/react";
 import { IonButton, IonLabel, IonListHeader } from "@ionic/react";
 import { useState } from "react";
@@ -43,12 +44,7 @@ export function IncomeForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <IonListHeader>
-        <IonLabel>
-          <h2 className="text-base font-semibold">Thêm thu nhập mới</h2>
-          <p className="text-sm text-muted-foreground">Nhập thông tin giao dịch thu nhập</p>
-        </IonLabel>
-      </IonListHeader>
+      <SectionHeader title="Thêm thu nhập mới" description="Nhập thông tin giao dịch thu nhập" />
 
       <IncomeFormFields
         amount={amount}
