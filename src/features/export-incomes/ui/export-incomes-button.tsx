@@ -16,15 +16,9 @@ export function ExportIncomesButton() {
   };
 
   return (
-    <IonButton
-      onClick={handleExport}
-      disabled={isExporting}
-      fill="outline"
-      size="small"
-      className="gap-2"
-    >
+    <IonButton onClick={handleExport} disabled={isExporting} fill="outline" size="small">
       <IonIcon icon={downloadOutline} slot="start" />
-      {isExporting ? "Đang xuất..." : "Xuất dữ liệu"}
+      <span className="ml-1">{isExporting ? "Đang xuất..." : "Xuất dữ liệu"}</span>
     </IonButton>
   );
 }

@@ -33,7 +33,10 @@ export function AppRoutes() {
       </IonRouterOutlet>
 
       {/* Tab Bar - native-styled bottom navigation */}
-      <IonTabBar slot="bottom" className="h-[65px] pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+      <IonTabBar
+        slot="bottom"
+        className="h-[65px] pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
+      >
         <IonTabButton tab="dashboard" href="/dashboard" className="py-2">
           <IonIcon icon={gridOutline} className="text-[28px] mb-1" />
           <IonLabel className="text-[13px] font-medium">Tổng quan</IonLabel>

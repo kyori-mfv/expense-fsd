@@ -51,7 +51,7 @@ export function ImportExpensesButton() {
         className="gap-2"
       >
         <IonIcon icon={cloudUploadOutline} slot="start" />
-        {isImporting ? "Đang nhập..." : "Nhập dữ liệu"}
+        <span className="ml-1">{isImporting ? "Đang nhập..." : "Nhập dữ liệu"}</span>
       </IonButton>
     </>
   );

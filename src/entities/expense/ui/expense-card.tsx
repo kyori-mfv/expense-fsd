@@ -20,7 +20,7 @@ export function ExpenseCard({ expense, actions }: ExpenseCardProps) {
       button={false}
       detail={false}
       lines="none"
-      className="ion-no-padding mb-3 rounded-lg border border-border/50 shadow-sm hover:shadow-md transition-shadow bg-card"
+      className="ion-no-padding mb-2 rounded-lg border border-border/50 shadow-sm hover:shadow-md transition-shadow bg-card"
     >
       <div className="w-full py-3">
         <div className="flex flex-col gap-2.5">
