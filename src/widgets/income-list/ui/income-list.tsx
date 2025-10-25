@@ -37,10 +37,19 @@ export function IncomeList() {
     resetPage();
   };
 
+  const handleResetFilter = () => {
+    handleReset();
+    resetPage();
+  };
+
   return (
     <div className="space-y-4">
       {/* Feature: Filter Form */}
-      <IncomeFilterForm form={form} onReset={handleReset} onFilterChange={handleFilterChange} />
+      <IncomeFilterForm
+        form={form}
+        onReset={handleResetFilter}
+        onFilterChange={handleFilterChange}
+      />
 
       {/* Results */}
       {totalCount === 0 ? (
@@ -48,23 +57,25 @@ export function IncomeList() {
       ) : (
         <>
           {/* Entity: Income List */}
-          <IonList className="ion-no-padding">
-            {paginatedIncomes.map((income) => (
-              <IncomeCard
-                key={income.id}
-                income={income}
-                actions={
-                  <>
-                    <EditIncomeButton income={income} />
-                    <DeleteIncomeButton
-                      incomeId={income.id}
-                      incomeDescription={income.description}
-                    />
-                  </>
-                }
-              />
-            ))}
-          </IonList>
+          <div className="mb-3">
+            <IonList className="ion-no-padding">
+              {paginatedIncomes.map((income) => (
+                <IncomeCard
+                  key={income.id}
+                  income={income}
+                  actions={
+                    <>
+                      <EditIncomeButton income={income} />
+                      <DeleteIncomeButton
+                        incomeId={income.id}
+                        incomeDescription={income.description}
+                      />
+                    </>
+                  }
+                />
+              ))}
+            </IonList>
+          </div>
 
           {/* Pagination */}
           <PaginationControls

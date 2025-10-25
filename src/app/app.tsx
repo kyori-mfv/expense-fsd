@@ -1,3 +1,4 @@
+import { useSafeArea } from "@/shared/react";
 import { IonApp, setupIonicReact } from "@ionic/react";
 import { IonReactRouter } from "@ionic/react-router";
 
@@ -19,6 +20,7 @@ setupIonicReact({
  * - Compose application layers (Providers, Router, Routes)
  * - Initialize Ionic App wrapper
  * - Setup routing context
+ * - Initialize safe area insets for Android/iOS
  *
  * Architecture:
  * - Providers: Theme, state management, global context
@@ -27,6 +29,9 @@ setupIonicReact({
  * - AppRoutes: Route definitions and navigation structure
  */
 export function App() {
+  // Initialize safe area insets (fixes Android status bar overlap)
+  useSafeArea();
+
   return (
     <Providers>
       <IonApp>

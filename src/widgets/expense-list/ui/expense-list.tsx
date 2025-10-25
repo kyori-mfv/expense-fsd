@@ -37,10 +37,19 @@ export function ExpenseList() {
     resetPage();
   };
 
+  const handleResetFilter = () => {
+    handleReset();
+    resetPage();
+  };
+
   return (
     <div className="space-y-4">
       {/* Feature: Filter Form */}
-      <ExpenseFilterForm form={form} onReset={handleReset} onFilterChange={handleFilterChange} />
+      <ExpenseFilterForm
+        form={form}
+        onReset={handleResetFilter}
+        onFilterChange={handleFilterChange}
+      />
 
       {/* Results */}
       {totalCount === 0 ? (
@@ -48,23 +57,25 @@ export function ExpenseList() {
       ) : (
         <>
           {/* Entity: Expense List */}
-          <IonList className="ion-no-padding">
-            {paginatedExpenses.map((expense) => (
-              <ExpenseCard
-                key={expense.id}
-                expense={expense}
-                actions={
-                  <>
-                    <EditExpenseButton expense={expense} />
-                    <DeleteExpenseButton
-                      expenseId={expense.id}
-                      expenseDescription={expense.description}
-                    />
-                  </>
-                }
-              />
-            ))}
-          </IonList>
+          <div className="mb-3">
+            <IonList className="ion-no-padding">
+              {paginatedExpenses.map((expense) => (
+                <ExpenseCard
+                  key={expense.id}
+                  expense={expense}
+                  actions={
+                    <>
+                      <EditExpenseButton expense={expense} />
+                      <DeleteExpenseButton
+                        expenseId={expense.id}
+                        expenseDescription={expense.description}
+                      />
+                    </>
+                  }
+                />
+              ))}
+            </IonList>
+          </div>
 
           {/* Pagination */}
           <PaginationControls

@@ -35,21 +35,22 @@ export function AppRoutes() {
       {/* Tab Bar - native-styled bottom navigation */}
       <IonTabBar
         slot="bottom"
-        className="h-[65px] pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
+        className="h-[56px] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
+        style={{ paddingBottom: "var(--safe-area-inset-bottom, env(safe-area-inset-bottom))" }}
       >
-        <IonTabButton tab="dashboard" href="/dashboard" className="py-2">
-          <IonIcon icon={gridOutline} className="text-[28px] mb-1" />
-          <IonLabel className="text-[13px] font-medium">Tổng quan</IonLabel>
+        <IonTabButton tab="dashboard" href="/dashboard" className="py-1.5">
+          <IonIcon icon={gridOutline} className="text-[24px] mb-0.5" />
+          <IonLabel className="text-[11px] font-medium">Tổng quan</IonLabel>
         </IonTabButton>
 
-        <IonTabButton tab="expenses" href="/expenses" className="py-2">
-          <IonIcon icon={trendingDownOutline} className="text-[28px] mb-1" />
-          <IonLabel className="text-[13px] font-medium">Chi tiêu</IonLabel>
+        <IonTabButton tab="expenses" href="/expenses" className="py-1.5">
+          <IonIcon icon={trendingDownOutline} className="text-[24px] mb-0.5" />
+          <IonLabel className="text-[11px] font-medium">Chi tiêu</IonLabel>
         </IonTabButton>
 
-        <IonTabButton tab="income" href="/income" className="py-2">
-          <IonIcon icon={trendingUpOutline} className="text-[28px] mb-1" />
-          <IonLabel className="text-[13px] font-medium">Thu nhập</IonLabel>
+        <IonTabButton tab="income" href="/income" className="py-1.5">
+          <IonIcon icon={trendingUpOutline} className="text-[24px] mb-0.5" />
+          <IonLabel className="text-[11px] font-medium">Thu nhập</IonLabel>
         </IonTabButton>
       </IonTabBar>
     </IonTabs>

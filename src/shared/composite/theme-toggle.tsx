@@ -12,7 +12,13 @@ export const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <IonFab slot="fixed" vertical="top" horizontal="end" className="top-5 right-4">
+    <IonFab
+      slot="fixed"
+      vertical="top"
+      horizontal="end"
+      className="right-4"
+      style={{ top: "calc(var(--safe-area-inset-top, 0px) + 16px)" }}
+    >
       <IonFabButton size="small">
         <IonIcon icon={theme === "dark" ? moonOutline : sunnyOutline} />
       </IonFabButton>

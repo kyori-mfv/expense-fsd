@@ -95,6 +95,9 @@ importers:
       '@tailwindcss/cli':
         specifier: next
         version: 4.0.0
+      capacitor-plugin-safe-area:
+        specifier: ^4.0.2
+        version: 4.0.2(@capacitor/core@7.4.3)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -2324,6 +2327,11 @@ packages:
 
   caniuse-lite@1.0.30001748:
     resolution: {integrity: sha512-5P5UgAr0+aBmNiplks08JLw+AW/XG/SurlgZLgB1dDLfAw7EfRGxIwzPHxdSCGY/BTKDqIVyJL87cCN6s0ZR0w==}
+
+  capacitor-plugin-safe-area@4.0.2:
+    resolution: {integrity: sha512-PVwbxkhzfodNud6oRR/kHI0t56EU7DVXuziMJxAPN8jMKy5AXc1KJ1NwR5dKOSQHd107yiJygdblSjf4iMw0eg==}
+    peerDependencies:
+      '@capacitor/core': '>=7.0.0'
 
   chokidar@4.0.3:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
@@ -6525,6 +6533,10 @@ snapshots:
   callsites@3.1.0: {}
 
   caniuse-lite@1.0.30001748: {}
+
+  capacitor-plugin-safe-area@4.0.2(@capacitor/core@7.4.3):
+    dependencies:
+      '@capacitor/core': 7.4.3
 
   chokidar@4.0.3:
     dependencies:

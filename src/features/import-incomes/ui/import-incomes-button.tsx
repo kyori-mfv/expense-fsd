@@ -47,8 +47,8 @@ export function ImportIncomesButton() {
         onClick={handleClick}
         disabled={isImporting}
         fill="outline"
-        size="small"
-        className="gap-2"
+        size="default"
+        className="gap-2 h-[44px]"
       >
         <IonIcon icon={cloudUploadOutline} slot="start" />
         <span className="ml-1">{isImporting ? "Đang nhập..." : "Nhập dữ liệu"}</span>

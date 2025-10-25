@@ -29,19 +29,21 @@ export function PaginationControls({
       <div className="flex gap-2">
         <IonButton
           fill="outline"
-          size="small"
+          size="default"
           onClick={() => onPageChange(Math.max(1, currentPage - 1))}
           disabled={!canGoPrevious}
+          className="h-[44px] w-[44px]"
         >
-          <IonIcon icon={chevronBackOutline} slot="icon-only" />
+          <IonIcon icon={chevronBackOutline} slot="icon-only" className="text-xl" />
         </IonButton>
         <IonButton
           fill="outline"
-          size="small"
+          size="default"
           onClick={() => onPageChange(Math.min(totalPages, currentPage + 1))}
           disabled={!canGoNext}
+          className="h-[44px] w-[44px]"
         >
-          <IonIcon icon={chevronForwardOutline} slot="icon-only" />
+          <IonIcon icon={chevronForwardOutline} slot="icon-only" className="text-xl" />
         </IonButton>
       </div>
     </div>

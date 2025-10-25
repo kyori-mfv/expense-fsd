@@ -16,7 +16,13 @@ export function ExportIncomesButton() {
   };
 
   return (
-    <IonButton onClick={handleExport} disabled={isExporting} fill="outline" size="small">
+    <IonButton
+      onClick={handleExport}
+      disabled={isExporting}
+      fill="outline"
+      size="default"
+      className="gap-2 h-[44px]"
+    >
       <IonIcon icon={downloadOutline} slot="start" />
       <span className="ml-1">{isExporting ? "Đang xuất..." : "Xuất dữ liệu"}</span>
     </IonButton>
