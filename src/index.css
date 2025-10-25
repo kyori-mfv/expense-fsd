@@ -64,13 +64,13 @@
   --ion-color-warning-shade: hsl(13.2143 73.0435% 49%);
   --ion-color-warning-tint: hsl(13.2143 73.0435% 62%);
 
-  /* Danger - from shadcn destructive */
-  --ion-color-danger: hsl(0 84.2365% 60.1961%);
-  --ion-color-danger-rgb: 239, 68, 68;
+  /* Danger - Crimson for maximum distinction from orange primary (345° vs 13° = 332° separation) */
+  --ion-color-danger: hsl(345 82% 48%);
+  --ion-color-danger-rgb: 216, 27, 96;
   --ion-color-danger-contrast: hsl(0 0% 100%);
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: hsl(0 84.2365% 54%);
-  --ion-color-danger-tint: hsl(0 84.2365% 70%);
+  --ion-color-danger-shade: hsl(345 82% 43%);
+  --ion-color-danger-tint: hsl(345 82% 55%);
 
   /* Ionic component-specific */
   --ion-card-background: hsl(0 0% 100%);
@@ -88,9 +88,9 @@
   --ion-color-popover-foreground: hsl(0 0% 20%);
 
   /* Domain-specific colors - keep existing */
-  --ion-color-expense: hsl(0 84.2365% 60.1961%);
-  --ion-color-expense-foreground: hsl(0 84.2365% 60.1961%);
-  --ion-color-expense-light: hsl(0 84.2365% 96%);
+  --ion-color-expense: hsl(345 82% 48%);
+  --ion-color-expense-foreground: hsl(345 82% 48%);
+  --ion-color-expense-light: hsl(345 82% 96%);
 
   --ion-color-income: hsl(142 76% 36%);
   --ion-color-income-foreground: hsl(142 76% 36%);
@@ -104,7 +104,7 @@
   --ion-color-savings-foreground: hsl(13.2143 73.0435% 54.902%);
 
   --ion-color-net-balance-positive: hsl(217 91% 60%);
-  --ion-color-net-balance-negative: hsl(0 84.2365% 60.1961%);
+  --ion-color-net-balance-negative: hsl(345 82% 48%);
 
   /* Design tokens - from shadcn */
   --radius: 0.75rem;
@@ -169,13 +169,13 @@
   --ion-color-warning-shade: hsl(13.2143 73.0435% 49%);
   --ion-color-warning-tint: hsl(13.2143 73.0435% 62%);
 
-  /* Danger - from shadcn dark destructive */
-  --ion-color-danger: hsl(0 84.2365% 60.1961%);
-  --ion-color-danger-rgb: 239, 68, 68;
+  /* Danger - Crimson for maximum distinction from orange primary (345° vs 13° = 332° separation) */
+  --ion-color-danger: hsl(345 82% 48%);
+  --ion-color-danger-rgb: 216, 27, 96;
   --ion-color-danger-contrast: hsl(0 0% 100%);
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: hsl(0 84.2365% 54%);
-  --ion-color-danger-tint: hsl(0 84.2365% 70%);
+  --ion-color-danger-shade: hsl(345 82% 43%);
+  --ion-color-danger-tint: hsl(345 82% 55%);
 
   /* Ionic component-specific - from shadcn dark card */
   --ion-card-background: hsl(223.6364 20.7547% 20.7843%);
@@ -193,9 +193,9 @@
   --ion-color-popover-foreground: hsl(0 0% 89.8039%);
 
   /* Domain-specific colors - brighter for dark mode */
-  --ion-color-expense: hsl(0 84.2365% 60.1961%);
-  --ion-color-expense-foreground: hsl(0 84.2365% 70%);
-  --ion-color-expense-light: hsl(0 84.2365% 20%);
+  --ion-color-expense: hsl(345 82% 48%);
+  --ion-color-expense-foreground: hsl(345 82% 58%);
+  --ion-color-expense-light: hsl(345 82% 20%);
 
   --ion-color-income: hsl(142 76% 46%);
   --ion-color-income-foreground: hsl(142 76% 56%);
@@ -209,7 +209,7 @@
   --ion-color-savings-foreground: hsl(13.2143 73.0435% 62%);
 
   --ion-color-net-balance-positive: hsl(217 91% 70%);
-  --ion-color-net-balance-negative: hsl(0 84.2365% 60.1961%);
+  --ion-color-net-balance-negative: hsl(345 82% 48%);
 
   /* Shadows - same as light mode */
   --shadow-2xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.05);
