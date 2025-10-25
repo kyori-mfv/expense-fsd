@@ -153,29 +153,29 @@
   --ion-color-tertiary-shade: hsl(222 19.2308% 18%);
   --ion-color-tertiary-tint: hsl(222 19.2308% 25%);
 
-  /* Success - vibrant green for dark mode toasts (improved visibility) */
-  --ion-color-success: hsl(142 70% 50%);
-  --ion-color-success-rgb: 38, 217, 98;
-  --ion-color-success-contrast: hsl(0 0% 100%);
-  --ion-color-success-contrast-rgb: 255, 255, 255;
-  --ion-color-success-shade: hsl(142 70% 45%);
-  --ion-color-success-tint: hsl(142 70% 60%);
+  /* Success - balanced green for dark mode (WCAG compliant, reduced eye strain) */
+  --ion-color-success: hsl(142 65% 48%);
+  --ion-color-success-rgb: 43, 206, 94;
+  --ion-color-success-contrast: hsl(0 0% 0%);
+  --ion-color-success-contrast-rgb: 0, 0, 0;
+  --ion-color-success-shade: hsl(142 65% 43%);
+  --ion-color-success-tint: hsl(142 65% 56%);
 
-  /* Warning - brighter orange for dark mode toasts (better contrast) */
-  --ion-color-warning: hsl(13.2143 85% 62%);
-  --ion-color-warning-rgb: 247, 114, 69;
-  --ion-color-warning-contrast: hsl(0 0% 100%);
-  --ion-color-warning-contrast-rgb: 255, 255, 255;
-  --ion-color-warning-shade: hsl(13.2143 85% 57%);
-  --ion-color-warning-tint: hsl(13.2143 85% 70%);
+  /* Warning - amber for dark mode (distinct from orange primary, better visibility) */
+  --ion-color-warning: hsl(38 92% 55%);
+  --ion-color-warning-rgb: 250, 176, 21;
+  --ion-color-warning-contrast: hsl(0 0% 0%);
+  --ion-color-warning-contrast-rgb: 0, 0, 0;
+  --ion-color-warning-shade: hsl(38 92% 50%);
+  --ion-color-warning-tint: hsl(38 92% 63%);
 
-  /* Danger - vibrant crimson for dark mode toasts (enhanced visibility) */
-  --ion-color-danger: hsl(345 85% 55%);
-  --ion-color-danger-rgb: 240, 40, 115;
+  /* Danger - softer crimson for dark mode (maintains distinction, reduces halation) */
+  --ion-color-danger: hsl(345 75% 52%);
+  --ion-color-danger-rgb: 224, 56, 116;
   --ion-color-danger-contrast: hsl(0 0% 100%);
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: hsl(345 85% 50%);
-  --ion-color-danger-tint: hsl(345 85% 65%);
+  --ion-color-danger-shade: hsl(345 75% 47%);
+  --ion-color-danger-tint: hsl(345 75% 60%);
 
   /* Ionic component-specific - from shadcn dark card */
   --ion-card-background: hsl(223.6364 20.7547% 20.7843%);
