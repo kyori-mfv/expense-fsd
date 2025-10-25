@@ -35,7 +35,7 @@ export function AppRoutes() {
       {/* Tab Bar - native-styled bottom navigation */}
       <IonTabBar
         slot="bottom"
-        className="h-[56px] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
+        className="h-[64px] shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
         style={{ paddingBottom: "var(--safe-area-inset-bottom, env(safe-area-inset-bottom))" }}
       >
         <IonTabButton tab="dashboard" href="/dashboard" className="py-1.5">
