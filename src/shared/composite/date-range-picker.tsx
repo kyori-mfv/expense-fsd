@@ -55,23 +55,17 @@ export function DateRangePicker({
   const handleStartDateChange = (e: CustomEvent) => {
     const value = e.detail.value as string;
     setStartDate(value);
-    // Automatically move to step 2 after selecting start date
-    setTimeout(() => {
-      setStep("end");
-    }, 300);
+    setStep("end");
   };
 
   const handleEndDateChange = (e: CustomEvent) => {
     const value = e.detail.value as string;
     setEndDate(value);
-    // Automatically confirm after selecting end date
     if (startDate) {
-      setTimeout(() => {
-        const from = new Date(startDate);
-        const to = new Date(value);
-        onDateRangeChange({ from, to });
-        setIsOpen(false);
-      }, 300);
+      const from = new Date(startDate);
+      const to = new Date(value);
+      onDateRangeChange({ from, to });
+      setIsOpen(false);
     }
   };
 
