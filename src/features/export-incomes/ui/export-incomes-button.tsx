@@ -24,7 +24,7 @@ export function ExportIncomesButton() {
       className="gap-2 h-[44px]"
     >
       <IonIcon icon={downloadOutline} slot="start" />
-      <span className="ml-1">{isExporting ? "Đang xuất..." : "Xuất dữ liệu"}</span>
+      <span className="ml-1">{isExporting ? "Đang xuất..." : "Xuất"}</span>
     </IonButton>
   );
 }
