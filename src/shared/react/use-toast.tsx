@@ -7,6 +7,8 @@ import { checkmarkCircle, closeCircle, informationCircle, warningOutline } from 
  * Provides a simple API for showing success, error, warning, and info toasts
  * with native iOS/Android styling and icons.
  *
+ * Toasts are positioned below the page header for better visibility.
+ *
  * @example
  * const toast = useToast();
  * toast.success("Chi tiêu đã được thêm");
@@ -26,7 +28,7 @@ export function useToast() {
         position: "top",
         color: "success",
         icon: checkmarkCircle,
-        cssClass: "ion-toast-success",
+        cssClass: "toast-below-header ion-toast-success",
       });
     },
 
@@ -40,7 +42,7 @@ export function useToast() {
         position: "top",
         color: "danger",
         icon: closeCircle,
-        cssClass: "ion-toast-error",
+        cssClass: "toast-below-header ion-toast-error",
       });
     },
 
@@ -54,7 +56,7 @@ export function useToast() {
         position: "top",
         color: "warning",
         icon: warningOutline,
-        cssClass: "ion-toast-warning",
+        cssClass: "toast-below-header ion-toast-warning",
       });
     },
 
@@ -68,7 +70,7 @@ export function useToast() {
         position: "top",
         color: "primary",
         icon: informationCircle,
-        cssClass: "ion-toast-info",
+        cssClass: "toast-below-header ion-toast-info",
       });
     },
   };

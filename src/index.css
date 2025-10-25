@@ -153,29 +153,29 @@
   --ion-color-tertiary-shade: hsl(222 19.2308% 18%);
   --ion-color-tertiary-tint: hsl(222 19.2308% 25%);
 
-  /* Success - brighter for dark mode */
-  --ion-color-success: hsl(142 76% 46%);
-  --ion-color-success-rgb: 28, 206, 94;
+  /* Success - vibrant green for dark mode toasts (improved visibility) */
+  --ion-color-success: hsl(142 70% 50%);
+  --ion-color-success-rgb: 38, 217, 98;
   --ion-color-success-contrast: hsl(0 0% 100%);
   --ion-color-success-contrast-rgb: 255, 255, 255;
-  --ion-color-success-shade: hsl(142 76% 41%);
-  --ion-color-success-tint: hsl(142 76% 55%);
+  --ion-color-success-shade: hsl(142 70% 45%);
+  --ion-color-success-tint: hsl(142 70% 60%);
 
-  /* Warning - same as primary in dark mode */
-  --ion-color-warning: hsl(13.2143 73.0435% 54.902%);
-  --ion-color-warning-rgb: 237, 93, 56;
+  /* Warning - brighter orange for dark mode toasts (better contrast) */
+  --ion-color-warning: hsl(13.2143 85% 62%);
+  --ion-color-warning-rgb: 247, 114, 69;
   --ion-color-warning-contrast: hsl(0 0% 100%);
   --ion-color-warning-contrast-rgb: 255, 255, 255;
-  --ion-color-warning-shade: hsl(13.2143 73.0435% 49%);
-  --ion-color-warning-tint: hsl(13.2143 73.0435% 62%);
+  --ion-color-warning-shade: hsl(13.2143 85% 57%);
+  --ion-color-warning-tint: hsl(13.2143 85% 70%);
 
-  /* Danger - Crimson for maximum distinction from orange primary (345° vs 13° = 332° separation) */
-  --ion-color-danger: hsl(345 82% 48%);
-  --ion-color-danger-rgb: 216, 27, 96;
+  /* Danger - vibrant crimson for dark mode toasts (enhanced visibility) */
+  --ion-color-danger: hsl(345 85% 55%);
+  --ion-color-danger-rgb: 240, 40, 115;
   --ion-color-danger-contrast: hsl(0 0% 100%);
   --ion-color-danger-contrast-rgb: 255, 255, 255;
-  --ion-color-danger-shade: hsl(345 82% 43%);
-  --ion-color-danger-tint: hsl(345 82% 55%);
+  --ion-color-danger-shade: hsl(345 85% 50%);
+  --ion-color-danger-tint: hsl(345 85% 65%);
 
   /* Ionic component-specific - from shadcn dark card */
   --ion-card-background: hsl(223.6364 20.7547% 20.7843%);
@@ -437,5 +437,12 @@
     position: absolute;
     left: 12px;
     color: var(--ion-color-primary);
+  }
+
+  /* Toast positioning - below page header */
+  ion-toast.toast-below-header,
+  ion-toast.toast-below-header::part(container),
+  .toast-below-header.toast-wrapper {
+    top: calc(56px + var(--safe-area-inset-top, env(safe-area-inset-top)) + 8px) !important;
   }
 }
