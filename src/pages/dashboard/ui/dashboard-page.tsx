@@ -91,7 +91,7 @@ export function DashboardPage() {
         titleColor="text-dashboard-foreground"
         iconColor="text-dashboard-foreground"
       />
-      <IonContent>
+      <IonContent scrollY={true} scrollEvents={true}>
         <div className="container mx-auto p-4 space-y-6 max-w-7xl">
           {/* Monthly Trends Chart (6 months fixed) */}
           <MonthlyTrends monthlyStats={monthlyStats} showNetLine />

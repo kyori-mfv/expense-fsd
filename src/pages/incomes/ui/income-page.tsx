@@ -17,7 +17,7 @@ export function IncomePage() {
         description="Quản lý và theo dõi các khoản thu nhập"
         titleColor="text-income-foreground"
       />
-      <IonContent>
+      <IonContent scrollY={true} scrollEvents={true}>
         <div className="container mx-auto p-4 max-w-4xl pb-6">
           <div className="space-y-6">
             <IncomeForm />

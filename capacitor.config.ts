@@ -8,6 +8,13 @@ const config: CapacitorConfig = {
     androidScheme: "https",
     iosScheme: "https",
   },
+  plugins: {
+    Keyboard: {
+      resize: "body",
+      style: "dark",
+      resizeOnFullScreen: true,
+    },
+  },
 };
 
 export default config;
