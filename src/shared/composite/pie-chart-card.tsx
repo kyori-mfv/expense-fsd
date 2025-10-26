@@ -1,4 +1,4 @@
-import { formatAmount } from "@/shared/lib/format";
+import { formatAmount } from "@/shared/lib/currency";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { PieChartIcon } from "lucide-react";
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";

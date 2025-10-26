@@ -1,5 +1,5 @@
 import { DateRangePicker, Segment } from "@/shared/composite";
-import type { DatePreset } from "@/shared/lib/date-presets";
+import type { DatePreset } from "@/shared/lib/date";
 import type { DateRange } from "react-day-picker";
 
 interface DateRangeFilterProps {

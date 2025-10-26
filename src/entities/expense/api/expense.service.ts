@@ -1,6 +1,6 @@
 import { db } from "@/shared/api";
 import type { ExpenseRecord } from "@/shared/contract";
-import { generateUUID } from "@/shared/lib/utils";
+import { generateUUID } from "@/shared/lib/generator";
 import Dexie from "dexie";
 
 export const expenseService = {

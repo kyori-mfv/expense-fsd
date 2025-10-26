@@ -1,6 +1,6 @@
 import { PieChartCard, type PieChartData } from "@/shared/composite";
 import { INCOME_CATEGORY_MAP } from "@/shared/config";
-import type { CategoryStats } from "@/shared/lib/calculate-stats";
+import type { CategoryStats } from "@/shared/lib/stats";
 
 interface IncomeCategoryChartProps {
   categoryStats: CategoryStats[];

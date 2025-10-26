@@ -1,4 +1,4 @@
-import { formatAmount } from "@/shared/lib/format";
+import { formatAmount } from "@/shared/lib/currency";
 import { Card, CardContent } from "@/shared/ui/card";
 import type { LucideIcon } from "lucide-react";
 

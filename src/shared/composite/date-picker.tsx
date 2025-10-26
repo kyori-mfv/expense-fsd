@@ -72,8 +72,8 @@ export function DatePicker({
       <IonModal
         isOpen={isOpen}
         onDidDismiss={() => setIsOpen(false)}
-        breakpoints={[0, 0.5, 1]}
-        initialBreakpoint={0.5}
+        breakpoints={[0, 0.6, 1]}
+        initialBreakpoint={0.6}
         className="date-picker-modal"
       >
         <IonHeader>
@@ -96,9 +96,15 @@ export function DatePicker({
             presentation={presentation}
             locale="vi-VN"
             firstDayOfWeek={1}
-            preferWheel
             size="cover"
           />
+          <style>
+            {`
+              ion-datetime::part(month-year-button) {
+                text-transform: capitalize;
+              }
+            `}
+          </style>
         </IonContent>
       </IonModal>
     </>

@@ -1,19 +1,19 @@
 import { useExpensesAll } from "@/entities/expense";
 import { useIncomesAll } from "@/entities/income";
 import {
-  calculateExpenseCategoryStats,
-  calculateFinancialStats,
-  calculateIncomeCategoryStats,
-  calculateMonthlyTrends,
-} from "@/shared/lib/calculate-stats";
-import {
   type DatePreset,
   type DateRangeWithPreset,
   createCustomRange,
   datePresets,
   getLastNMonths,
   getThisMonth,
-} from "@/shared/lib/date-presets";
+} from "@/shared/lib/date";
+import {
+  calculateExpenseCategoryStats,
+  calculateFinancialStats,
+  calculateIncomeCategoryStats,
+  calculateMonthlyTrends,
+} from "@/shared/lib/stats";
 import { DateRangeFilter } from "@/widgets/date-range-filter";
 import { ExpenseCategoryChart } from "@/widgets/expense-category-chart";
 import { FinancialOverview } from "@/widgets/financial-overview";

@@ -1,5 +1,5 @@
-import type { MonthlyStats } from "@/shared/lib/calculate-stats";
-import { formatAmount } from "@/shared/lib/format";
+import { formatAmount } from "@/shared/lib/currency";
+import type { MonthlyStats } from "@/shared/lib/stats";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import {
   Bar,

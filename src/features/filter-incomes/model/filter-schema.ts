@@ -1,4 +1,4 @@
-import { getCurrentMonthRange } from "@/shared/lib/date-utils";
+import { getCurrentMonthRange } from "@/shared/lib/date";
 import type { DateRange } from "react-day-picker";
 
 export interface IncomeFilterValues {

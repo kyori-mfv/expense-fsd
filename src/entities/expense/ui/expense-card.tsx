@@ -1,5 +1,6 @@
 import type { ExpenseRecord } from "@/shared/contract";
-import { formatAmount, formatDate } from "@/shared/lib/format";
+import { formatAmount } from "@/shared/lib/currency";
+import { formatDate } from "@/shared/lib/number";
 import { IonIcon, IonItem, IonItemOptions, IonItemSliding } from "@ionic/react";
 import { calendarOutline } from "ionicons/icons";
 import { ExpenseCategoryBadge } from "./expense-category-badge";
