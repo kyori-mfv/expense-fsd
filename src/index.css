@@ -169,13 +169,13 @@
   --ion-color-warning-shade: hsl(38 70% 22%);
   --ion-color-warning-tint: hsl(38 70% 30%);
 
-  /* Danger - dark crimson background with bright foreground (reduced eye strain) */
-  --ion-color-danger: hsl(345 60% 24%);
-  --ion-color-danger-rgb: 97, 25, 52;
-  --ion-color-danger-contrast: hsl(345 85% 72%);
-  --ion-color-danger-contrast-rgb: 245, 121, 165;
-  --ion-color-danger-shade: hsl(345 60% 22%);
-  --ion-color-danger-tint: hsl(345 60% 30%);
+  /* Danger - brighter crimson for better readability (WCAG AA compliant) */
+  --ion-color-danger: hsl(345 82% 52%);
+  --ion-color-danger-rgb: 224, 41, 108;
+  --ion-color-danger-contrast: hsl(0 0% 100%);
+  --ion-color-danger-contrast-rgb: 255, 255, 255;
+  --ion-color-danger-shade: hsl(345 82% 47%);
+  --ion-color-danger-tint: hsl(345 82% 60%);
 
   /* Ionic component-specific - from shadcn dark card */
   --ion-card-background: hsl(223.6364 20.7547% 20.7843%);
