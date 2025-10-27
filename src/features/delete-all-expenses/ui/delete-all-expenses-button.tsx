@@ -8,7 +8,7 @@ import { useDeleteAllExpenses } from "../model/use-delete-all-expenses";
 export function DeleteAllExpensesButton() {
   const toast = useToast();
   const [open, setOpen] = useState(false);
-  const { deleteAll, isDeleting } = useDeleteAllExpenses();
+  const { deleteAll } = useDeleteAllExpenses();
 
   const handleConfirm = async () => {
     try {
@@ -22,7 +22,7 @@ export function DeleteAllExpensesButton() {
 
   return (
     <>
-      <IonButton color="danger" onClick={() => setOpen(true)} disabled={isDeleting}>
+      <IonButton color="danger" onClick={() => setOpen(true)}>
         <IonIcon icon={trashOutline} slot="icon-only" />
       </IonButton>
 
@@ -33,8 +33,6 @@ export function DeleteAllExpensesButton() {
         description="Hành động này không thể hoàn tác. Tất cả chi tiêu của bạn sẽ bị xóa vĩnh viễn khỏi cơ sở dữ liệu."
         confirmLabel="Xóa tất cả"
         variant="destructive"
-        isLoading={isDeleting}
-        loadingText="Đang xóa..."
         onConfirm={handleConfirm}
       />
     </>

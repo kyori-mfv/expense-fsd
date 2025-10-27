@@ -19,7 +19,7 @@ interface DeleteIncomeButtonProps {
 export function DeleteIncomeButton({ incomeId, incomeDescription }: DeleteIncomeButtonProps) {
   const toast = useToast();
   const [open, setOpen] = useState(false);
-  const { deleteIncome, isLoading } = useDeleteIncome();
+  const { deleteIncome } = useDeleteIncome();
 
   const handleConfirm = async () => {
     const success = await deleteIncome(incomeId);
@@ -54,8 +54,6 @@ export function DeleteIncomeButton({ incomeId, incomeDescription }: DeleteIncome
         }
         confirmLabel="Xóa"
         variant="destructive"
-        isLoading={isLoading}
-        loadingText="Đang xóa..."
         onConfirm={handleConfirm}
       />
     </>

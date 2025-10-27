@@ -26,7 +26,7 @@ export function IncomeEditDialog({ income, open, onOpenChange }: IncomeEditDialo
   const [date, setDate] = useState<Date | undefined>(undefined);
 
   const toast = useToast();
-  const { editIncome, isLoading } = useEditIncome();
+  const { editIncome } = useEditIncome();
 
   useEffect(() => {
     if (income) {
@@ -75,8 +75,8 @@ export function IncomeEditDialog({ income, open, onOpenChange }: IncomeEditDialo
           </IonButtons>
           <IonTitle>Chỉnh sửa thu nhập</IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={handleSubmit} strong disabled={isLoading}>
-              {isLoading ? "Đang lưu..." : "Lưu"}
+            <IonButton onClick={handleSubmit} strong>
+              Lưu
             </IonButton>
           </IonButtons>
         </IonToolbar>
@@ -93,7 +93,6 @@ export function IncomeEditDialog({ income, open, onOpenChange }: IncomeEditDialo
             onDescriptionChange={setDescription}
             date={date}
             onDateChange={setDate}
-            disabled={isLoading}
           />
         </form>
       </IonContent>

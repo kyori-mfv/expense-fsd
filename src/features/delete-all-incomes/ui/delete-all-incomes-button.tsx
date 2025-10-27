@@ -8,7 +8,7 @@ import { useDeleteAllIncomes } from "../model/use-delete-all-incomes";
 export function DeleteAllIncomesButton() {
   const toast = useToast();
   const [open, setOpen] = useState(false);
-  const { deleteAll, isDeleting } = useDeleteAllIncomes();
+  const { deleteAll } = useDeleteAllIncomes();
 
   const handleConfirm = async () => {
     try {
@@ -22,7 +22,7 @@ export function DeleteAllIncomesButton() {
 
   return (
     <>
-      <IonButton color="danger" onClick={() => setOpen(true)} disabled={isDeleting}>
+      <IonButton color="danger" onClick={() => setOpen(true)}>
         <IonIcon icon={trashOutline} slot="icon-only" />
       </IonButton>
 
@@ -33,8 +33,6 @@ export function DeleteAllIncomesButton() {
         description="Hành động này không thể hoàn tác. Tất cả thu nhập của bạn sẽ bị xóa vĩnh viễn khỏi cơ sở dữ liệu."
         confirmLabel="Xóa tất cả"
         variant="destructive"
-        isLoading={isDeleting}
-        loadingText="Đang xóa..."
         onConfirm={handleConfirm}
       />
     </>

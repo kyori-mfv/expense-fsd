@@ -19,7 +19,7 @@ interface DeleteExpenseButtonProps {
 export function DeleteExpenseButton({ expenseId, expenseDescription }: DeleteExpenseButtonProps) {
   const toast = useToast();
   const [open, setOpen] = useState(false);
-  const { deleteExpense, isLoading } = useDeleteExpense();
+  const { deleteExpense } = useDeleteExpense();
 
   const handleConfirm = async () => {
     const success = await deleteExpense(expenseId);
@@ -54,8 +54,6 @@ export function DeleteExpenseButton({ expenseId, expenseDescription }: DeleteExp
         }
         confirmLabel="Xóa"
         variant="destructive"
-        isLoading={isLoading}
-        loadingText="Đang xóa..."
         onConfirm={handleConfirm}
       />
     </>

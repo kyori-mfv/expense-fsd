@@ -49,6 +49,8 @@ export function DatePicker({
   const handleChange = (value: string | string[] | null | undefined) => {
     if (value && typeof value === "string") {
       onDateChange(new Date(value));
+      // Auto-close modal after selecting a date
+      setIsOpen(false);
     } else if (value === null) {
       onDateChange(undefined);
     }

@@ -12,7 +12,7 @@ export function IncomeForm() {
   const [description, setDescription] = useState("");
   const [date, setDate] = useState<Date | undefined>(new Date());
 
-  const { addIncome, isLoading } = useAddIncome();
+  const { addIncome } = useAddIncome();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,13 +55,12 @@ export function IncomeForm() {
         onDescriptionChange={setDescription}
         date={date}
         onDateChange={setDate}
-        disabled={isLoading}
         className="rounded-sm"
       />
 
       <div className="px-4 pb-4">
-        <IonButton expand="block" type="submit" disabled={isLoading}>
-          {isLoading ? "Đang thêm..." : "Thêm thu nhập"}
+        <IonButton expand="block" type="submit">
+          Thêm thu nhập
         </IonButton>
       </div>
     </form>

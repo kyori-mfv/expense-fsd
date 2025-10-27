@@ -9,8 +9,6 @@ interface ConfirmationDialogProps {
   confirmLabel?: string;
   cancelLabel?: string;
   variant?: "default" | "destructive";
-  isLoading?: boolean;
-  loadingText?: string;
   onConfirm: () => void | Promise<void>;
 }
 
@@ -19,6 +17,8 @@ interface ConfirmationDialogProps {
  *
  * A composite component that provides native iOS/Android alert dialogs for confirmations.
  * Uses IonAlert for platform-specific UI with proper button styling.
+ *
+ * Note: No loading states - operations are instant in offline-first architecture.
  */
 export function ConfirmationDialog({
   open,
@@ -28,8 +28,6 @@ export function ConfirmationDialog({
   confirmLabel = "Xác nhận",
   cancelLabel = "Hủy",
   variant = "default",
-  isLoading = false,
-  loadingText = "Đang xử lý...",
   onConfirm,
 }: ConfirmationDialogProps) {
   const handleConfirm = async () => {
@@ -51,7 +49,7 @@ export function ConfirmationDialog({
           },
         },
         {
-          text: isLoading ? loadingText : confirmLabel,
+          text: confirmLabel,
           role: variant === "destructive" ? "destructive" : "confirm",
           handler: () => {
             handleConfirm();

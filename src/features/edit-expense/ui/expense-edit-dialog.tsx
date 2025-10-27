@@ -26,7 +26,7 @@ export function ExpenseEditDialog({ expense, open, onOpenChange }: ExpenseEditDi
   const [date, setDate] = useState<Date | undefined>(undefined);
 
   const toast = useToast();
-  const { editExpense, isLoading } = useEditExpense();
+  const { editExpense } = useEditExpense();
 
   useEffect(() => {
     if (expense) {
@@ -75,8 +75,8 @@ export function ExpenseEditDialog({ expense, open, onOpenChange }: ExpenseEditDi
           </IonButtons>
           <IonTitle>Chỉnh sửa chi tiêu</IonTitle>
           <IonButtons slot="end">
-            <IonButton onClick={handleSubmit} strong disabled={isLoading}>
-              {isLoading ? "Đang lưu..." : "Lưu"}
+            <IonButton onClick={handleSubmit} strong>
+              Lưu
             </IonButton>
           </IonButtons>
         </IonToolbar>
@@ -93,7 +93,6 @@ export function ExpenseEditDialog({ expense, open, onOpenChange }: ExpenseEditDi
             onDescriptionChange={setDescription}
             date={date}
             onDateChange={setDate}
-            disabled={isLoading}
           />
         </form>
       </IonContent>
