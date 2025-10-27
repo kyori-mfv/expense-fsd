@@ -64,8 +64,8 @@ export function ExpenseEditDialog({ expense, open, onOpenChange }: ExpenseEditDi
     <IonModal
       isOpen={open}
       onDidDismiss={() => onOpenChange(false)}
-      breakpoints={[0, 0.5, 1]}
-      initialBreakpoint={0.5}
+      breakpoints={[0, 0.8, 1]}
+      initialBreakpoint={0.8}
       className="expense-edit-modal"
     >
       <IonHeader>

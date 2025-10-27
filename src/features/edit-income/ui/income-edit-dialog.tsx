@@ -64,8 +64,8 @@ export function IncomeEditDialog({ income, open, onOpenChange }: IncomeEditDialo
     <IonModal
       isOpen={open}
       onDidDismiss={() => onOpenChange(false)}
-      breakpoints={[0, 0.5, 1]}
-      initialBreakpoint={0.5}
+      breakpoints={[0, 0.8, 1]}
+      initialBreakpoint={0.8}
       className="income-edit-modal"
     >
       <IonHeader>
