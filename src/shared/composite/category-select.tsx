@@ -64,7 +64,7 @@ export function CategorySelect({
     <IonSelect
       ref={selectRef}
       label={label}
-      labelPlacement="floating"
+      labelPlacement="end"
       value={selectValue}
       onIonChange={handleChange}
       onIonDismiss={handleDismiss}

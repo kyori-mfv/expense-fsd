@@ -32,7 +32,7 @@ export function ExpenseFormFields({
       <IonItem lines="full">
         <IonInput
           label="Số tiền (VNĐ)"
-          labelPlacement="floating"
+          labelPlacement="end"
           type="text"
           inputmode="numeric"
           value={amount}
@@ -56,7 +56,7 @@ export function ExpenseFormFields({
       <IonItem lines="full">
         <IonInput
           label="Mô tả"
-          labelPlacement="floating"
+          labelPlacement="end"
           type="text"
           value={description}
           onIonInput={(e) => onDescriptionChange(e.detail.value || "")}
@@ -67,7 +67,7 @@ export function ExpenseFormFields({
         />
       </IonItem>
 
-      <IonItem button lines="full">
+      <IonItem lines="full">
         <DatePicker label="Ngày" date={date} onDateChange={onDateChange} disabled={disabled} />
       </IonItem>
     </IonList>

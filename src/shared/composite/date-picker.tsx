@@ -60,7 +60,7 @@ export function DatePicker({
     <>
       <IonInput
         label={label}
-        labelPlacement="floating"
+        labelPlacement="end"
         value={formattedDate}
         readonly
         placeholder={placeholder}
