@@ -7,7 +7,7 @@ import { useAddIncome } from "../model/use-add-income";
 
 export function IncomeForm() {
   const toast = useToast();
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState<Date | undefined>(new Date());
@@ -23,7 +23,7 @@ export function IncomeForm() {
     }
 
     const result = await addIncome({
-      amount: Number.parseFloat(amount),
+      amount,
       category,
       description,
       date,
@@ -31,7 +31,7 @@ export function IncomeForm() {
 
     if (result) {
       // Reset form
-      setAmount("");
+      setAmount(0);
       setCategory("");
       setDescription("");
       setDate(new Date());

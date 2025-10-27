@@ -7,7 +7,7 @@
 export { formatAmount } from "./currency";
 
 // Number and date formatting
-export { formatNumber, formatDate } from "./number";
+export { formatNumber, formatDate, formatNumberInput, parseNumberInput } from "./number";
 
 // Class name utilities
 export { cn } from "./class-names";

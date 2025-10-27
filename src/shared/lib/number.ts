@@ -45,3 +45,56 @@ export function formatDate(date: Date | string, format: "short" | "long" = "shor
     day: "2-digit",
   }).format(dateObj);
 }
+
+/**
+ * Format number input with thousand separators for user input
+ * Only keeps digits and formats with commas
+ *
+ * @param value - String value from input field
+ * @returns Formatted string with thousand separators
+ *
+ * @example
+ * formatNumberInput("100");      // "100"
+ * formatNumberInput("1000");     // "1,000"
+ * formatNumberInput("10000");    // "10,000"
+ * formatNumberInput("1,000");    // "1,000" (already formatted)
+ * formatNumberInput("abc123");   // "123"
+ */
+export function formatNumberInput(value: string): string {
+  // Remove all non-digit characters
+  const digitsOnly = value.replace(/\D/g, "");
+
+  // Return empty string if no digits
+  if (!digitsOnly) {
+    return "";
+  }
+
+  // Convert to number and format with commas
+  const number = Number.parseInt(digitsOnly, 10);
+  return number.toLocaleString("en-US");
+}
+
+/**
+ * Parse formatted number string back to raw number
+ * Removes all separators and converts to number
+ *
+ * @param value - Formatted string with separators
+ * @returns Parsed number
+ *
+ * @example
+ * parseNumberInput("100");       // 100
+ * parseNumberInput("1,000");     // 1000
+ * parseNumberInput("10,000");    // 10000
+ * parseNumberInput("");          // 0
+ */
+export function parseNumberInput(value: string): number {
+  // Remove all non-digit characters
+  const digitsOnly = value.replace(/\D/g, "");
+
+  // Return 0 if no digits
+  if (!digitsOnly) {
+    return 0;
+  }
+
+  return Number.parseInt(digitsOnly, 10);
+}

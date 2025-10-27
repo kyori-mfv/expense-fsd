@@ -20,7 +20,7 @@ interface ExpenseEditDialogProps {
 }
 
 export function ExpenseEditDialog({ expense, open, onOpenChange }: ExpenseEditDialogProps) {
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState<Date | undefined>(undefined);
@@ -30,7 +30,7 @@ export function ExpenseEditDialog({ expense, open, onOpenChange }: ExpenseEditDi
 
   useEffect(() => {
     if (expense) {
-      setAmount(expense.amount.toString());
+      setAmount(expense.amount);
       setCategory(expense.category);
       setDescription(expense.description);
       setDate(new Date(expense.date));
@@ -46,7 +46,7 @@ export function ExpenseEditDialog({ expense, open, onOpenChange }: ExpenseEditDi
     }
 
     const success = await editExpense(expense.id, {
-      amount: Number.parseFloat(amount),
+      amount,
       category,
       description,
       date,

@@ -20,7 +20,7 @@ interface IncomeEditDialogProps {
 }
 
 export function IncomeEditDialog({ income, open, onOpenChange }: IncomeEditDialogProps) {
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState<Date | undefined>(undefined);
@@ -30,7 +30,7 @@ export function IncomeEditDialog({ income, open, onOpenChange }: IncomeEditDialo
 
   useEffect(() => {
     if (income) {
-      setAmount(income.amount.toString());
+      setAmount(income.amount);
       setCategory(income.category);
       setDescription(income.description);
       setDate(new Date(income.date));
@@ -46,7 +46,7 @@ export function IncomeEditDialog({ income, open, onOpenChange }: IncomeEditDialo
     }
 
     const success = await editIncome(income.id, {
-      amount: Number.parseFloat(amount),
+      amount,
       category,
       description,
       date,
