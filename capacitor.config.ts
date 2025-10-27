@@ -10,7 +10,7 @@ const config: CapacitorConfig = {
   },
   plugins: {
     Keyboard: {
-      resize: "body",
+      resize: "ionic",
       style: "dark",
       resizeOnFullScreen: true,
     },
