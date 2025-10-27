@@ -93,6 +93,7 @@ export function IncomeEditDialog({ income, open, onOpenChange }: IncomeEditDialo
             onDescriptionChange={setDescription}
             date={date}
             onDateChange={setDate}
+            autoFocusAmount={open}
           />
         </form>
       </IonContent>

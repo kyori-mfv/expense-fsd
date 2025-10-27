@@ -93,6 +93,7 @@ export function ExpenseEditDialog({ expense, open, onOpenChange }: ExpenseEditDi
             onDescriptionChange={setDescription}
             date={date}
             onDateChange={setDate}
+            autoFocusAmount={open}
           />
         </form>
       </IonContent>

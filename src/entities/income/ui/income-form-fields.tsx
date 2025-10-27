@@ -1,7 +1,7 @@
 import { DatePicker } from "@/shared/composite";
 import { formatNumberInput, parseNumberInput } from "@/shared/lib";
 import { IonInput, IonItem, IonList } from "@ionic/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IncomeCategorySelect } from "./income-category-select";
 
 interface IncomeFormFieldsProps {
@@ -15,6 +15,7 @@ interface IncomeFormFieldsProps {
   onDateChange: (date: Date | undefined) => void;
   disabled?: boolean;
   className?: string;
+  autoFocusAmount?: boolean;
 }
 
 export function IncomeFormFields({
@@ -28,14 +29,25 @@ export function IncomeFormFields({
   onDateChange,
   disabled = false,
   className,
+  autoFocusAmount = false,
 }: IncomeFormFieldsProps) {
   // Internal state for formatted display value
   const [displayValue, setDisplayValue] = useState("");
+  const amountInputRef = useRef<HTMLIonInputElement>(null);
 
   // Sync display value when amount prop changes (e.g., from parent reset or edit)
   useEffect(() => {
     setDisplayValue(amount ? formatNumberInput(amount.toString()) : "");
   }, [amount]);
+
+  // Auto-focus amount input when requested
+  useEffect(() => {
+    if (autoFocusAmount && amountInputRef.current) {
+      setTimeout(() => {
+        amountInputRef.current?.setFocus();
+      }, 300);
+    }
+  }, [autoFocusAmount]);
 
   const handleAmountChange = (value: string) => {
     // Format the input with thousand separators for display
@@ -51,6 +63,7 @@ export function IncomeFormFields({
     <IonList className={className}>
       <IonItem lines="full">
         <IonInput
+          ref={amountInputRef}
           label="Số tiền (VNĐ)"
           labelPlacement="end"
           type="text"
